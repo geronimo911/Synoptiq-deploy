@@ -4,9 +4,6 @@ import { useEffect, useRef } from "react";
 
 type Zone = { zone: string; lat: number; lon: number; model: string; colour: string };
 
-// Internal zone ids -> the public AOI codes used everywhere else in the UI
-// (region selectors, forecast, replay). The map labels by AOI, not by model:
-// the model is shown only as a secondary line under the AOI code.
 const AOI_CODES: Record<string, string> = {
   kerala_western_ghats: "KWG",
   bay_of_bengal_east_coast: "BOB",
@@ -17,26 +14,26 @@ function aoiCode(zone: string): string {
   return AOI_CODES[zone] ?? zone;
 }
 
-function zonesToFeatureCollection(zones: Zone[]) {
-  return {
-    type: "FeatureCollection" as const,
-    features: zones.map((zone) => ({
-      type: "Feature" as const,
-      properties: {
-        zone: zone.zone,
-        aoi: aoiCode(zone.zone),
-        model: zone.model,
-        colour: zone.colour,
-      },
-      geometry: { type: "Point" as const, coordinates: [zone.lon, zone.lat] },
-    })),
-  };
+function positionMarkers(instance: maplibregl.Map, zones: Zone[], markers: HTMLButtonElement[]) {
+  zones.forEach((zone, index) => {
+    const marker = markers[index];
+    if (!marker) return;
+    const point = instance.project([zone.lon, zone.lat]);
+    marker.style.left = `${point.x}px`;
+    marker.style.top = `${point.y}px`;
+    marker.hidden =
+      point.x < 0 ||
+      point.y < 0 ||
+      point.x > instance.getContainer().clientWidth ||
+      point.y > instance.getContainer().clientHeight;
+  });
 }
 
 function syncMarkers(
   instance: maplibregl.Map,
   zones: Zone[],
-  markers: maplibregl.Marker[],
+  overlay: HTMLDivElement,
+  markers: HTMLButtonElement[],
   selected: string,
   onSelect: (zone: string) => void,
 ) {
@@ -45,27 +42,34 @@ function syncMarkers(
     0,
     markers.length,
     ...zones.map((zone) => {
-      const label = document.createElement("button");
-      label.type = "button";
-      label.className = `atlas-zone-label${zone.zone === selected ? " selected" : ""}`;
-      label.setAttribute("aria-label", `Select ${aoiCode(zone.zone)}, ${zone.model} dominates`);
-      label.style.setProperty("--zone-colour", zone.colour);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `atlas-zone-label${zone.zone === selected ? " selected" : ""}`;
+      button.setAttribute("aria-label", `Select ${aoiCode(zone.zone)}, ${zone.model} dominates`);
+      button.setAttribute("aria-pressed", String(zone.zone === selected));
+      button.style.setProperty("--zone-colour", zone.colour);
 
+      const dot = document.createElement("span");
+      dot.className = "atlas-zone-dot";
+      dot.setAttribute("aria-hidden", "true");
+      const label = document.createElement("span");
+      label.className = "atlas-zone-caption";
       const code = document.createElement("b");
       code.textContent = aoiCode(zone.zone);
       const model = document.createElement("small");
       model.textContent = zone.model;
-
       label.append(code, model);
-      label.addEventListener("click", (event) => {
+      button.append(dot, label);
+
+      button.addEventListener("click", (event) => {
         event.stopPropagation();
         onSelect(zone.zone);
       });
-      return new maplibregl.Marker({ element: label, anchor: "top", offset: [0, 14] })
-        .setLngLat([zone.lon, zone.lat])
-        .addTo(instance);
+      overlay.append(button);
+      return button;
     }),
   );
+  positionMarkers(instance, zones, markers);
 }
 
 export function TrustAtlasMap({
@@ -79,17 +83,15 @@ export function TrustAtlasMap({
 }) {
   const element = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
-  const markers = useRef<maplibregl.Marker[]>([]);
+  const overlay = useRef<HTMLDivElement | null>(null);
+  const markers = useRef<HTMLButtonElement[]>([]);
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
   const selectedRef = useRef(selected);
   selectedRef.current = selected;
-  // Latest zones, read by the map's `load` handler so the init effect does not
-  // need `zones` as a dependency (which used to rebuild the whole map).
   const zonesRef = useRef(zones);
   zonesRef.current = zones;
 
-  // Initialise MapLibre exactly once for the lifetime of the component.
   useEffect(() => {
     if (!element.current || map.current) return;
     maplibregl.setWorkerUrl(workerUrl);
@@ -147,102 +149,69 @@ export function TrustAtlasMap({
       attributionControl: {},
     });
     instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    const updateMarkerPositions = () =>
+      positionMarkers(instance, zonesRef.current, markers.current);
     instance.on("load", () => {
       instance.fitBounds(
         [
-          [67, 5],
-          [98, 38],
+          [64, 0],
+          [101, 40],
         ],
         { padding: 18, duration: 0 },
       );
-      // Seed the zone source from whatever the latest props are.
-      instance.addSource("atlas-zones", {
-        type: "geojson",
-        data: zonesToFeatureCollection(zonesRef.current),
-      });
-      instance.addLayer({
-        id: "atlas-zone-halo",
-        type: "circle",
-        source: "atlas-zones",
-        paint: {
-          "circle-radius": ["case", ["==", ["get", "zone"], selectedRef.current], 34, 26],
-          "circle-color": ["get", "colour"],
-          "circle-opacity": ["case", ["==", ["get", "zone"], selectedRef.current], 0.38, 0.24],
-          "circle-blur": 0.85,
-          "circle-stroke-width": 2,
-          "circle-stroke-color": ["get", "colour"],
-        },
-      });
-      instance.addLayer({
-        id: "atlas-zone-dot",
-        type: "circle",
-        source: "atlas-zones",
-        paint: {
-          "circle-radius": ["case", ["==", ["get", "zone"], selectedRef.current], 9, 7],
-          "circle-color": ["get", "colour"],
-          "circle-opacity": 1,
-          "circle-stroke-width": 2,
-          "circle-stroke-color": "#e6f1f8",
-        },
-      });
-      instance.on("click", "atlas-zone-halo", (event) => {
-        const zone = event.features?.[0]?.properties?.["zone"];
-        if (typeof zone === "string") onSelectRef.current(zone);
-      });
-      instance.on("mouseenter", "atlas-zone-halo", () => {
-        instance.getCanvas().style.cursor = "pointer";
-      });
-      instance.on("mouseleave", "atlas-zone-halo", () => {
-        instance.getCanvas().style.cursor = "";
-      });
+      const markerOverlay = document.createElement("div");
+      markerOverlay.className = "atlas-zone-overlay";
+      element.current?.append(markerOverlay);
+      overlay.current = markerOverlay;
       syncMarkers(
         instance,
         zonesRef.current,
+        markerOverlay,
         markers.current,
         selectedRef.current,
         onSelectRef.current,
       );
     });
+    for (const event of ["move", "resize", "zoom", "rotate", "pitch"] as const) {
+      instance.on(event, updateMarkerPositions);
+    }
     map.current = instance;
     return () => {
       markers.current.forEach((marker) => marker.remove());
       markers.current = [];
+      overlay.current?.remove();
+      overlay.current = null;
       instance.remove();
       map.current = null;
     };
   }, []);
 
-  // Push new zone data into the EXISTING source. The map is never recreated.
   useEffect(() => {
     const instance = map.current;
-    if (!instance || !instance.isStyleLoaded()) return;
-    const source = instance.getSource("atlas-zones") as maplibregl.GeoJSONSource | undefined;
-    source?.setData(zonesToFeatureCollection(zones));
-    syncMarkers(instance, zones, markers.current, selectedRef.current, onSelectRef.current);
+    const markerOverlay = overlay.current;
+    if (!instance || !markerOverlay) return;
+    syncMarkers(
+      instance,
+      zones,
+      markerOverlay,
+      markers.current,
+      selectedRef.current,
+      onSelectRef.current,
+    );
   }, [zones]);
 
   useEffect(() => {
     const instance = map.current;
-    if (!instance?.isStyleLoaded() || !instance.getLayer("atlas-zone-halo")) return;
-    instance.setPaintProperty("atlas-zone-halo", "circle-radius", [
-      "case",
-      ["==", ["get", "zone"], selected],
-      34,
-      26,
-    ]);
-    instance.setPaintProperty("atlas-zone-halo", "circle-opacity", [
-      "case",
-      ["==", ["get", "zone"], selected],
-      0.38,
-      0.24,
-    ]);
-    instance.setPaintProperty("atlas-zone-dot", "circle-radius", [
-      "case",
-      ["==", ["get", "zone"], selected],
-      9,
-      7,
-    ]);
-    syncMarkers(instance, zonesRef.current, markers.current, selected, onSelectRef.current);
+    const markerOverlay = overlay.current;
+    if (!instance || !markerOverlay) return;
+    syncMarkers(
+      instance,
+      zonesRef.current,
+      markerOverlay,
+      markers.current,
+      selected,
+      onSelectRef.current,
+    );
   }, [selected]);
 
   return (

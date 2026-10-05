@@ -105,7 +105,7 @@ def test_gfs_fallback_walks_back_through_cycles(monkeypatch):
     monkeypatch.setattr(fetch_gfs, "fetch_cycle", fake_fetch_cycle)
     monkeypatch.setattr(
         live_refresh, "_aggregate_archive_rows",
-        lambda model, raw, now, provider, transport: raw,
+        lambda model, raw, now, provider, transport, forecast_reference_time=None: raw,
     )
     monkeypatch.setattr(live_refresh, "validate_rows", lambda *_args: {})
 
@@ -128,7 +128,10 @@ def test_gfs_fallback_skips_incomplete_cycle_before_accepting(monkeypatch):
         tried.append(hour)
         return [{"run_date": date_str, "run_hour": hour}]
 
-    def forecast_rows(_model, _raw, retrieved_at, _provider, _transport):
+    def forecast_rows(
+        _model, _raw, retrieved_at, _provider, _transport, forecast_reference_time=None
+    ):
+        reference_time = forecast_reference_time or retrieved_at
         rows = []
         for zone in live_refresh.ZONES:
             for variable in ("temperature", "precipitation", "wind_speed"):
@@ -142,7 +145,7 @@ def test_gfs_fallback_skips_incomplete_cycle_before_accepting(monkeypatch):
                         "variable": variable,
                         "lead_hours": lead,
                         "forecast_value": 1.0,
-                        "valid_time": (retrieved_at.replace(tzinfo=None)
+                        "valid_time": (reference_time.replace(tzinfo=None)
                                        + live_refresh.timedelta(hours=lead)),
                     })
         return rows
@@ -172,10 +175,10 @@ def test_gfs_provider_records_unavailable_reason_instead_of_raising(monkeypatch)
 
     now = datetime(2026, 10, 5, 15, 37, tzinfo=timezone.utc)
 
-    def no_primary(_model, _now):
+    def no_primary(_model, _now, _reference_time=None):
         raise RuntimeError("primary unavailable")
 
-    def no_fallback(_model, _now):
+    def no_fallback(_model, _now, _reference_time=None):
         raise RuntimeError("no valid NOAA cycle: fallback missing bay_of_bengal_east_coast lead 48")
 
     monkeypatch.setattr(live_refresh, "_live_rows", no_primary)
@@ -213,6 +216,20 @@ def test_provider_validation_rejects_rows_that_cannot_join_the_shared_lead():
     rows[0]["valid_time"] -= live_refresh.timedelta(hours=6)
     with pytest.raises(RuntimeError, match="aligned=False"):
         live_refresh.validate_rows("GFS", rows, now)
+
+
+def test_shared_forecast_reference_uses_the_live_provider_utc_day():
+    import live_refresh
+
+    earlier = datetime(2026, 10, 5, 12, 5, tzinfo=timezone.utc)
+    later = datetime(2026, 10, 5, 17, 55, tzinfo=timezone.utc)
+
+    assert live_refresh._forecast_reference_time(earlier) == datetime(
+        2026, 10, 5, 0, tzinfo=timezone.utc
+    )
+    assert live_refresh._forecast_reference_time(later) == datetime(
+        2026, 10, 5, 0, tzinfo=timezone.utc
+    )
 
 
 @pytest.mark.parametrize(
@@ -278,7 +295,8 @@ def test_status_is_live_when_the_cycle_is_current_but_the_visit_is_old(tmp_path)
     from sqlalchemy.orm import sessionmaker
 
     from app import api_v1
-    from app.models_db import Base, LiveForecast
+    from app.models_db import Base, ForecastRow, LiveForecast
+    import live_refresh
 
     engine = create_engine(f"sqlite:///{tmp_path/'status.sqlite3'}")
     Base.metadata.create_all(bind=engine)
@@ -297,6 +315,26 @@ def test_status_is_live_when_the_cycle_is_current_but_the_visit_is_old(tmp_path)
         }
         for model in ("GFS", "IFS", "AIFS")
     }
+    forecast_reference_time = live_refresh._forecast_reference_time(ingested)
+    for model in ("GFS", "IFS", "AIFS"):
+        for zone in live_refresh.ZONES:
+            for variable in ("temperature", "precipitation", "wind_speed"):
+                for lead in live_refresh.LEADS:
+                    db.add(ForecastRow(
+                        model=model,
+                        model_generation=f"live:{model}",
+                        region=zone,
+                        run_time=cycle.replace(tzinfo=None),
+                        valid_time=(forecast_reference_time + timedelta(hours=lead)).replace(tzinfo=None),
+                        lead_hours=lead,
+                        variable=variable,
+                        lat=0.0,
+                        lon=0.0,
+                        forecast_value=1.0,
+                        season="post_monsoon",
+                        regime="normal",
+                        regime_probs=None,
+                    ))
     db.add(LiveForecast(
         region="__cycle__", variable="__cycle__", valid_time=ingested, lead_hours=0,
         run_time=ingested, ingestion_time=ingested, model_version="test",
@@ -309,6 +347,18 @@ def test_status_is_live_when_the_cycle_is_current_but_the_visit_is_old(tmp_path)
 
     assert payload["live_state"] == "REAL LIVE", payload["providers"]
     assert all(p["fresh"] for p in payload["providers"].values())
+    assert all(p["coverage"]["aligned"] for p in payload["providers"].values())
+
+    for row in db.query(ForecastRow).filter(ForecastRow.model == "IFS").all():
+        row.valid_time += timedelta(hours=6)
+    db.commit()
+    degraded = api_v1.system_status(db)
+    db.close()
+
+    assert degraded["live_state"] == "DEGRADED REAL"
+    assert degraded["providers"]["IFS"]["status"] == "INVALID"
+    assert degraded["providers"]["IFS"]["coverage"]["aligned"] is False
+    assert "shared live valid-time ladder" in degraded["providers"]["IFS"]["reason"]
 
 
 def test_status_goes_stale_once_the_cycle_is_superseded(tmp_path):
@@ -380,3 +430,29 @@ def test_latest_ingestion_prefers_the_complete_row(tmp_path):
     assert row is not None
     assert row.payload["providers"]["AIFS"]["status"] == "LIVE"
     db.close()
+
+
+def test_primary_provider_retries_are_bounded_before_real_fallback(monkeypatch):
+    import live_refresh
+
+    calls = []
+
+    def unavailable_primary(model, retrieved_at, forecast_reference_time=None):
+        calls.append(model)
+        raise TimeoutError("Open-Meteo request timed out")
+
+    monkeypatch.setattr(live_refresh, "_live_rows", unavailable_primary)
+    monkeypatch.setattr(
+        live_refresh, "_fallback_rows",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("no complete archive cycle")),
+    )
+    monkeypatch.setattr(live_refresh.time, "sleep", lambda _seconds: None)
+
+    rows, state = live_refresh.fetch_provider(
+        "IFS", datetime(2026, 10, 5, 18, 0, tzinfo=timezone.utc)
+    )
+
+    assert rows == []
+    assert calls == ["IFS", "IFS"]
+    assert state["status"] == "UNAVAILABLE"
+    assert state["reason"] == "RuntimeError: no complete archive cycle"

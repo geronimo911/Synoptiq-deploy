@@ -168,29 +168,44 @@ def _require_real_production() -> dict:
     return manifest
 
 
-def _require_live_inputs(db: Session) -> None:
+def _require_live_inputs(db: Session) -> set[str] | None:
     if RUNTIME_MODE != "real":
-        return
+        return None
     status = system_status(db)
-    if status["ready"]:
-        return
+    live_models = {
+        model
+        for model, provider in status["providers"].items()
+        if provider.get("status") == "LIVE" and provider.get("is_real")
+    }
+    if status["ready"] and len(live_models) >= 2:
+        return live_models
     raise HTTPException(
         503,
         detail={
             "code": "REAL_INPUTS_UNAVAILABLE",
-            "message": "Current real provider cycles are stale, incomplete, or unavailable.",
+            "message": "At least two current, aligned real provider cycles are required.",
             "providers": status["providers"],
         },
     )
 
 
-def _latest_context(db: Session, internal_region: str, variable: str, lead_hours: int,
-                    season: str | None = None) -> datetime:
+def _latest_context(
+    db: Session,
+    internal_region: str,
+    variable: str,
+    lead_hours: int,
+    season: str | None = None,
+    live_models: set[str] | None = None,
+) -> datetime:
     q = db.query(ForecastRow).filter(
         ForecastRow.region == internal_region,
         ForecastRow.variable == variable,
         ForecastRow.lead_hours == lead_hours,
     )
+    if RUNTIME_MODE == "real":
+        q = q.filter(ForecastRow.model_generation.like("live:%"))
+        if live_models is not None:
+            q = q.filter(ForecastRow.model.in_(live_models))
     if season:
         q = q.filter(ForecastRow.season == season)
     row = q.order_by(ForecastRow.valid_time.desc()).first()
@@ -209,20 +224,29 @@ def _run_blend_context(
     season_override: str | None = None,
 ):
     _require_real_production()
+    live_models = _require_live_inputs(db)
     internal = _internal_region(region_code)
     if variable not in VARIABLES:
         raise HTTPException(422, f"Unknown variable '{variable}'.")
     if lead_hours not in LEAD_HOURS:
         raise HTTPException(422, f"Unsupported lead time {lead_hours}. Available: {LEAD_HOURS}")
     if valid_time is None:
-        valid_time = _latest_context(db, internal, variable, lead_hours)
+        valid_time = _latest_context(
+            db, internal, variable, lead_hours, live_models=live_models
+        )
     try:
         result = run_blend_pipeline(db, internal, variable, valid_time, lead_hours,
-                                    regime_override=regime_override, season_override=season_override)
+                                    regime_override=regime_override, season_override=season_override,
+                                    live_models=live_models)
     except RuntimeError as exc:
         raise HTTPException(503, str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(404, str(exc)) from exc
+    if live_models is not None and len(result.raw_sources) < 2:
+        raise HTTPException(
+            503,
+            "Fewer than two current aligned real providers have data for this forecast context.",
+        )
     return internal, valid_time, result
 
 
@@ -652,9 +676,36 @@ def system_status(db: Session = Depends(get_db)):
     if latest_ingestion:
         live_age_minutes = max(0, int((now - latest_ingestion.ingestion_time).total_seconds() / 60))
     if live_states:
+        reference_value = live_payload.get("forecast_reference_time")
+        if reference_value:
+            try:
+                forecast_reference_time = datetime.fromisoformat(reference_value)
+                if forecast_reference_time.tzinfo is not None:
+                    forecast_reference_time = forecast_reference_time.astimezone(
+                        timezone.utc
+                    ).replace(tzinfo=None)
+            except (TypeError, ValueError):
+                forecast_reference_time = None
+        else:
+            marker_time = latest_ingestion.ingestion_time if latest_ingestion else now
+            forecast_reference_time = marker_time.replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
         live_provider_count = 0
         for model in MODELS:
             state = live_states.get(model, {})
+            live_rows = db.query(ForecastRow).filter(
+                ForecastRow.model == model,
+                ForecastRow.model_generation.like("live:%"),
+            ).all()
+            aligned = bool(
+                forecast_reference_time is not None
+                and live_rows
+                and all(
+                    row.valid_time == forecast_reference_time + timedelta(hours=row.lead_hours)
+                    for row in live_rows
+                )
+            )
             source_timestamp = state.get("source_run_time") or state.get("retrieved_at")
             source_age_minutes = None
             source_within_cycle = True
@@ -676,12 +727,27 @@ def system_status(db: Session = Depends(get_db)):
             # cycle that has been superseded several times over.
             fresh = live_cycle_is_fresh(
                 model, state.get("status"), source_within_cycle, live_age_minutes
+            ) and aligned
+            reason = state.get(
+                "reason", "fresh validated real provider cycle" if fresh else "live cycle is stale"
             )
+            if state.get("status") == "LIVE" and not aligned:
+                reason = (
+                    "Provider forecast rows do not align to the shared live valid-time "
+                    "ladder; refresh required before blending this provider."
+                )
             if fresh:
                 live_provider_count += 1
             providers[model].update({
-                "status": "LIVE" if fresh else ("STALE" if state.get("status") == "LIVE" else state.get("status", "UNAVAILABLE")),
-                "validation_result": "PASS" if fresh else state.get("reason", "live provider unavailable"),
+                "status": "LIVE" if fresh else (
+                    "INVALID" if state.get("status") == "LIVE" and not aligned
+                    else "STALE" if state.get("status") == "LIVE"
+                    else state.get("status", "UNAVAILABLE")
+                ),
+                "validation_result": "PASS" if fresh else (
+                    "VALID_TIME_MISALIGNMENT" if state.get("status") == "LIVE" and not aligned
+                    else reason
+                ),
                 "fresh": fresh,
                 "complete": bool(state.get("complete", False)),
                 "finite": bool(state.get("finite", False)),
@@ -691,10 +757,10 @@ def system_status(db: Session = Depends(get_db)):
                 "retrieved_at": state.get("retrieved_at"),
                 "source_run_time": state.get("source_run_time"),
                 "run_time_basis": state.get("run_time_basis"),
-                "coverage": state.get("coverage", {}),
+                "coverage": {**state.get("coverage", {}), "aligned": aligned},
                 "fallback_used": bool(state.get("fallback_used", False)),
                 "age_minutes": source_age_minutes if source_age_minutes is not None else live_age_minutes,
-                "reason": state.get("reason", "fresh validated real provider cycle" if fresh else "live cycle is stale"),
+                "reason": reason,
             })
     if live_provider_count == len(MODELS):
         live_state = "REAL LIVE"
@@ -793,6 +859,7 @@ def weights_map(region: str, variable: str, season: str, regime: str,
     if variable not in VARIABLES:
         raise HTTPException(422, f"Unknown variable '{variable}'.")
     _require_real_production()
+    live_models = _require_live_inputs(db)
     points = []
     for lead in LEAD_HOURS:
         try:
@@ -801,7 +868,9 @@ def weights_map(region: str, variable: str, season: str, regime: str,
             # selected forecast row. Use the latest available forecast for
             # the region/variable/lead and override the context in the
             # blending pipeline.
-            vt = _latest_context(db, internal, variable, lead)
+            vt = _latest_context(
+                db, internal, variable, lead, live_models=live_models
+            )
         except HTTPException as exc:
             if exc.status_code == 404:
                 continue
@@ -913,11 +982,14 @@ def extreme_guidance(region: str, lead_hours: int, db: Session = Depends(get_db)
     if lead_hours not in LEAD_HOURS:
         raise HTTPException(422, f"Unsupported lead time {lead_hours}. Available: {LEAD_HOURS}")
     _require_real_production()
+    live_models = _require_live_inputs(db)
     guidance = []
     valid_time = None
     for variable in VARIABLES:
         try:
-            current_time = _latest_context(db, internal, variable, lead_hours)
+            current_time = _latest_context(
+                db, internal, variable, lead_hours, live_models=live_models
+            )
         except HTTPException as exc:
             if exc.status_code == 404:
                 continue

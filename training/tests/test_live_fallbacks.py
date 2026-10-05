@@ -14,19 +14,21 @@ def test_provider_fallback_is_used_after_primary_failure(monkeypatch):
     calls = []
     monkeypatch.setattr(live_refresh.time, "sleep", lambda _: None)
 
-    def primary(model, retrieved_at):
+    def primary(model, retrieved_at, forecast_reference_time=None):
         calls.append("primary")
         raise RuntimeError("primary unavailable")
 
-    def fallback(model, retrieved_at):
+    def fallback(model, retrieved_at, forecast_reference_time=None):
         calls.append("fallback")
         rows = []
+        reference_time = forecast_reference_time or retrieved_at
         for zone in live_refresh.ZONES:
             for lead in live_refresh.LEADS:
                 for variable, value in (("temperature", 25.0), ("precipitation", 1.0), ("wind_speed", 12.0)):
                     rows.append({
                         "model": model, "region": zone, "variable": variable,
-                        "lead_hours": lead, "valid_time": (now + __import__("datetime").timedelta(hours=lead)).replace(tzinfo=None),
+                        "lead_hours": lead,
+                        "valid_time": (reference_time + timedelta(hours=lead)).replace(tzinfo=None),
                         "forecast_value": value,
                         "source_provider": "fallback", "source_model": "fallback", "source_transport": "https",
                     })
@@ -39,7 +41,32 @@ def test_provider_fallback_is_used_after_primary_failure(monkeypatch):
     assert state["status"] == "LIVE"
     assert state["fallback_used"] is True
     assert calls[-1] == "fallback"
-    assert calls[:-1] == ["primary"] * 5
+    assert calls[:-1] == ["primary"] * 2
+
+
+def test_ecmwf_candidate_missing_first_step_is_skipped_without_fetching_rest(
+    monkeypatch, tmp_path
+):
+    import fetch_ecmwf
+
+    calls = []
+
+    class MissingCycleClient:
+        def retrieve(self, **kwargs):
+            calls.append(kwargs["step"])
+            raise RuntimeError("404 not found")
+
+    monkeypatch.setattr(fetch_ecmwf, "CACHE_DIR", str(tmp_path))
+    monkeypatch.setattr(
+        fetch_ecmwf, "open_data_client", lambda *args, **kwargs: MissingCycleClient()
+    )
+
+    rows = fetch_ecmwf.fetch_cycle(
+        "ifs", "2026-10-05", 18, [6, 12, 18], source="aws", maximum_retries=1
+    )
+
+    assert rows == []
+    assert calls == ["6"]
 
 
 def test_ecmwf_client_uses_requested_open_data_mirror(monkeypatch):
@@ -185,7 +212,8 @@ def test_previous_aifs_cycle_is_found_by_provider_rows_not_ingestion_run_time(mo
         SimpleNamespace(**{
             "model": "AIFS", "model_generation": "live:AIFS Single v2",
             "region": zone, "run_time": datetime(2026, 9, 30),
-            "valid_time": latest.ingestion_time + timedelta(hours=lead),
+            "valid_time": live_refresh._forecast_reference_time(now).replace(tzinfo=None)
+            + timedelta(hours=lead),
             "lead_hours": lead, "variable": variable, "lat": 0.0, "lon": 0.0,
             "forecast_value": 1.0, "season": "post_monsoon", "regime": "normal",
             "regime_probs": None,
@@ -227,11 +255,13 @@ def test_previous_aifs_cycle_is_found_by_provider_rows_not_ingestion_run_time(mo
 
 def test_refresh_retains_last_validated_aifs_when_replacement_fails(monkeypatch):
     now = datetime.now(timezone.utc).replace(second=0, microsecond=0)
+    forecast_reference_time = live_refresh._forecast_reference_time(now).replace(tzinfo=None)
     previous_rows = [
         {
             "model": "AIFS", "region": zone, "variable": variable,
             "lead_hours": lead, "run_time": datetime(2026, 9, 30),
-            "valid_time": (now - timedelta(minutes=10) + timedelta(hours=lead)).replace(tzinfo=None),
+            "valid_time": forecast_reference_time + timedelta(hours=lead),
+            "forecast_value": 1.0,
         }
         for zone in live_refresh.ZONES
         for lead in live_refresh.LEADS
@@ -257,7 +287,8 @@ def test_refresh_retains_last_validated_aifs_when_replacement_fails(monkeypatch)
         rows = [
             {
                 "model": model, "region": zone, "variable": variable,
-                "lead_hours": lead, "valid_time": refresh_time + timedelta(hours=lead),
+                "lead_hours": lead,                 "valid_time": live_refresh._forecast_reference_time(refresh_time).replace(tzinfo=None)
+                + timedelta(hours=lead),
             }
             for zone in live_refresh.ZONES
             for lead in live_refresh.LEADS
@@ -275,8 +306,8 @@ def test_refresh_retains_last_validated_aifs_when_replacement_fails(monkeypatch)
     states = live_refresh.refresh_once()
 
     assert states["AIFS"]["status"] == "LIVE"
-    assert "retaining last validated cycle" in states["AIFS"]["reason"]
+    assert "retaining the aligned last validated cycle" in states["AIFS"]["reason"]
     assert len(persisted[0][0]["AIFS"]) == 45
     assert len(persisted[1][0]["AIFS"]) == 45
-    assert persisted[0][0]["AIFS"][0]["valid_time"] == now + timedelta(hours=24)
+    assert persisted[0][0]["AIFS"][0]["valid_time"] == forecast_reference_time + timedelta(hours=24)
     assert persisted[0][0]["AIFS"][0]["run_time"] == datetime(2026, 9, 30)

@@ -168,7 +168,7 @@ def fetch_day(model: str, target_date: str) -> list[dict]:
     return rows[target_date]
 
 
-def fetch_live_cycle(model: str, run_date: str) -> list[dict]:
+def fetch_live_cycle(model: str, run_date: str, timeout: float = 90.0) -> list[dict]:
     """Fetch current real forecasts in the raw shape consumed by live ingestion."""
     model_id, source_model = MODELS[model]
     points = [point for region_points in REPRESENTATIVE_POINTS.values() for point in region_points]
@@ -181,7 +181,7 @@ def fetch_live_cycle(model: str, run_date: str) -> list[dict]:
         "hourly": "temperature_2m,wind_speed_10m,precipitation",
     })
     request = urllib.request.Request(f"{LIVE_API_URL}?{query}", headers={"User-Agent": "synoptiq-live/1.0"})
-    with urllib.request.urlopen(request, timeout=180) as response:
+    with urllib.request.urlopen(request, timeout=timeout) as response:
         payload = json.loads(response.read().decode("utf-8"))
     records = payload if isinstance(payload, list) else [payload]
     rows = []

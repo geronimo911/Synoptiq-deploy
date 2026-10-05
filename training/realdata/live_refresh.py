@@ -35,16 +35,24 @@ def _atomic_write_parquet(frame: pd.DataFrame, path: Path) -> None:
     temporary.replace(path)
 
 
-def _live_rows(model: str, retrieved_at: datetime) -> list[dict]:
+def _forecast_reference_time(now: datetime) -> datetime:
+    utc_now = now.astimezone(timezone.utc) if now.tzinfo else now.replace(tzinfo=timezone.utc)
+    return utc_now.replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+def _live_rows(
+    model: str, retrieved_at: datetime, forecast_reference_time: datetime | None = None
+) -> list[dict]:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from fetch_openmeteo import REPRESENTATIVE_POINTS, fetch_live_cycle
 
     source_model = MODELS[model][1]
     source_rows = fetch_live_cycle(MODELS[model][0], retrieved_at.strftime("%Y-%m-%d"))
     rows = []
+    reference_time = forecast_reference_time or retrieved_at
     for item in source_rows:
         lead = int(item["step"])
-        valid_time = retrieved_at + timedelta(hours=lead)
+        valid_time = reference_time + timedelta(hours=lead)
         common = {
             "model": model,
             "region": item["zone"],
@@ -72,7 +80,9 @@ def _live_rows(model: str, retrieved_at: datetime) -> list[dict]:
     return rows
 
 
-def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
+def _fallback_rows(
+    model: str, retrieved_at: datetime, forecast_reference_time: datetime | None = None
+) -> list[dict]:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     if model == "GFS":
         import fetch_gfs
@@ -105,9 +115,10 @@ def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
                 continue
             try:
                 rows = _aggregate_archive_rows(
-                    model, raw, retrieved_at, "NOAA/AWS", "noaa-gfs-bdp-pds"
+                    model, raw, retrieved_at, "NOAA/AWS", "noaa-gfs-bdp-pds",
+                    forecast_reference_time=forecast_reference_time,
                 )
-                validate_rows(model, rows, retrieved_at)
+                validate_rows(model, rows, forecast_reference_time or retrieved_at)
                 return rows
             except Exception as exc:
                 last_error = exc
@@ -165,10 +176,13 @@ def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
             if not raw:
                 continue
             try:
-                return _aggregate_archive_rows(
+                rows = _aggregate_archive_rows(
                     model, raw, retrieved_at, "ECMWF Open Data",
                     f"ECMWF Open Data ({source})",
+                    forecast_reference_time=forecast_reference_time,
                 )
+                validate_rows(model, rows, forecast_reference_time or retrieved_at)
+                return rows
             except Exception as exc:
                 last_error = exc
                 logging.warning(
@@ -180,7 +194,14 @@ def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
     raise RuntimeError(f"No published ECMWF {model} cycle returned forecast rows")
 
 
-def _aggregate_archive_rows(model: str, raw_rows: list[dict], retrieved_at: datetime, provider: str, transport: str) -> list[dict]:
+def _aggregate_archive_rows(
+    model: str,
+    raw_rows: list[dict],
+    retrieved_at: datetime,
+    provider: str,
+    transport: str,
+    forecast_reference_time: datetime | None = None,
+) -> list[dict]:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from fetch_openmeteo import REPRESENTATIVE_POINTS
     frame = pd.DataFrame(raw_rows)
@@ -201,10 +222,11 @@ def _aggregate_archive_rows(model: str, raw_rows: list[dict], retrieved_at: date
     if model == "AIFS" and generation != "AIFS Single v2":
         raise RuntimeError(f"fallback returned unexpected AIFS generation: {generation}")
     rows = []
+    reference_time = forecast_reference_time or retrieved_at
     for zone, group in frame.groupby("zone"):
         indexed = group.set_index("step")
         for lead in LEADS:
-            valid_time = retrieved_at + timedelta(hours=lead)
+            valid_time = reference_time + timedelta(hours=lead)
             source_offset = (valid_time - cycle_time).total_seconds() / 3600
             temperatures = [
                 _interpolate_step(indexed, "t2m_c", source_offset + offset)
@@ -277,18 +299,28 @@ def _interpolate_gfs_precip(indexed: pd.DataFrame, target_hour: float) -> float:
     return float(np.interp(target_hour, [0.0, *steps], cumulative))
 
 
-def validate_rows(model: str, rows: list[dict], now: datetime) -> dict:
+def validate_rows(
+    model: str,
+    rows: list[dict],
+    now: datetime,
+    forecast_reference_time: datetime | None = None,
+) -> dict:
     frame = pd.DataFrame(rows)
     expected = {(zone, variable, lead) for zone in ZONES for variable in ("temperature", "precipitation", "wind_speed") for lead in LEADS}
     observed = set(zip(frame["region"], frame["variable"], frame["lead_hours"])) if not frame.empty else set()
     finite = bool(not frame.empty and np.isfinite(frame["forecast_value"].to_numpy(dtype=float)).all())
     now_naive = now.astimezone(timezone.utc).replace(tzinfo=None) if now.tzinfo else now
+    reference_time = forecast_reference_time or now
+    reference_naive = (
+        reference_time.astimezone(timezone.utc).replace(tzinfo=None)
+        if reference_time.tzinfo else reference_time
+    )
     valid_times = pd.to_datetime(frame["valid_time"]) if not frame.empty else pd.Series(dtype="datetime64[ns]")
     future = bool(not frame.empty and (valid_times > now_naive).all())
     aligned = bool(
         not frame.empty
         and all(
-            valid_time == now_naive + timedelta(hours=int(lead))
+            valid_time == reference_naive + timedelta(hours=int(lead))
             for valid_time, lead in zip(valid_times, frame["lead_hours"])
         )
     )
@@ -304,14 +336,15 @@ def validate_rows(model: str, rows: list[dict], now: datetime) -> dict:
 
 def fetch_provider(model: str, now: datetime) -> tuple[list[dict], dict]:
     started = time.monotonic()
+    forecast_reference_time = _forecast_reference_time(now)
     fallback_used = False
     error = None
-    for attempt, delay in enumerate((0, 2, 5, 10, 20)):
+    for attempt, delay in enumerate((0, 5)):
         if delay:
             time.sleep(delay)
         try:
-            rows = _live_rows(model, now)
-            coverage = validate_rows(model, rows, now)
+            rows = _live_rows(model, now, forecast_reference_time)
+            coverage = validate_rows(model, rows, now, forecast_reference_time)
             source_provider = rows[0]["source_provider"]
             state = {"status": "LIVE", "fresh": True, "complete": True, "finite": True, "source": source_provider, "source_model": rows[0]["source_model"], "source_transport": rows[0]["source_transport"], "retrieved_at": now.isoformat(), "source_run_time": None, "run_time_basis": "retrieval_time", "coverage": coverage, "fallback_used": fallback_used, "reason": "complete future real forecast cycle", "latency_seconds": round(time.monotonic() - started, 3)}
             return rows, state
@@ -321,8 +354,8 @@ def fetch_provider(model: str, now: datetime) -> tuple[list[dict], dict]:
             if "returned non-finite values" in error:
                 break
     try:
-        rows = _fallback_rows(model, now)
-        coverage = validate_rows(model, rows, now)
+        rows = _fallback_rows(model, now, forecast_reference_time)
+        coverage = validate_rows(model, rows, now, forecast_reference_time)
         source_run_time = rows[0].get("source_run_time")
         source_age = (
             now - datetime.fromisoformat(source_run_time).astimezone(timezone.utc)
@@ -348,7 +381,14 @@ def persist_cycle(provider_rows: dict[str, list[dict]], states: dict[str, dict],
     for model, rows in provider_rows.items():
         if rows:
             _atomic_write_parquet(pd.DataFrame(rows), LIVE_DIR / f"{model.lower()}_latest.parquet")
-    manifest = {"last_refresh": now.isoformat(), "model_version": ACTIVE_MODEL_VERSION or MODEL_VERSION, "providers": states, "blend_readiness": sum(state["status"] == "LIVE" for state in states.values()) >= 2, "frontend_readiness": True}
+    manifest = {
+        "last_refresh": now.isoformat(),
+        "forecast_reference_time": _forecast_reference_time(now).isoformat(),
+        "model_version": ACTIVE_MODEL_VERSION or MODEL_VERSION,
+        "providers": states,
+        "blend_readiness": sum(state["status"] == "LIVE" for state in states.values()) >= 2,
+        "frontend_readiness": True,
+    }
     temporary = LIVE_DIR / "live_manifest.json.tmp"
     temporary.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     temporary.replace(LIVE_DIR / "live_manifest.json")
@@ -414,7 +454,10 @@ def _previous_live_provider(model: str, now: datetime) -> tuple[list[dict], dict
             )
         } for row in rows]
         try:
-            validate_rows(model, snapshots, ingestion_time.astimezone(timezone.utc))
+            validate_rows(
+                model, snapshots, now,
+                forecast_reference_time=_forecast_reference_time(now),
+            )
         except RuntimeError:
             return [], None
         return snapshots, dict(state)
@@ -432,21 +475,7 @@ def refresh_once() -> dict:
         provider_rows[model] = rows
         states[model] = state
         logging.info("provider=%s source=%s success=%s fallback=%s rows=%s valid_min=%s valid_max=%s freshness=%s", model, state.get("source"), state["status"] == "LIVE", state["fallback_used"], state.get("coverage", {}).get("rows", 0), rows[0]["valid_time"].isoformat() if rows else None, rows[-1]["valid_time"].isoformat() if rows else None, state["fresh"])
-    if previous_aifs_state:
-        current_valid_times = {
-            (row["region"], row["variable"], row["lead_hours"]): row["valid_time"]
-            for rows in provider_rows.values()
-            for row in rows
-        }
-        previous_aifs_rows = [
-            {
-                **row,
-                "valid_time": current_valid_times.get(
-                    (row["region"], row["variable"], row["lead_hours"]), row["valid_time"]
-                ),
-            }
-            for row in previous_aifs_rows
-        ]
+    if previous_aifs_state and previous_aifs_rows:
         provider_rows["AIFS"] = previous_aifs_rows
         states["AIFS"] = {
             **previous_aifs_state,
@@ -454,6 +483,8 @@ def refresh_once() -> dict:
             "valid_time_alignment": "current region/variable/lead keys",
         }
     else:
+        previous_aifs_rows = []
+        previous_aifs_state = None
         states["AIFS"] = {
             "status": "UNAVAILABLE",
             "fresh": False,
@@ -474,12 +505,27 @@ def refresh_once() -> dict:
     rows, state = fetch_provider("AIFS", now)
     if state.get("status") != "LIVE" and previous_aifs_state:
         refresh_error = state.get("reason", "new AIFS cycle was not usable")
-        state = {
-            **previous_aifs_state,
-            "reason": f"new AIFS cycle failed validation; retaining last validated cycle ({refresh_error})",
-            "last_refresh_error": refresh_error,
-        }
-        rows = previous_aifs_rows
+        try:
+            validate_rows(
+                "AIFS", previous_aifs_rows, now,
+                forecast_reference_time=_forecast_reference_time(now),
+            )
+        except RuntimeError:
+            previous_aifs_rows = []
+            state = {
+                **state,
+                "reason": (
+                    "new AIFS cycle failed validation and the previous cycle does not "
+                    f"match the current shared forecast times ({refresh_error})"
+                ),
+            }
+        else:
+            state = {
+                **previous_aifs_state,
+                "reason": f"new AIFS cycle failed validation; retaining the aligned last validated cycle ({refresh_error})",
+                "last_refresh_error": refresh_error,
+            }
+            rows = previous_aifs_rows
     provider_rows["AIFS"] = rows
     states["AIFS"] = state
     logging.info("provider=AIFS source=%s success=%s fallback=%s rows=%s valid_min=%s valid_max=%s freshness=%s", state.get("source"), state["status"] == "LIVE", state["fallback_used"], state.get("coverage", {}).get("rows", 0), rows[0]["valid_time"].isoformat() if rows else None, rows[-1]["valid_time"].isoformat() if rows else None, state["fresh"])

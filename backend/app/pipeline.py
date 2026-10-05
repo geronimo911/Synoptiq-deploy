@@ -69,13 +69,18 @@ def _detect_regime_from_context(db: Session, region: str, valid_time: datetime, 
 def run_blend_pipeline(
     db: Session, region: str, variable: str, valid_time: datetime, lead_hours: int,
     regime_override: str | None = None, season_override: str | None = None,
+    live_models: set[str] | None = None,
 ) -> BlendedForecastResponse:
-    rows = (
-        db.query(ForecastRow)
-        .filter(ForecastRow.region == region, ForecastRow.variable == variable,
-                ForecastRow.valid_time == valid_time, ForecastRow.lead_hours == lead_hours)
-        .all()
+    query = db.query(ForecastRow).filter(
+        ForecastRow.region == region, ForecastRow.variable == variable,
+        ForecastRow.valid_time == valid_time, ForecastRow.lead_hours == lead_hours,
     )
+    if live_models is not None:
+        query = query.filter(
+            ForecastRow.model_generation.like("live:%"),
+            ForecastRow.model.in_(live_models),
+        )
+    rows = query.all()
     if not rows:
         raise ValueError("No cached forecast sources for that region/variable/valid_time/lead_hours.")
 
