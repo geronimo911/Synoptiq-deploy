@@ -180,9 +180,7 @@ def fetch_cycle(model: str, run_date: str, hour: int, steps, source: str = "aws"
                     pass
                 text = str(exc).lower()
                 if any(code in text for code in ("404", "not found", "no data")):
-                    if step == steps[0]:
-                        return []
-                    continue
+                    return []
                 if "503" in text or "slowdown" in text or "slow down" in text:
                     reason = f"{source} returned HTTP 503 SlowDown after bounded retries"
                 else:

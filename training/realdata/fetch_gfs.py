@@ -125,11 +125,15 @@ def fetch_cycle(run_date: str, hour: int, steps) -> list[dict]:
             blob = fetch_file_fields(run_date, hour, step)
             means = decode_zone_means(blob)
         except FileNotFoundError:
-            continue  # cycle/file not published yet -> skip
+            print(
+                f"  gfs {run_date} {hour:02d}z f{step:03d}: required lead unavailable",
+                flush=True,
+            )
+            return []
         except urllib.error.HTTPError as exc:
             if exc.code == 404:
                 print(f"  gfs {run_date} {hour:02d}z f{step:03d}: provider lead unavailable (HTTP 404)", flush=True)
-                continue
+                return []
             raise
         for zkey, m in means.items():
             rows.append(dict(run_date=run_date, run_hour=hour, step=step, zone=zkey, **m))

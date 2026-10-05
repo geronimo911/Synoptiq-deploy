@@ -69,6 +69,77 @@ def test_ecmwf_candidate_missing_first_step_is_skipped_without_fetching_rest(
     assert calls == ["6"]
 
 
+def test_ecmwf_incomplete_required_lead_stops_cycle_immediately(
+    monkeypatch, tmp_path
+):
+    calls = []
+
+    class PartialCycleClient:
+        def retrieve(self, **kwargs):
+            calls.append(kwargs["step"])
+            if kwargs["step"] == "12":
+                raise RuntimeError("404 not found")
+            Path(kwargs["target"]).write_bytes(b"GRIB")
+
+    monkeypatch.setattr(fetch_ecmwf, "CACHE_DIR", str(tmp_path))
+    monkeypatch.setattr(
+        fetch_ecmwf, "open_data_client", lambda *args, **kwargs: PartialCycleClient()
+    )
+    monkeypatch.setattr(
+        fetch_ecmwf, "validate_grib_fields",
+        lambda path: (Path(path).exists(), set()),
+    )
+    monkeypatch.setattr(
+        fetch_ecmwf, "decode_zone_means",
+        lambda *_args: {
+            zone: {"t2m_c": 20.0, "wind_ms": 3.0, "tp_cum_m": 0.01}
+            for zone in live_refresh.ZONES
+        },
+    )
+
+    rows = fetch_ecmwf.fetch_cycle(
+        "ifs", "2026-10-05", 18, [6, 12, 18], source="aws", maximum_retries=1
+    )
+
+    assert rows == []
+    assert calls == ["6", "12"]
+
+
+def test_fallback_requests_only_steps_needed_for_shared_forecast_horizon():
+    cycle = datetime(2026, 10, 5, 18, tzinfo=timezone.utc)
+    reference = datetime(2026, 10, 5, 0, tzinfo=timezone.utc)
+
+    assert live_refresh._required_archive_steps(cycle, reference) == list(
+        range(6, 127, 6)
+    )
+
+
+def test_gfs_incomplete_required_lead_stops_cycle_immediately(monkeypatch):
+    import fetch_gfs
+
+    calls = []
+
+    def get_file(_date, _hour, step):
+        calls.append(step)
+        if step == 12:
+            raise FileNotFoundError("required forecast lead unavailable")
+        return b"GRIB"
+
+    monkeypatch.setattr(fetch_gfs, "fetch_file_fields", get_file)
+    monkeypatch.setattr(
+        fetch_gfs, "decode_zone_means",
+        lambda _blob: {
+            zone: {"t2m_c": 20.0, "wind_ms": 3.0, "apcp6_mm": 1.0}
+            for zone in live_refresh.ZONES
+        },
+    )
+
+    rows = fetch_gfs.fetch_cycle("2026-10-05", 18, [6, 12, 18])
+
+    assert rows == []
+    assert calls == [6, 12]
+
+
 def test_ecmwf_client_uses_requested_open_data_mirror(monkeypatch):
     import ecmwf.opendata
 

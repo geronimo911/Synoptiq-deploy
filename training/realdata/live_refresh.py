@@ -40,6 +40,15 @@ def _forecast_reference_time(now: datetime) -> datetime:
     return utc_now.replace(hour=0, minute=0, second=0, microsecond=0)
 
 
+def _required_archive_steps(
+    cycle_time: datetime, forecast_reference_time: datetime
+) -> list[int]:
+    latest_valid_time = forecast_reference_time + timedelta(hours=max(LEADS) + 24)
+    latest_source_hour = (latest_valid_time - cycle_time).total_seconds() / 3600
+    max_step = max(6, math.ceil(latest_source_hour / 6) * 6)
+    return list(range(6, max_step + 1, 6))
+
+
 def _live_rows(
     model: str, retrieved_at: datetime, forecast_reference_time: datetime | None = None
 ) -> list[dict]:
@@ -99,10 +108,12 @@ def _fallback_rows(
         for offset in range(4):
             cycle = base_cycle - timedelta(hours=6 * offset)
             try:
+                reference_time = forecast_reference_time or retrieved_at
+                steps = _required_archive_steps(cycle, reference_time)
                 raw = fetch_gfs.fetch_cycle(
                     cycle.strftime("%Y-%m-%d"),
                     cycle.hour,
-                    list(range(6, 181, 6)),
+                    steps,
                 )
             except Exception as exc:
                 last_error = exc
@@ -153,13 +164,14 @@ def _fallback_rows(
     # the per-step fetch fails fast (404) when it is not yet published, and
     # a complete-but-slightly-younger cycle is always better than a stale one.
     candidates = [latest_cycle - timedelta(hours=cycle_hours * offset) for offset in range(4)]
-    steps = list(range(6, 175, 6)) if model == "AIFS" else list(range(6, 181, 6))
     last_error = None
     # cloud mirrors first: data.ecmwf.int is rate-limited (500 concurrent
     # connections) and is the most likely to fail; azure/google/aws are the
     # official replicas and carry AIFS.
     sources = ("azure", "google", "aws", "ecmwf")
     for cycle in candidates:
+        reference_time = forecast_reference_time or retrieved_at
+        steps = _required_archive_steps(cycle, reference_time)
         for source in sources:
             try:
                 raw = fetch_ecmwf.fetch_cycle(
