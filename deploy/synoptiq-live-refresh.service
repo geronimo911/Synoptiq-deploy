@@ -1,0 +1,24 @@
+# Standalone live-refresh worker (optional second safety net; the API already
+# schedules refreshes in-process). Use this if you prefer the worker to be a
+# separate process from the web server.
+[Unit]
+Description=Synoptiq live provider refresh worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=synoptiq
+WorkingDirectory=/opt/synoptiq
+Environment=SYNOPTIQ_MODE=real
+Environment=SYNOPTIQ_DATABASE_ROLE=PRODUCTION
+Environment=SYNOPTIQ_LIVE_REFRESH_MINUTES=15
+Environment=SYNOPTIQ_ARTIFACTS_DIR=/opt/synoptiq/artifacts/real_12m_aifs_corrected
+Environment=SYNOPTIQ_LIVE_DATA_DIR=/opt/synoptiq/data/real/live
+EnvironmentFile=-/etc/synoptiq.env
+ExecStart=/opt/synoptiq/.venv/bin/python training/realdata/live_refresh.py
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

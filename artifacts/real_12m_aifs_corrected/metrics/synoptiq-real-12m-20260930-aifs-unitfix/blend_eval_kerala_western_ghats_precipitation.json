@@ -1,0 +1,37 @@
+{
+  "region": "kerala_western_ghats",
+  "variable": "precipitation",
+  "n_test_contexts": 440,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-06 00:00:00",
+    "test_start": "2025-11-30 00:00:00"
+  },
+  "metric": "CSI@20mm",
+  "best_single_model": "AIFS",
+  "best_single_model_csi": 0.0,
+  "synoptiq_csi": 0.0,
+  "synoptiq_mae": 0.3786,
+  "synoptiq_rmse": 1.2322,
+  "per_model_metrics": {
+    "AIFS": {
+      "csi": 0.0,
+      "mae": 0.4781172363636364,
+      "rmse": 0.9403582861654333
+    },
+    "GFS": {
+      "csi": 0.0,
+      "mae": 0.7094977272727272,
+      "rmse": 1.9074540569946776
+    },
+    "IFS": {
+      "csi": 0.0,
+      "mae": 0.5156863636363636,
+      "rmse": 1.1083009970220183
+    }
+  },
+  "naive_average_mae": 0.498,
+  "naive_average_rmse": 1.1173,
+  "relative_csi_improvement_pct": 0.0,
+  "fss_metric_type": "not applicable at this threshold summary; FSS-proxy remains diagnostic only"
+}

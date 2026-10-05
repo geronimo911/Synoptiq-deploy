@@ -1,0 +1,31 @@
+{
+  "mode": "REAL_12M",
+  "contexts": 16425,
+  "period": {
+    "start": "2025-02-26",
+    "end": "2026-02-25"
+  },
+  "regions": [
+    "kerala_western_ghats",
+    "bay_of_bengal_east_coast",
+    "indo_gangetic_plains"
+  ],
+  "variables": [
+    "precipitation",
+    "temperature",
+    "wind_speed"
+  ],
+  "leads": [
+    24,
+    48,
+    72,
+    96,
+    120
+  ],
+  "source": "backend.app.blending.batch_blend",
+  "calibration": "REAL_12M artifacts",
+  "synthetic_fallback": false,
+  "output": "D:\\SIH2026\\Synoptiq-2\\artifacts\\real_12m_aifs_corrected\\inference\\historical_blends.jsonl",
+  "val_start": "2025-10-03 00:00:00",
+  "test_start": "2025-11-26 00:00:00"
+}

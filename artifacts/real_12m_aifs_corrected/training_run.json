@@ -1,0 +1,11 @@
+{
+  "mode": "REAL_12M",
+  "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+  "trained_at": "2026-09-30T08:59:11.621958+00:00",
+  "training_input": "D:\\SIH2026\\Synoptiq-2\\training\\realdata\\cache\\12m_aifs_corrected\\training",
+  "forecast_rows": 49275,
+  "truth_rows": 3285,
+  "model_root": "D:\\SIH2026\\Synoptiq-2\\artifacts\\real_12m_aifs_corrected\\models",
+  "calibration_root": "D:\\SIH2026\\Synoptiq-2\\artifacts\\real_12m_aifs_corrected\\calibration",
+  "metrics_root": "D:\\SIH2026\\Synoptiq-2\\artifacts\\real_12m_aifs_corrected\\metrics"
+}

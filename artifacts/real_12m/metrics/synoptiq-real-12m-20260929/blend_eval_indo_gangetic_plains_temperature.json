@@ -1,0 +1,36 @@
+{
+  "region": "indo_gangetic_plains",
+  "variable": "temperature",
+  "n_test_contexts": 460,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-03 00:00:00",
+    "test_start": "2025-11-26 00:00:00"
+  },
+  "metric": "RMSE",
+  "best_single_model": "AIFS",
+  "best_single_model_rmse": 0.833,
+  "synoptiq_rmse": 2.228,
+  "synoptiq_mae": 1.589,
+  "synoptiq_bias": 1.33,
+  "per_model_metrics": {
+    "AIFS": {
+      "mae": 0.6622956521739132,
+      "rmse": 0.8327979320652604,
+      "bias": 0.5337869565217392
+    },
+    "GFS": {
+      "mae": 2.8241,
+      "rmse": 3.1476268106512304,
+      "bias": -2.8082652173913045
+    },
+    "IFS": {
+      "mae": 4.6717891304347825,
+      "rmse": 4.905900250895765,
+      "bias": -4.6717891304347825
+    }
+  },
+  "naive_average_mae": 2.317,
+  "naive_average_rmse": 2.542,
+  "relative_rmse_improvement_pct": -167.56
+}

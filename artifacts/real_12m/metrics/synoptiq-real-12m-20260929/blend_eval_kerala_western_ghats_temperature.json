@@ -1,0 +1,36 @@
+{
+  "region": "kerala_western_ghats",
+  "variable": "temperature",
+  "n_test_contexts": 460,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-03 00:00:00",
+    "test_start": "2025-11-26 00:00:00"
+  },
+  "metric": "RMSE",
+  "best_single_model": "AIFS",
+  "best_single_model_rmse": 0.806,
+  "synoptiq_rmse": 0.381,
+  "synoptiq_mae": 0.289,
+  "synoptiq_bias": 0.018,
+  "per_model_metrics": {
+    "AIFS": {
+      "mae": 0.7369565217391304,
+      "rmse": 0.8055433435023029,
+      "bias": 0.7369478260869565
+    },
+    "GFS": {
+      "mae": 4.366530434782608,
+      "rmse": 4.450450530197941,
+      "bias": -4.366530434782608
+    },
+    "IFS": {
+      "mae": 3.78920652173913,
+      "rmse": 3.8613961315543124,
+      "bias": -3.78920652173913
+    }
+  },
+  "naive_average_mae": 2.473,
+  "naive_average_rmse": 2.522,
+  "relative_rmse_improvement_pct": 52.72
+}

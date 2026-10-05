@@ -1,0 +1,18 @@
+{
+  "mode": "REAL_12M",
+  "training_data": "PASS",
+  "models": "PASS",
+  "calibration": "PASS",
+  "validation": "PASS",
+  "historical_inference": "PASS",
+  "backend": "DEGRADED",
+  "frontend": "PASS",
+  "live_forecast": "DEGRADED",
+  "shap": "PASS",
+  "synthetic_fallback": false,
+  "model_version": "synoptiq-real-12m-20260929",
+  "updated_at": "2026-09-29T11:26:42.982797+00:00",
+  "known_limitations": [
+    "GFS and IFS are fresh live sources; AIFS is currently unavailable after Open-Meteo non-finite output and bounded ECMWF/AWS 503 fallback failure."
+  ]
+}

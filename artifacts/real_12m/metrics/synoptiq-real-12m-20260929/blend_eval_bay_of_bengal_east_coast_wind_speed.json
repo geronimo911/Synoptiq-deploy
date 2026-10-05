@@ -1,0 +1,36 @@
+{
+  "region": "bay_of_bengal_east_coast",
+  "variable": "wind_speed",
+  "n_test_contexts": 460,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-03 00:00:00",
+    "test_start": "2025-11-26 00:00:00"
+  },
+  "metric": "RMSE",
+  "best_single_model": "AIFS",
+  "best_single_model_rmse": 2.654,
+  "synoptiq_rmse": 2.247,
+  "synoptiq_mae": 1.77,
+  "synoptiq_bias": -1.148,
+  "per_model_metrics": {
+    "AIFS": {
+      "mae": 2.0966652173913043,
+      "rmse": 2.6543765435187616,
+      "bias": -1.7900478260869566
+    },
+    "GFS": {
+      "mae": 6.990715217391304,
+      "rmse": 7.728662154744113,
+      "bias": -6.77478043478261
+    },
+    "IFS": {
+      "mae": 5.009708695652174,
+      "rmse": 5.740562661409178,
+      "bias": -4.903904347826088
+    }
+  },
+  "naive_average_mae": 4.535,
+  "naive_average_rmse": 5.01,
+  "relative_rmse_improvement_pct": 15.35
+}

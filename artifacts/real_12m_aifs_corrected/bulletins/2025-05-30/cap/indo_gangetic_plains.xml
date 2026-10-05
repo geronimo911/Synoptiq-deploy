@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>synoptiq-indo_gangetic_plains-20250530</identifier>
+  <sender>synoptiq@blend.local</sender>
+  <sent>2026-10-01T06:19:23+00:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>en-IN</language>
+    <category>Met</category>
+    <event>Heat Wave</event>
+    <responseType>Prepare</responseType>
+    <urgency>Past</urgency>
+    <severity>Minor</severity>
+    <certainty>Possible</certainty>
+    <eventCode>
+      <valueName>IMD_COLOUR</valueName>
+      <value>GREEN</value>
+    </eventCode>
+    <effective>2025-05-30T00:00:00+00:00</effective>
+    <onset>2025-05-30T00:00:00+00:00</onset>
+    <expires>2025-06-01T00:00:00+00:00</expires>
+    <senderName>Synoptiq Hybrid AI-NWP Blend</senderName>
+    <headline>GREEN ALERT: Low heat wave impact forecast for indo gangetic plains (Impact Severity Index 1.66/10)</headline>
+    <description>GREEN. indo gangetic plains is forecast in the low-impact class. No special action beyond routine monitoring.</description>
+    <instruction>GREEN. indo gangetic plains is forecast in the low-impact class. No special action beyond routine monitoring.</instruction>
+      <area>
+        <areaDesc>indo gangetic plains</areaDesc>
+      </area>
+  </info>
+</alert>

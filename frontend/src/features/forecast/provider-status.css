@@ -1,0 +1,88 @@
+.provider-status {
+  margin: 0 0 1rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 84%, var(--background));
+}
+
+.provider-status-head,
+.provider-status-item > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.provider-status-head h2 {
+  margin: .3rem 0 0;
+  font-size: 1rem;
+}
+
+.provider-status-head > span,
+.provider-status-item > div > span,
+.provider-status-item time,
+.provider-status-item small {
+  font: 600 .58rem var(--font-mono);
+  color: var(--muted-foreground);
+}
+
+.provider-status > p,
+.provider-status-item p {
+  color: var(--muted-foreground);
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.provider-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.provider-status-item {
+  min-width: 0;
+  padding-top: .8rem;
+  border-top: 1px solid var(--border);
+}
+
+.provider-status-item > div > strong {
+  font: 600 .75rem var(--font-mono);
+}
+
+.provider-status-item p {
+  margin: .4rem 0;
+}
+
+.provider-status-item small {
+  font-weight: 400;
+}
+
+.provider-status-item.invalid > div > span,
+.provider-status-item.stale > div > span,
+.provider-status-item.unavailable > div > span {
+  color: var(--warning);
+}
+
+.provider-status-item.live > div > span {
+  color: var(--primary);
+}
+
+.operational-status {
+  font: 600 .65rem var(--font-mono);
+}
+
+.operational-status.live {
+  color: var(--primary);
+}
+
+.operational-status.unavailable {
+  color: var(--warning);
+}
+
+@media (max-width: 720px) {
+  .provider-status-grid {
+    grid-template-columns: 1fr;
+    gap: .5rem;
+  }
+}

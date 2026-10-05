@@ -1,0 +1,274 @@
+{
+ "scope": "descriptive over the full 12-month record; skill columns use the untouched test split",
+ "catalogue": {
+  "active_monsoon": {
+   "label": "Active Monsoon Trough",
+   "synoptic": "Monsoon trough in its normal position across the peninsula; strong low-level (850 hPa) westerly jet feeding organised rainfall over the west coast and central India.",
+   "typical_signature": "widespread rain, moderate temperatures, sustained onshore winds"
+  },
+  "break_monsoon": {
+   "label": "Break Monsoon",
+   "synoptic": "Trough shifted to the Himalayan foothills; suppressed convection over the peninsula and core monsoon zone despite the calendar season.",
+   "typical_signature": "anomalously dry over central India, rain concentrated along the foothills"
+  },
+  "depression": {
+   "label": "Cyclonic Low / Depression",
+   "synoptic": "Low-pressure system (depression/deep depression) over the Bay of Bengal or Arabian Sea; closed circulation with strong winds and intense convective bands.",
+   "typical_signature": "very heavy rain, high wind speeds, falling pressure"
+  },
+  "western_disturbance": {
+   "label": "Western Disturbance",
+   "synoptic": "Mid-latitude trough in the westerlies crossing northwest India; the dominant winter and pre-monsoon rain-bearing system for the north.",
+   "typical_signature": "cloudy, cool, light-to-moderate rain over the Indo-Gangetic Plains"
+  },
+  "heatwave": {
+   "label": "Heat Dome / Heatwave",
+   "synoptic": "Stable high-pressure ridge over central/north India with subsidence, clear skies and suppressed convection.",
+   "typical_signature": "very high maximum temperatures, low humidity, near-zero rainfall"
+  },
+  "pre_monsoon": {
+   "label": "Pre-Monsoon Convection",
+   "synoptic": "Seasonal heating with locally organised thunderstorm activity (Nor'westers over the east, coastal Kerala pre-monsoon showers) before monsoon onset.",
+   "typical_signature": "isolated intense convective cells, high daytime temperatures, gusty winds"
+  },
+  "normal": {
+   "label": "Fair Weather / No Dominant System",
+   "synoptic": "No organised synoptic forcing; the blend defaults to its all-weather weight profile.",
+   "typical_signature": "near-climatological conditions"
+  }
+ },
+ "global_mean_weights": {
+  "GFS": 0.2953,
+  "IFS": 0.3029,
+  "AIFS": 0.4018
+ },
+ "profiles": [
+  {
+   "regime": "active_monsoon",
+   "label": "Active Monsoon Trough",
+   "synoptic": "Monsoon trough in its normal position across the peninsula; strong low-level (850 hPa) westerly jet feeding organised rainfall over the west coast and central India.",
+   "typical_signature": "widespread rain, moderate temperatures, sustained onshore winds",
+   "n_contexts": 675,
+   "n_test_contexts": 255,
+   "mean_weights": {
+    "GFS": 0.2943,
+    "IFS": 0.2985,
+    "AIFS": 0.4072
+   },
+   "test_mae": {
+    "GFS": 2.7865,
+    "IFS": 2.3804,
+    "AIFS": 0.9455
+   },
+   "best_test_model": "AIFS",
+   "policy_shift": {
+    "deltas": {
+     "AIFS": 0.0054,
+     "GFS": -0.001,
+     "IFS": -0.0044
+    },
+    "material": false,
+    "statement": "In the Active Monsoon Trough regime the issued weights stay within 2% of the all-weather profile \u2014 no material policy shift."
+   }
+  },
+  {
+   "regime": "depression",
+   "label": "Cyclonic Low / Depression",
+   "synoptic": "Low-pressure system (depression/deep depression) over the Bay of Bengal or Arabian Sea; closed circulation with strong winds and intense convective bands.",
+   "typical_signature": "very heavy rain, high wind speeds, falling pressure",
+   "n_contexts": 11820,
+   "n_test_contexts": 1305,
+   "mean_weights": {
+    "GFS": 0.2921,
+    "IFS": 0.3014,
+    "AIFS": 0.4065
+   },
+   "test_mae": {
+    "GFS": 3.017,
+    "IFS": 2.6541,
+    "AIFS": 1.4778
+   },
+   "best_test_model": "AIFS",
+   "policy_shift": {
+    "deltas": {
+     "AIFS": 0.0047,
+     "GFS": -0.0032,
+     "IFS": -0.0015
+    },
+    "material": false,
+    "statement": "In the Cyclonic Low / Depression regime the issued weights stay within 2% of the all-weather profile \u2014 no material policy shift."
+   }
+  },
+  {
+   "regime": "normal",
+   "label": "Fair Weather / No Dominant System",
+   "synoptic": "No organised synoptic forcing; the blend defaults to its all-weather weight profile.",
+   "typical_signature": "near-climatological conditions",
+   "n_contexts": 1020,
+   "n_test_contexts": 0,
+   "mean_weights": {
+    "GFS": 0.3083,
+    "IFS": 0.2994,
+    "AIFS": 0.3923
+   },
+   "test_mae": {},
+   "best_test_model": null,
+   "policy_shift": {
+    "deltas": {
+     "AIFS": -0.0095,
+     "GFS": 0.013,
+     "IFS": -0.0035
+    },
+    "material": false,
+    "statement": "In the Fair Weather / No Dominant System regime the issued weights stay within 2% of the all-weather profile \u2014 no material policy shift."
+   }
+  },
+  {
+   "regime": "pre_monsoon",
+   "label": "Pre-Monsoon Convection",
+   "synoptic": "Seasonal heating with locally organised thunderstorm activity (Nor'westers over the east, coastal Kerala pre-monsoon showers) before monsoon onset.",
+   "typical_signature": "isolated intense convective cells, high daytime temperatures, gusty winds",
+   "n_contexts": 240,
+   "n_test_contexts": 0,
+   "mean_weights": {
+    "GFS": 0.2916,
+    "IFS": 0.2968,
+    "AIFS": 0.4116
+   },
+   "test_mae": {},
+   "best_test_model": null,
+   "policy_shift": {
+    "deltas": {
+     "AIFS": 0.0098,
+     "GFS": -0.0037,
+     "IFS": -0.0061
+    },
+    "material": false,
+    "statement": "In the Pre-Monsoon Convection regime the issued weights stay within 2% of the all-weather profile \u2014 no material policy shift."
+   }
+  },
+  {
+   "regime": "western_disturbance",
+   "label": "Western Disturbance",
+   "synoptic": "Mid-latitude trough in the westerlies crossing northwest India; the dominant winter and pre-monsoon rain-bearing system for the north.",
+   "typical_signature": "cloudy, cool, light-to-moderate rain over the Indo-Gangetic Plains",
+   "n_contexts": 2670,
+   "n_test_contexts": 2580,
+   "mean_weights": {
+    "GFS": 0.3052,
+    "IFS": 0.3125,
+    "AIFS": 0.3823
+   },
+   "test_mae": {
+    "GFS": 2.2063,
+    "IFS": 2.0935,
+    "AIFS": 0.8855
+   },
+   "best_test_model": "AIFS",
+   "policy_shift": {
+    "deltas": {
+     "AIFS": -0.0195,
+     "GFS": 0.0099,
+     "IFS": 0.0096
+    },
+    "material": false,
+    "statement": "In the Western Disturbance regime the issued weights stay within 2% of the all-weather profile \u2014 no material policy shift."
+   }
+  }
+ ],
+ "current": {
+  "as_of": "2026-02-25",
+  "regime": "western_disturbance",
+  "regime_probs": {
+   "active_monsoon": 0.0739,
+   "break_monsoon": 0.0739,
+   "depression": 0.0739,
+   "western_disturbance": 0.3311,
+   "heatwave": 0.0739,
+   "pre_monsoon": 0.0739,
+   "normal": 0.2996
+  },
+  "profile": {
+   "regime": "western_disturbance",
+   "label": "Western Disturbance",
+   "synoptic": "Mid-latitude trough in the westerlies crossing northwest India; the dominant winter and pre-monsoon rain-bearing system for the north.",
+   "typical_signature": "cloudy, cool, light-to-moderate rain over the Indo-Gangetic Plains",
+   "n_contexts": 2670,
+   "n_test_contexts": 2580,
+   "mean_weights": {
+    "GFS": 0.3052,
+    "IFS": 0.3125,
+    "AIFS": 0.3823
+   },
+   "test_mae": {
+    "GFS": 2.2063,
+    "IFS": 2.0935,
+    "AIFS": 0.8855
+   },
+   "best_test_model": "AIFS",
+   "policy_shift": {
+    "deltas": {
+     "AIFS": -0.0195,
+     "GFS": 0.0099,
+     "IFS": 0.0096
+    },
+    "material": false,
+    "statement": "In the Western Disturbance regime the issued weights stay within 2% of the all-weather profile \u2014 no material policy shift."
+   }
+  }
+ },
+ "weight_policy_measurement": {
+  "scope": "untouched test split, raw weighted blends, identical treatment per policy so the comparison isolates weighting",
+  "rows": [
+   {
+    "variable": "precipitation",
+    "n_test_contexts": 1380,
+    "mae_by_lambda": {
+     "0.00": 0.5869,
+     "0.25": 0.5876,
+     "0.50": 0.5883,
+     "0.75": 0.5901,
+     "1.00": 0.5925
+    },
+    "best_lambda": 0.0,
+    "meta_model_lambda_0": 0.5869,
+    "router_only_lambda_1": 0.5925,
+    "router_helps": false
+   },
+   {
+    "variable": "temperature",
+    "n_test_contexts": 1380,
+    "mae_by_lambda": {
+     "0.00": 0.9896,
+     "0.25": 1.1116,
+     "0.50": 1.2344,
+     "0.75": 1.3577,
+     "1.00": 1.4813
+    },
+    "best_lambda": 0.0,
+    "meta_model_lambda_0": 0.9896,
+    "router_only_lambda_1": 1.4813,
+    "router_helps": false
+   },
+   {
+    "variable": "wind_speed",
+    "n_test_contexts": 1380,
+    "mae_by_lambda": {
+     "0.00": 2.2661,
+     "0.25": 2.385,
+     "0.50": 2.5116,
+     "0.75": 2.644,
+     "1.00": 2.7815
+    },
+    "best_lambda": 0.0,
+    "meta_model_lambda_0": 2.2661,
+    "router_only_lambda_1": 2.7815,
+    "router_helps": false
+   }
+  ],
+  "recommended_lambda": 0.0,
+  "recommendation": "the meta-model weights are already regime-conditioned (regime probabilities are features), so the measured optimum is lambda=0.00 \u2014 apply the router weights only as a documented, measured blend"
+ },
+ "note": "regime probabilities come from the transparent rule-based detector in app/regime_detector.py; this router makes the resulting weight conditioning explicit and measurable.",
+ "generated_at": "2026-10-01T06:46:54.941962+00:00"
+}

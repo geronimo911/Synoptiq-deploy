@@ -1,0 +1,31 @@
+# Synoptiq API with the in-process live-refresh scheduler.
+# Install:
+#   sudo cp deploy/synoptiq-api.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now synoptiq-api
+[Unit]
+Description=Synoptiq API (blend + automatic live refresh)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=synoptiq
+WorkingDirectory=/opt/synoptiq
+Environment=SYNOPTIQ_MODE=real
+Environment=SYNOPTIQ_DATABASE_ROLE=PRODUCTION
+Environment=SYNOPTIQ_ARTIFACTS_DIR=/opt/synoptiq/artifacts/real_12m_aifs_corrected
+Environment=SYNOPTIQ_MODELS_DIR=/opt/synoptiq/artifacts/real_12m_aifs_corrected/models
+Environment=SYNOPTIQ_CALIBRATION_DIR=/opt/synoptiq/artifacts/real_12m_aifs_corrected/calibration
+Environment=SYNOPTIQ_METRICS_DIR=/opt/synoptiq/artifacts/real_12m_aifs_corrected/metrics
+Environment=SYNOPTIQ_LIVE_DATA_DIR=/opt/synoptiq/data/real/live
+Environment=SYNOPTIQ_MODEL_VERSION=synoptiq-real-12m-20260930-aifs-unitfix
+# automatic refresh: on by default; the API process keeps pulling real cycles
+Environment=SYNOPTIQ_AUTO_REFRESH=1
+Environment=SYNOPTIQ_LIVE_REFRESH_MINUTES=15
+EnvironmentFile=-/etc/synoptiq.env
+ExecStart=/opt/synoptiq/.venv/bin/uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

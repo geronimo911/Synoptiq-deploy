@@ -1,0 +1,2418 @@
+{
+ "scope": "descriptive over the full 12-month record; skill columns use the untouched test split",
+ "model_colours": {
+  "GFS": "#f87171",
+  "IFS": "#60a5fa",
+  "AIFS": "#34d399"
+ },
+ "cells": [
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "precipitation",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.307,
+    "IFS": 0.3369,
+    "AIFS": 0.3561
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 0.7457,
+    "IFS": 0.6954,
+    "AIFS": 1.0277
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.324,
+      "IFS": 0.337,
+      "AIFS": 0.339
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.29,
+      "IFS": 0.34,
+      "AIFS": 0.37
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.334,
+      "AIFS": 0.334
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.333,
+      "IFS": 0.33,
+      "AIFS": 0.336
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.695 vs GFS 0.746, AIFS 1.028); issued weight 36% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "precipitation",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3043,
+    "IFS": 0.334,
+    "AIFS": 0.3617
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 0.8784,
+    "IFS": 0.6084,
+    "AIFS": 0.8747
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.33,
+      "IFS": 0.331,
+      "AIFS": 0.339
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.286,
+      "IFS": 0.335,
+      "AIFS": 0.379
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.335,
+      "AIFS": 0.333
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.333,
+      "IFS": 0.331,
+      "AIFS": 0.337
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.608 vs GFS 0.878, AIFS 0.875); issued weight 36% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "precipitation",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3058,
+    "IFS": 0.3314,
+    "AIFS": 0.3628
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.718,
+    "IFS": 0.7209,
+    "AIFS": 0.706
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.323,
+      "IFS": 0.334,
+      "AIFS": 0.343
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.287,
+      "IFS": 0.329,
+      "AIFS": 0.384
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.335,
+      "AIFS": 0.333
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.336,
+      "IFS": 0.336,
+      "AIFS": 0.329
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.706 vs GFS 0.718, IFS 0.721); issued weight 36% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "precipitation",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3039,
+    "IFS": 0.3252,
+    "AIFS": 0.3709
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.8295,
+    "IFS": 0.7343,
+    "AIFS": 0.6962
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.33,
+      "IFS": 0.328,
+      "AIFS": 0.342
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.283,
+      "IFS": 0.32,
+      "AIFS": 0.396
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.334,
+      "AIFS": 0.334
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.337,
+      "IFS": 0.332,
+      "AIFS": 0.331
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.696 vs GFS 0.829, IFS 0.734); issued weight 37% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "precipitation",
+   "lead_hours": 120,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2831,
+    "IFS": 0.334,
+    "AIFS": 0.3829
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.9597,
+    "IFS": 0.6863,
+    "AIFS": 0.6725
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.322,
+      "IFS": 0.334,
+      "AIFS": 0.344
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.25,
+      "IFS": 0.335,
+      "AIFS": 0.415
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.329,
+      "IFS": 0.333,
+      "AIFS": 0.337
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.336,
+      "IFS": 0.332,
+      "AIFS": 0.332
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.673 vs GFS 0.960, IFS 0.686); issued weight 38% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "temperature",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3281,
+    "IFS": 0.3352,
+    "AIFS": 0.3367
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 0.3151,
+    "IFS": 0.2554,
+    "AIFS": 0.3512
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.324,
+      "IFS": 0.338,
+      "AIFS": 0.338
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.325,
+      "IFS": 0.327,
+      "AIFS": 0.348
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.325,
+      "IFS": 0.337,
+      "AIFS": 0.338
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.339,
+      "IFS": 0.356,
+      "AIFS": 0.305
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.255 vs GFS 0.315, AIFS 0.351); issued weight 34% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "temperature",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3317,
+    "IFS": 0.3322,
+    "AIFS": 0.336
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 0.2532,
+    "IFS": 0.2599,
+    "AIFS": 0.3118
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.326,
+      "IFS": 0.337,
+      "AIFS": 0.337
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.328,
+      "IFS": 0.326,
+      "AIFS": 0.347
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.329,
+      "IFS": 0.333,
+      "AIFS": 0.338
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.346,
+      "IFS": 0.348,
+      "AIFS": 0.306
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 0.253 vs IFS 0.260, AIFS 0.312); issued weight 34% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "temperature",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3335,
+    "IFS": 0.3313,
+    "AIFS": 0.3352
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 0.2391,
+    "IFS": 0.2862,
+    "AIFS": 0.2865
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.327,
+      "IFS": 0.338,
+      "AIFS": 0.335
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.328,
+      "IFS": 0.325,
+      "AIFS": 0.347
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.33,
+      "IFS": 0.333,
+      "AIFS": 0.337
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.353,
+      "IFS": 0.346,
+      "AIFS": 0.301
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 0.239 vs IFS 0.286, AIFS 0.287); issued weight 34% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "temperature",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3329,
+    "IFS": 0.3319,
+    "AIFS": 0.3352
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.2718,
+    "IFS": 0.2919,
+    "AIFS": 0.2626
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.328,
+      "IFS": 0.336,
+      "AIFS": 0.335
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.326,
+      "IFS": 0.326,
+      "AIFS": 0.348
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.33,
+      "IFS": 0.333,
+      "AIFS": 0.336
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.354,
+      "IFS": 0.346,
+      "AIFS": 0.3
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.263 vs GFS 0.272, IFS 0.292); issued weight 34% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "temperature",
+   "lead_hours": 120,
+   "dominating_model": "GFS",
+   "mean_weights": {
+    "GFS": 0.3338,
+    "IFS": 0.3325,
+    "AIFS": 0.3337
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.2693,
+    "IFS": 0.3161,
+    "AIFS": 0.2629
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.33,
+      "IFS": 0.334,
+      "AIFS": 0.336
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.326,
+      "IFS": 0.327,
+      "AIFS": 0.347
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.331,
+      "IFS": 0.333,
+      "AIFS": 0.336
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.358,
+      "IFS": 0.346,
+      "AIFS": 0.296
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.263 vs GFS 0.269, IFS 0.316); issued weight 33% to GFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "wind_speed",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2772,
+    "IFS": 0.3193,
+    "AIFS": 0.4035
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 5.9072,
+    "IFS": 4.2431,
+    "AIFS": 1.4371
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.274,
+      "IFS": 0.314,
+      "AIFS": 0.412
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.311,
+      "IFS": 0.315,
+      "AIFS": 0.374
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.326,
+      "IFS": 0.307,
+      "AIFS": 0.367
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.159,
+      "IFS": 0.34,
+      "AIFS": 0.501
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 1.437 vs GFS 5.907, IFS 4.243); issued weight 40% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "wind_speed",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2653,
+    "IFS": 0.3289,
+    "AIFS": 0.4058
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 6.7696,
+    "IFS": 4.7496,
+    "AIFS": 1.7569
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.292,
+      "IFS": 0.345,
+      "AIFS": 0.363
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.299,
+      "IFS": 0.315,
+      "AIFS": 0.386
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.317,
+      "IFS": 0.32,
+      "AIFS": 0.363
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.143,
+      "IFS": 0.367,
+      "AIFS": 0.49
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 1.757 vs GFS 6.770, IFS 4.750); issued weight 41% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "wind_speed",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2595,
+    "IFS": 0.3377,
+    "AIFS": 0.4028
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 7.0253,
+    "IFS": 5.3435,
+    "AIFS": 2.122
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.247,
+      "IFS": 0.369,
+      "AIFS": 0.384
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.294,
+      "IFS": 0.328,
+      "AIFS": 0.378
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.289,
+      "IFS": 0.346,
+      "AIFS": 0.365
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.159,
+      "IFS": 0.348,
+      "AIFS": 0.493
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 2.122 vs GFS 7.025, IFS 5.343); issued weight 40% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "wind_speed",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2597,
+    "IFS": 0.3244,
+    "AIFS": 0.4159
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 7.3898,
+    "IFS": 5.3279,
+    "AIFS": 2.4837
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.28,
+      "IFS": 0.337,
+      "AIFS": 0.383
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.296,
+      "IFS": 0.305,
+      "AIFS": 0.399
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.265,
+      "IFS": 0.351,
+      "AIFS": 0.384
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.167,
+      "IFS": 0.351,
+      "AIFS": 0.482
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 2.484 vs GFS 7.390, IFS 5.328); issued weight 42% to AIFS across 365 contexts."
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "wind_speed",
+   "lead_hours": 120,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2589,
+    "IFS": 0.3307,
+    "AIFS": 0.4104
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 7.8616,
+    "IFS": 5.3844,
+    "AIFS": 2.6836
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 16,
+     "mean_weight": {
+      "GFS": 0.273,
+      "IFS": 0.332,
+      "AIFS": 0.395
+     }
+    },
+    "depression": {
+     "n": 218,
+     "mean_weight": {
+      "GFS": 0.298,
+      "IFS": 0.314,
+      "AIFS": 0.388
+     }
+    },
+    "normal": {
+     "n": 42,
+     "mean_weight": {
+      "GFS": 0.246,
+      "IFS": 0.348,
+      "AIFS": 0.406
+     }
+    },
+    "western_disturbance": {
+     "n": 81,
+     "mean_weight": {
+      "GFS": 0.168,
+      "IFS": 0.357,
+      "AIFS": 0.474
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 2.684 vs GFS 7.862, IFS 5.384); issued weight 41% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "precipitation",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3139,
+    "IFS": 0.3382,
+    "AIFS": 0.3479
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 0.5969,
+    "IFS": 0.4077,
+    "AIFS": 0.4639
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.329,
+      "IFS": 0.331,
+      "AIFS": 0.34
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.305,
+      "IFS": 0.341,
+      "AIFS": 0.354
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.333,
+      "IFS": 0.333,
+      "AIFS": 0.334
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.333,
+      "AIFS": 0.335
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.408 vs GFS 0.597, AIFS 0.464); issued weight 35% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "precipitation",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3093,
+    "IFS": 0.3332,
+    "AIFS": 0.3575
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 0.5802,
+    "IFS": 0.4153,
+    "AIFS": 0.4194
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.326,
+      "IFS": 0.332,
+      "AIFS": 0.342
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.299,
+      "IFS": 0.333,
+      "AIFS": 0.369
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.334,
+      "AIFS": 0.334
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.335,
+      "AIFS": 0.333
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.415 vs GFS 0.580, AIFS 0.419); issued weight 36% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "precipitation",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2986,
+    "IFS": 0.3386,
+    "AIFS": 0.3628
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 0.6295,
+    "IFS": 0.4914,
+    "AIFS": 0.5143
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.328,
+      "IFS": 0.333,
+      "AIFS": 0.339
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.283,
+      "IFS": 0.341,
+      "AIFS": 0.377
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.334,
+      "AIFS": 0.334
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.333,
+      "IFS": 0.336,
+      "AIFS": 0.332
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.491 vs GFS 0.630, AIFS 0.514); issued weight 36% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "precipitation",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.307,
+    "IFS": 0.3352,
+    "AIFS": 0.3578
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.6781,
+    "IFS": 0.5434,
+    "AIFS": 0.5184
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.328,
+      "IFS": 0.332,
+      "AIFS": 0.34
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.294,
+      "IFS": 0.337,
+      "AIFS": 0.369
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.333,
+      "IFS": 0.333,
+      "AIFS": 0.334
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.335,
+      "IFS": 0.332,
+      "AIFS": 0.333
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.518 vs GFS 0.678, IFS 0.543); issued weight 36% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "precipitation",
+   "lead_hours": 120,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3153,
+    "IFS": 0.337,
+    "AIFS": 0.3477
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 0.7346,
+    "IFS": 0.4803,
+    "AIFS": 0.5643
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.328,
+      "IFS": 0.334,
+      "AIFS": 0.338
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.307,
+      "IFS": 0.337,
+      "AIFS": 0.355
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.335,
+      "AIFS": 0.333
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.332,
+      "IFS": 0.337,
+      "AIFS": 0.331
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.480 vs GFS 0.735, AIFS 0.564); issued weight 35% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "temperature",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.278,
+    "IFS": 0.1824,
+    "AIFS": 0.5396
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 3.2377,
+    "IFS": 4.8293,
+    "AIFS": 0.4639
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.241,
+      "IFS": 0.156,
+      "AIFS": 0.603
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.277,
+      "IFS": 0.187,
+      "AIFS": 0.537
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.19,
+      "IFS": 0.109,
+      "AIFS": 0.701
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.329,
+      "IFS": 0.207,
+      "AIFS": 0.464
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.464 vs GFS 3.238, IFS 4.829); issued weight 54% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "temperature",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2838,
+    "IFS": 0.183,
+    "AIFS": 0.5331
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 2.9579,
+    "IFS": 4.709,
+    "AIFS": 0.5261
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.26,
+      "IFS": 0.151,
+      "AIFS": 0.589
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.279,
+      "IFS": 0.189,
+      "AIFS": 0.532
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.203,
+      "IFS": 0.106,
+      "AIFS": 0.691
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.34,
+      "IFS": 0.203,
+      "AIFS": 0.457
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.526 vs GFS 2.958, IFS 4.709); issued weight 53% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "temperature",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2838,
+    "IFS": 0.1837,
+    "AIFS": 0.5325
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 2.7729,
+    "IFS": 4.6601,
+    "AIFS": 0.6526
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.27,
+      "IFS": 0.149,
+      "AIFS": 0.581
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.279,
+      "IFS": 0.191,
+      "AIFS": 0.531
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.207,
+      "IFS": 0.109,
+      "AIFS": 0.684
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.337,
+      "IFS": 0.201,
+      "AIFS": 0.463
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.653 vs GFS 2.773, IFS 4.660); issued weight 53% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "temperature",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2807,
+    "IFS": 0.1861,
+    "AIFS": 0.5332
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 2.629,
+    "IFS": 4.6159,
+    "AIFS": 0.769
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.268,
+      "IFS": 0.149,
+      "AIFS": 0.582
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.272,
+      "IFS": 0.195,
+      "AIFS": 0.532
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.212,
+      "IFS": 0.112,
+      "AIFS": 0.676
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.341,
+      "IFS": 0.195,
+      "AIFS": 0.464
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.769 vs GFS 2.629, IFS 4.616); issued weight 53% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "temperature",
+   "lead_hours": 120,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2828,
+    "IFS": 0.1874,
+    "AIFS": 0.5298
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 2.523,
+    "IFS": 4.5446,
+    "AIFS": 0.8998
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.266,
+      "IFS": 0.155,
+      "AIFS": 0.58
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.274,
+      "IFS": 0.197,
+      "AIFS": 0.529
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.221,
+      "IFS": 0.117,
+      "AIFS": 0.662
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.343,
+      "IFS": 0.193,
+      "AIFS": 0.464
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.900 vs GFS 2.523, IFS 4.545); issued weight 53% to AIFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "wind_speed",
+   "lead_hours": 24,
+   "dominating_model": "GFS",
+   "mean_weights": {
+    "GFS": 0.3723,
+    "IFS": 0.2907,
+    "AIFS": 0.337
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 1.5366,
+    "IFS": 2.1855,
+    "AIFS": 1.5818
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.36,
+      "IFS": 0.279,
+      "AIFS": 0.361
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.376,
+      "IFS": 0.294,
+      "AIFS": 0.33
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.349,
+      "IFS": 0.27,
+      "AIFS": 0.381
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.371,
+      "IFS": 0.29,
+      "AIFS": 0.34
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 1.537 vs IFS 2.186, AIFS 1.582); issued weight 37% to GFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "wind_speed",
+   "lead_hours": 48,
+   "dominating_model": "GFS",
+   "mean_weights": {
+    "GFS": 0.3677,
+    "IFS": 0.3035,
+    "AIFS": 0.3288
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 1.5334,
+    "IFS": 2.1486,
+    "AIFS": 1.6991
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.35,
+      "IFS": 0.293,
+      "AIFS": 0.357
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.369,
+      "IFS": 0.309,
+      "AIFS": 0.322
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.351,
+      "IFS": 0.282,
+      "AIFS": 0.367
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.377,
+      "IFS": 0.296,
+      "AIFS": 0.327
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 1.533 vs IFS 2.149, AIFS 1.699); issued weight 37% to GFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "wind_speed",
+   "lead_hours": 72,
+   "dominating_model": "GFS",
+   "mean_weights": {
+    "GFS": 0.3704,
+    "IFS": 0.3013,
+    "AIFS": 0.3283
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 1.6232,
+    "IFS": 2.0588,
+    "AIFS": 1.6829
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.357,
+      "IFS": 0.3,
+      "AIFS": 0.344
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.373,
+      "IFS": 0.305,
+      "AIFS": 0.322
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.341,
+      "IFS": 0.279,
+      "AIFS": 0.38
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.379,
+      "IFS": 0.297,
+      "AIFS": 0.324
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 1.623 vs IFS 2.059, AIFS 1.683); issued weight 37% to GFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "wind_speed",
+   "lead_hours": 96,
+   "dominating_model": "GFS",
+   "mean_weights": {
+    "GFS": 0.3734,
+    "IFS": 0.3025,
+    "AIFS": 0.3241
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 1.6953,
+    "IFS": 2.0652,
+    "AIFS": 1.7872
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.344,
+      "IFS": 0.322,
+      "AIFS": 0.334
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.374,
+      "IFS": 0.304,
+      "AIFS": 0.321
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.353,
+      "IFS": 0.286,
+      "AIFS": 0.361
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.386,
+      "IFS": 0.298,
+      "AIFS": 0.316
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 1.695 vs IFS 2.065, AIFS 1.787); issued weight 37% to GFS across 365 contexts."
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "wind_speed",
+   "lead_hours": 120,
+   "dominating_model": "GFS",
+   "mean_weights": {
+    "GFS": 0.3678,
+    "IFS": 0.3095,
+    "AIFS": 0.3226
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 1.8149,
+    "IFS": 2.1033,
+    "AIFS": 1.8489
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 15,
+     "mean_weight": {
+      "GFS": 0.371,
+      "IFS": 0.291,
+      "AIFS": 0.337
+     }
+    },
+    "depression": {
+     "n": 247,
+     "mean_weight": {
+      "GFS": 0.367,
+      "IFS": 0.313,
+      "AIFS": 0.32
+     }
+    },
+    "normal": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.342,
+      "IFS": 0.307,
+      "AIFS": 0.351
+     }
+    },
+    "western_disturbance": {
+     "n": 71,
+     "mean_weight": {
+      "GFS": 0.38,
+      "IFS": 0.298,
+      "AIFS": 0.322
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 1.815 vs IFS 2.103, AIFS 1.849); issued weight 37% to GFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "precipitation",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.3077,
+    "IFS": 0.341,
+    "AIFS": 0.3513
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.8276,
+    "IFS": 0.6834,
+    "AIFS": 0.5421
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.339,
+      "IFS": 0.325,
+      "AIFS": 0.336
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.303,
+      "IFS": 0.343,
+      "AIFS": 0.354
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.344,
+      "IFS": 0.323,
+      "AIFS": 0.333
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.542 vs GFS 0.828, IFS 0.683); issued weight 35% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "precipitation",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2977,
+    "IFS": 0.3349,
+    "AIFS": 0.3674
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.7742,
+    "IFS": 0.6277,
+    "AIFS": 0.6
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.337,
+      "IFS": 0.328,
+      "AIFS": 0.335
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.293,
+      "IFS": 0.336,
+      "AIFS": 0.372
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.337,
+      "IFS": 0.327,
+      "AIFS": 0.336
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.600 vs GFS 0.774, IFS 0.628); issued weight 37% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "precipitation",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2928,
+    "IFS": 0.3292,
+    "AIFS": 0.378
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 0.8432,
+    "IFS": 0.621,
+    "AIFS": 0.5822
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.335,
+      "IFS": 0.331,
+      "AIFS": 0.334
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.287,
+      "IFS": 0.329,
+      "AIFS": 0.384
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.335,
+      "IFS": 0.334,
+      "AIFS": 0.331
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.582 vs GFS 0.843, IFS 0.621); issued weight 38% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "precipitation",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2916,
+    "IFS": 0.3337,
+    "AIFS": 0.3747
+   },
+   "best_test_model": "IFS",
+   "test_mae": {
+    "GFS": 1.0177,
+    "IFS": 0.5441,
+    "AIFS": 0.6623
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.327,
+      "IFS": 0.325,
+      "AIFS": 0.348
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.287,
+      "IFS": 0.334,
+      "AIFS": 0.379
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.331,
+      "IFS": 0.334,
+      "AIFS": 0.335
+     }
+    }
+   },
+   "reason": "IFS best on the untouched test split (MAE 0.544 vs GFS 1.018, AIFS 0.662); issued weight 37% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "precipitation",
+   "lead_hours": 120,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2755,
+    "IFS": 0.3456,
+    "AIFS": 0.3789
+   },
+   "best_test_model": "GFS",
+   "test_mae": {
+    "GFS": 0.612,
+    "IFS": 0.6636,
+    "AIFS": 0.6295
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.333,
+      "IFS": 0.324,
+      "AIFS": 0.343
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.267,
+      "IFS": 0.348,
+      "AIFS": 0.384
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.342,
+      "IFS": 0.325,
+      "AIFS": 0.333
+     }
+    }
+   },
+   "reason": "GFS best on the untouched test split (MAE 0.612 vs IFS 0.664, AIFS 0.629); issued weight 38% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "temperature",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2465,
+    "IFS": 0.2488,
+    "AIFS": 0.5047
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.1919,
+    "IFS": 3.7752,
+    "AIFS": 0.6996
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.183,
+      "IFS": 0.211,
+      "AIFS": 0.606
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.253,
+      "IFS": 0.252,
+      "AIFS": 0.495
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.203,
+      "IFS": 0.232,
+      "AIFS": 0.565
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.700 vs GFS 4.192, IFS 3.775); issued weight 50% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "temperature",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2442,
+    "IFS": 0.2494,
+    "AIFS": 0.5064
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.285,
+    "IFS": 3.8357,
+    "AIFS": 0.7122
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.182,
+      "IFS": 0.208,
+      "AIFS": 0.61
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.251,
+      "IFS": 0.253,
+      "AIFS": 0.496
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.201,
+      "IFS": 0.23,
+      "AIFS": 0.57
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.712 vs GFS 4.285, IFS 3.836); issued weight 51% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "temperature",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2437,
+    "IFS": 0.2501,
+    "AIFS": 0.5063
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.3368,
+    "IFS": 3.8629,
+    "AIFS": 0.7452
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.184,
+      "IFS": 0.223,
+      "AIFS": 0.593
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.251,
+      "IFS": 0.253,
+      "AIFS": 0.496
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.194,
+      "IFS": 0.229,
+      "AIFS": 0.577
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.745 vs GFS 4.337, IFS 3.863); issued weight 51% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "temperature",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2445,
+    "IFS": 0.2527,
+    "AIFS": 0.5027
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.4658,
+    "IFS": 3.7216,
+    "AIFS": 0.7582
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.181,
+      "IFS": 0.226,
+      "AIFS": 0.593
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.252,
+      "IFS": 0.255,
+      "AIFS": 0.493
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.192,
+      "IFS": 0.236,
+      "AIFS": 0.572
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.758 vs GFS 4.466, IFS 3.722); issued weight 50% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "temperature",
+   "lead_hours": 120,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2438,
+    "IFS": 0.2516,
+    "AIFS": 0.5046
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.5531,
+    "IFS": 3.7506,
+    "AIFS": 0.7696
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.176,
+      "IFS": 0.233,
+      "AIFS": 0.592
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.251,
+      "IFS": 0.254,
+      "AIFS": 0.495
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.19,
+      "IFS": 0.236,
+      "AIFS": 0.574
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 0.770 vs GFS 4.553, IFS 3.751); issued weight 50% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "wind_speed",
+   "lead_hours": 24,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2608,
+    "IFS": 0.3138,
+    "AIFS": 0.4254
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 3.8272,
+    "IFS": 2.8598,
+    "AIFS": 1.9846
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.265,
+      "IFS": 0.334,
+      "AIFS": 0.401
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.261,
+      "IFS": 0.311,
+      "AIFS": 0.428
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.26,
+      "IFS": 0.354,
+      "AIFS": 0.386
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 1.985 vs GFS 3.827, IFS 2.860); issued weight 43% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "wind_speed",
+   "lead_hours": 48,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.261,
+    "IFS": 0.3259,
+    "AIFS": 0.413
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 3.9876,
+    "IFS": 2.841,
+    "AIFS": 2.2432
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.233,
+      "IFS": 0.368,
+      "AIFS": 0.399
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.264,
+      "IFS": 0.322,
+      "AIFS": 0.415
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.251,
+      "IFS": 0.374,
+      "AIFS": 0.375
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 2.243 vs GFS 3.988, IFS 2.841); issued weight 41% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "wind_speed",
+   "lead_hours": 72,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2689,
+    "IFS": 0.3204,
+    "AIFS": 0.4107
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.0229,
+    "IFS": 3.1739,
+    "AIFS": 2.3208
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.276,
+      "IFS": 0.323,
+      "AIFS": 0.401
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.27,
+      "IFS": 0.318,
+      "AIFS": 0.412
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.256,
+      "IFS": 0.357,
+      "AIFS": 0.387
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 2.321 vs GFS 4.023, IFS 3.174); issued weight 41% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "wind_speed",
+   "lead_hours": 96,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2587,
+    "IFS": 0.3272,
+    "AIFS": 0.4141
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.2892,
+    "IFS": 2.9747,
+    "AIFS": 2.3974
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.25,
+      "IFS": 0.333,
+      "AIFS": 0.417
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.263,
+      "IFS": 0.323,
+      "AIFS": 0.414
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.218,
+      "IFS": 0.385,
+      "AIFS": 0.397
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 2.397 vs GFS 4.289, IFS 2.975); issued weight 41% to AIFS across 365 contexts."
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "wind_speed",
+   "lead_hours": 120,
+   "dominating_model": "AIFS",
+   "mean_weights": {
+    "GFS": 0.2624,
+    "IFS": 0.3265,
+    "AIFS": 0.4111
+   },
+   "best_test_model": "AIFS",
+   "test_mae": {
+    "GFS": 4.3797,
+    "IFS": 2.8566,
+    "AIFS": 2.442
+   },
+   "n_contexts": 365,
+   "regime_breakdown": {
+    "active_monsoon": {
+     "n": 14,
+     "mean_weight": {
+      "GFS": 0.234,
+      "IFS": 0.353,
+      "AIFS": 0.413
+     }
+    },
+    "depression": {
+     "n": 323,
+     "mean_weight": {
+      "GFS": 0.267,
+      "IFS": 0.321,
+      "AIFS": 0.411
+     }
+    },
+    "western_disturbance": {
+     "n": 26,
+     "mean_weight": {
+      "GFS": 0.218,
+      "IFS": 0.384,
+      "AIFS": 0.397
+     }
+    }
+   },
+   "reason": "AIFS best on the untouched test split (MAE 2.442 vs GFS 4.380, IFS 2.857); issued weight 41% to AIFS across 365 contexts."
+  }
+ ],
+ "region_lead_matrix": {
+  "bay_of_bengal_east_coast": {
+   "24": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.307,
+     "IFS": 0.3369,
+     "AIFS": 0.3561
+    }
+   },
+   "48": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.3043,
+     "IFS": 0.334,
+     "AIFS": 0.3617
+    }
+   },
+   "72": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.3058,
+     "IFS": 0.3314,
+     "AIFS": 0.3628
+    }
+   },
+   "96": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.3039,
+     "IFS": 0.3252,
+     "AIFS": 0.3709
+    }
+   },
+   "120": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.2831,
+     "IFS": 0.334,
+     "AIFS": 0.3829
+    }
+   }
+  },
+  "indo_gangetic_plains": {
+   "24": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.3139,
+     "IFS": 0.3382,
+     "AIFS": 0.3479
+    }
+   },
+   "48": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.3093,
+     "IFS": 0.3332,
+     "AIFS": 0.3575
+    }
+   },
+   "72": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.2986,
+     "IFS": 0.3386,
+     "AIFS": 0.3628
+    }
+   },
+   "96": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.307,
+     "IFS": 0.3352,
+     "AIFS": 0.3578
+    }
+   },
+   "120": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.3153,
+     "IFS": 0.337,
+     "AIFS": 0.3477
+    }
+   }
+  },
+  "kerala_western_ghats": {
+   "24": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.3077,
+     "IFS": 0.341,
+     "AIFS": 0.3513
+    }
+   },
+   "48": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.2977,
+     "IFS": 0.3349,
+     "AIFS": 0.3674
+    }
+   },
+   "72": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.2928,
+     "IFS": 0.3292,
+     "AIFS": 0.378
+    }
+   },
+   "96": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.2916,
+     "IFS": 0.3337,
+     "AIFS": 0.3747
+    }
+   },
+   "120": {
+    "dominating_model": "AIFS",
+    "weights": {
+     "GFS": 0.2755,
+     "IFS": 0.3456,
+     "AIFS": 0.3789
+    }
+   }
+  }
+ },
+ "zone_centroids": {
+  "kerala_western_ghats": {
+   "lat": 10.2,
+   "lon": 76.4
+  },
+  "bay_of_bengal_east_coast": {
+   "lat": 19.6,
+   "lon": 85.8
+  },
+  "indo_gangetic_plains": {
+   "lat": 26.0,
+   "lon": 81.5
+  }
+ },
+ "generated_at": "2026-10-01T06:46:54.933472+00:00"
+}

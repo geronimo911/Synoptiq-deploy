@@ -1,0 +1,15 @@
+xarray
+cfgrib
+eccodes
+pyarrow
+pandas
+netcdf4
+earthaccess
+requests
+numpy
+scikit-learn
+lightgbm
+joblib
+shap
+python-dotenv
+ecmwf-opendata

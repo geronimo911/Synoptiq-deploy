@@ -1,0 +1,51 @@
+{
+  "region": "kerala_western_ghats",
+  "variable": "wind_speed",
+  "n_test_contexts": 440,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-06 00:00:00",
+    "test_start": "2025-11-30 00:00:00"
+  },
+  "event_calibration": {
+    "variable": "wind_speed",
+    "event": "gale",
+    "threshold": 62.0,
+    "calibration_source": null,
+    "n_test": 440,
+    "positive_count": 0,
+    "negative_count": 440,
+    "brier_score": null,
+    "event_frequency": 0.0,
+    "mean_predicted_probability": null,
+    "expected_calibration_error": null,
+    "reliability": [],
+    "status": "No fitted real calibrator; probability metrics unavailable."
+  },
+  "metric": "RMSE",
+  "best_single_model": "AIFS",
+  "best_single_model_rmse": 2.644,
+  "synoptiq_rmse": 1.699,
+  "synoptiq_mae": 1.361,
+  "synoptiq_bias": 0.178,
+  "per_model_metrics": {
+    "AIFS": {
+      "mae": 2.2243204545454547,
+      "rmse": 2.643808553187823,
+      "bias": -2.117452272727273
+    },
+    "GFS": {
+      "mae": 4.039625,
+      "rmse": 4.57199652007145,
+      "bias": -3.967665909090909
+    },
+    "IFS": {
+      "mae": 2.9452454545454545,
+      "rmse": 3.7493103596164556,
+      "bias": -2.5988863636363635
+    }
+  },
+  "naive_average_mae": 2.923,
+  "naive_average_rmse": 3.366,
+  "relative_rmse_improvement_pct": 35.75
+}

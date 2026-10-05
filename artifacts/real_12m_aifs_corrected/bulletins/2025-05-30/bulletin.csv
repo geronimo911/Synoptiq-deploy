@@ -1,0 +1,4 @@
+valid_date,zone,isi,colour,severity,precipitation_mm,wind_kmh,temperature_c,dominating_model_rain,conformal90_rain,regime,advisory
+2025-05-30,kerala_western_ghats,6.52,ORANGE,Severe,48.03,29.67,25.86,AIFS,8.199,depression,"ORANGE ALERT. kerala western ghats is forecast in the severe-impact class. Recommended action: alert district control rooms, keep NDRF/SDRF on standby, advise suspension of non-essential outdoor activity and verify drainage/embankment readiness."
+2025-05-30,bay_of_bengal_east_coast,3.86,YELLOW,Moderate,5.97,41.29,28.95,AIFS,8.199,depression,"YELLOW ALERT. bay of bengal east coast is forecast in the moderate-impact class. Recommended action: monitor updates, brief local bodies, and prepare shelters and relief stocks."
+2025-05-30,indo_gangetic_plains,1.66,GREEN,Low,2.36,10.72,26.9,AIFS,8.199,depression,GREEN. indo gangetic plains is forecast in the low-impact class. No special action beyond routine monitoring.

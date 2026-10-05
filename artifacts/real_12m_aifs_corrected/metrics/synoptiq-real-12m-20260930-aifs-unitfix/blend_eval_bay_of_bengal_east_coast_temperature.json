@@ -1,0 +1,51 @@
+{
+  "region": "bay_of_bengal_east_coast",
+  "variable": "temperature",
+  "n_test_contexts": 440,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-06 00:00:00",
+    "test_start": "2025-11-30 00:00:00"
+  },
+  "event_calibration": {
+    "variable": "temperature",
+    "event": "heatwave",
+    "threshold": 40.0,
+    "calibration_source": null,
+    "n_test": 440,
+    "positive_count": 0,
+    "negative_count": 440,
+    "brier_score": null,
+    "event_frequency": 0.0,
+    "mean_predicted_probability": null,
+    "expected_calibration_error": null,
+    "reliability": [],
+    "status": "No fitted real calibrator; probability metrics unavailable."
+  },
+  "metric": "RMSE",
+  "best_single_model": "GFS",
+  "best_single_model_rmse": 0.334,
+  "synoptiq_rmse": 0.432,
+  "synoptiq_mae": 0.37,
+  "synoptiq_bias": 0.366,
+  "per_model_metrics": {
+    "AIFS": {
+      "mae": 0.29475909090909097,
+      "rmse": 0.3433398925528198,
+      "bias": 0.2700727272727273
+    },
+    "GFS": {
+      "mae": 0.26744999999999974,
+      "rmse": 0.3335687539868857,
+      "bias": -0.013540909090908998
+    },
+    "IFS": {
+      "mae": 0.2823795454545454,
+      "rmse": 0.3645817373125238,
+      "bias": 0.07342045454545462
+    }
+  },
+  "naive_average_mae": 0.198,
+  "naive_average_rmse": 0.247,
+  "relative_rmse_improvement_pct": -29.49
+}

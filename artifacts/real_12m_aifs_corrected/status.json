@@ -1,0 +1,18 @@
+{
+  "mode": "REAL_12M",
+  "training_data": "PASS",
+  "models": "PASS",
+  "calibration": "PASS",
+  "validation": "PASS",
+  "historical_inference": "PASS",
+  "backend": "DEGRADED",
+  "frontend": "PASS",
+  "live_forecast": "DEGRADED",
+  "shap": "PASS",
+  "synthetic_fallback": false,
+  "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+  "updated_at": "2026-09-30T09:00:44.359846+00:00",
+  "known_limitations": [
+    "Current live provider cycles are stale; explicit historical REAL_12M requests remain available."
+  ]
+}

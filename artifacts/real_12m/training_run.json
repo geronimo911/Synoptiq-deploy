@@ -1,0 +1,11 @@
+{
+  "mode": "REAL_12M",
+  "model_version": "synoptiq-real-12m-20260929",
+  "trained_at": "2026-09-29T11:02:01.875600+00:00",
+  "training_input": "D:\\SIH2026\\Synoptiq\\training\\realdata\\cache\\12m\\training",
+  "forecast_rows": 49275,
+  "truth_rows": 3285,
+  "model_root": "D:\\SIH2026\\Synoptiq\\artifacts\\real_12m\\models",
+  "calibration_root": "D:\\SIH2026\\Synoptiq\\artifacts\\real_12m\\calibration",
+  "metrics_root": "D:\\SIH2026\\Synoptiq\\artifacts\\real_12m\\metrics"
+}

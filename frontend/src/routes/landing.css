@@ -1,0 +1,32 @@
+.hero-copy {
+  width: min(100%, 670px);
+  min-width: 0;
+  overflow: visible;
+}
+
+.hero-copy > div {
+  overflow: visible;
+}
+
+.hero h1 {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 1.7rem 0 1.5rem;
+  font-size: clamp(4.4rem, 9vw, 8.5rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+@media (max-width: 720px) {
+  .hero-copy {
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.4rem, 15vw, 4.8rem);
+    line-height: 1.05;
+  }
+}

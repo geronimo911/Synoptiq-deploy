@@ -1,0 +1,1 @@
+export function routeHead(title:string, description:string){const pageTitle=`Synoptiq | ${title}`;return {meta:[{title:pageTitle},{name:"description",content:description},{property:"og:title",content:pageTitle},{property:"og:description",content:description},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]};}

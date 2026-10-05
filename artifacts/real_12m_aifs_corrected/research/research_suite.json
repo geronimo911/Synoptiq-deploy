@@ -1,0 +1,6975 @@
+{
+ "generated_at": "2026-10-01T06:19:12.682065+00:00",
+ "source": {
+  "mode": "REAL_12M",
+  "blends_file": "historical_blends.jsonl",
+  "contexts": 16425,
+  "period": {
+   "start": "2025-02-26",
+   "end": "2026-02-25"
+  },
+  "splits": {
+   "train": 9855,
+   "test": 4140,
+   "val": 2430
+  },
+  "test_start": "2025-11-26",
+  "test_end": "2026-02-25"
+ },
+ "baselines": {
+  "note": "MAE in native units; persistence = previous day's observed value; climatology = month-of-year mean from the train split only.",
+  "rows": [
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 0.6771,
+     "naive_average": 0.6715,
+     "persistence": 0.8088,
+     "climatology": null,
+     "GFS": 0.8263,
+     "IFS": 0.689,
+     "AIFS": 0.7954
+    },
+    "best_single_model": "IFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": 0.015507322997666117,
+      "improvement_pct": 2.2216147392682855,
+      "ci95_improvement_pct": [
+       -15.814938527308442,
+       15.132357781283515
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": -0.007020050525298214,
+      "improvement_pct": -0.9069622907353506,
+      "ci95_improvement_pct": [
+       -12.582034564735157,
+       9.113693255380216
+      ]
+     }
+    }
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 0.3685,
+     "naive_average": 0.1973,
+     "persistence": 0.1711,
+     "climatology": null,
+     "GFS": 0.2697,
+     "IFS": 0.2819,
+     "AIFS": 0.295
+    },
+    "best_single_model": "GFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": -0.09836610832163083,
+      "improvement_pct": -36.78014084557102,
+      "ci95_improvement_pct": [
+       -54.84923316410688,
+       -19.296145648123503
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": -0.17141467179468425,
+      "improvement_pct": -86.88942403214108,
+      "ci95_improvement_pct": [
+       -105.14615976158662,
+       -69.52780719779518
+      ]
+     }
+    }
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 1.77,
+     "naive_average": 4.5347,
+     "persistence": 2.7312,
+     "climatology": null,
+     "GFS": 6.9907,
+     "IFS": 5.0097,
+     "AIFS": 2.0967
+    },
+    "best_single_model": "AIFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": 0.3244619955308281,
+      "improvement_pct": 15.39949622406608,
+      "ci95_improvement_pct": [
+       7.687224747415864,
+       22.98439520423562
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": 2.757890305881367,
+      "improvement_pct": 60.87968702744054,
+      "ci95_improvement_pct": [
+       56.86116888546254,
+       64.97022120045249
+      ]
+     }
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 0.4478,
+     "naive_average": 0.5036,
+     "persistence": 1.0614,
+     "climatology": null,
+     "GFS": 0.6439,
+     "IFS": 0.4676,
+     "AIFS": 0.496
+    },
+    "best_single_model": "IFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": 0.020241177921885376,
+      "improvement_pct": 3.551046197931116,
+      "ci95_improvement_pct": [
+       -17.862010874250657,
+       20.906139370528148
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": 0.056225353778063994,
+      "improvement_pct": 9.528802165091625,
+      "ci95_improvement_pct": [
+       -3.8026850330243214,
+       23.92345834629293
+      ]
+     }
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 1.5887,
+     "naive_average": 2.3174,
+     "persistence": 0.64,
+     "climatology": null,
+     "GFS": 2.8241,
+     "IFS": 4.6718,
+     "AIFS": 0.6623
+    },
+    "best_single_model": "AIFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": -0.9289128036771445,
+      "improvement_pct": -140.98842694130755,
+      "ci95_improvement_pct": [
+       -195.28825122908938,
+       -92.50231634386053
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": 0.7216534929133265,
+      "improvement_pct": 30.82883590846906,
+      "ci95_improvement_pct": [
+       10.54856796919311,
+       47.354703230606724
+      ]
+     }
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 1.0771,
+     "naive_average": 1.1711,
+     "persistence": 0.9325,
+     "climatology": null,
+     "GFS": 1.6407,
+     "IFS": 2.1123,
+     "AIFS": 1.72
+    },
+    "best_single_model": "GFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": 0.560507716071789,
+      "improvement_pct": 34.18009943837927,
+      "ci95_improvement_pct": [
+       29.01773730427372,
+       38.68847990746979
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": 0.09253368400677624,
+      "improvement_pct": 7.392819190511658,
+      "ci95_improvement_pct": [
+       -13.533574515830622,
+       26.210835981733435
+      ]
+     }
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 0.5112,
+     "naive_average": 0.6099,
+     "persistence": 0.6558,
+     "climatology": null,
+     "GFS": 0.8149,
+     "IFS": 0.628,
+     "AIFS": 0.6032
+    },
+    "best_single_model": "AIFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": 0.08761301923826703,
+      "improvement_pct": 15.102902030902682,
+      "ci95_improvement_pct": [
+       -4.922909751804614,
+       36.376245664517384
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": 0.09705548090385852,
+      "improvement_pct": 16.632488052979323,
+      "ci95_improvement_pct": [
+       1.6290636309245647,
+       34.67313555796453
+      ]
+     }
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 0.2886,
+     "naive_average": 2.4729,
+     "persistence": 0.396,
+     "climatology": null,
+     "GFS": 4.3665,
+     "IFS": 3.7892,
+     "AIFS": 0.737
+    },
+    "best_single_model": "AIFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": 0.446704280745976,
+      "improvement_pct": 60.629004891571256,
+      "ci95_improvement_pct": [
+       54.50598289212708,
+       66.29870819561724
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": 2.1816189082690487,
+      "improvement_pct": 88.28118180719822,
+      "ci95_improvement_pct": [
+       85.93677125164692,
+       90.28621868925586
+      ]
+     }
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "n_test_rows": 460,
+    "n_test_days": 92,
+    "mae": {
+     "blend": 1.3888,
+     "naive_average": 2.9389,
+     "persistence": 1.8054,
+     "climatology": null,
+     "GFS": 4.1013,
+     "IFS": 2.9412,
+     "AIFS": 2.2776
+    },
+    "best_single_model": "AIFS",
+    "bootstrap": {
+     "method": "cluster bootstrap over test days, 1000 resamples, seed 42",
+     "blend_vs_best_single": {
+      "mean_mae_reduction": 0.8838576498130195,
+      "improvement_pct": 38.720200265705614,
+      "ci95_improvement_pct": [
+       30.125028889686742,
+       46.717995213830314
+      ]
+     },
+     "blend_vs_naive_average": {
+      "mean_mae_reduction": 1.551367264504744,
+      "improvement_pct": 52.62904902576769,
+      "ci95_improvement_pct": [
+       45.460719664178534,
+       59.18100947995897
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "hard_days": {
+  "rows": [
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 207,
+     "mae": {
+      "blend": 0.1457,
+      "naive_average": 0.1461,
+      "GFS": 0.1461,
+      "IFS": 0.1461,
+      "AIFS": 0.1461
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 1.4849,
+      "naive_average": 1.4554,
+      "GFS": 1.9166,
+      "IFS": 1.5067,
+      "AIFS": 1.8271
+     }
+    },
+    "blend_gain_pct": {
+     "easy": 0.27,
+     "hard": -2.03
+    }
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 155,
+     "mae": {
+      "blend": 0.4148,
+      "naive_average": 0.21,
+      "GFS": 0.2224,
+      "IFS": 0.2109,
+      "AIFS": 0.2485
+     }
+    },
+    "hard": {
+     "n": 155,
+     "mae": {
+      "blend": 0.3275,
+      "naive_average": 0.2045,
+      "GFS": 0.3723,
+      "IFS": 0.3917,
+      "AIFS": 0.3651
+     }
+    },
+    "blend_gain_pct": {
+     "easy": -97.52,
+     "hard": -60.15
+    }
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 153,
+     "mae": {
+      "blend": 1.5771,
+      "naive_average": 3.3671,
+      "GFS": 4.373,
+      "IFS": 3.4588,
+      "AIFS": 2.4731
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 1.8257,
+      "naive_average": 5.8882,
+      "GFS": 10.0636,
+      "IFS": 6.4847,
+      "AIFS": 1.8085
+     }
+    },
+    "blend_gain_pct": {
+     "easy": 36.23,
+     "hard": -0.95
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 227,
+     "mae": {
+      "blend": 0.1125,
+      "naive_average": 0.1264,
+      "GFS": 0.1264,
+      "IFS": 0.1264,
+      "AIFS": 0.1264
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 1.1056,
+      "naive_average": 1.2392,
+      "GFS": 1.6566,
+      "IFS": 1.1301,
+      "AIFS": 1.2192
+     }
+    },
+    "blend_gain_pct": {
+     "easy": 11.0,
+     "hard": 2.17
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 154,
+     "mae": {
+      "blend": 2.7426,
+      "naive_average": 1.4117,
+      "GFS": 1.6644,
+      "IFS": 3.1327,
+      "AIFS": 0.7079
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 0.6929,
+      "naive_average": 3.2254,
+      "GFS": 4.0417,
+      "IFS": 6.206,
+      "AIFS": 0.6415
+     }
+    },
+    "blend_gain_pct": {
+     "easy": -287.43,
+     "hard": -8.01
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 153,
+     "mae": {
+      "blend": 0.62,
+      "naive_average": 1.4693,
+      "GFS": 0.7614,
+      "IFS": 2.1675,
+      "AIFS": 1.8781
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 1.5956,
+      "naive_average": 0.7977,
+      "GFS": 2.873,
+      "IFS": 1.8184,
+      "AIFS": 1.6039
+     }
+    },
+    "blend_gain_pct": {
+     "easy": 18.57,
+     "hard": -100.03
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 153,
+     "mae": {
+      "blend": 0.1857,
+      "naive_average": 0.1952,
+      "GFS": 0.1906,
+      "IFS": 0.1975,
+      "AIFS": 0.2094
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 1.1221,
+      "naive_average": 1.3561,
+      "GFS": 1.9725,
+      "IFS": 1.3868,
+      "AIFS": 1.2453
+     }
+    },
+    "blend_gain_pct": {
+     "easy": 2.57,
+     "hard": 9.89
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 155,
+     "mae": {
+      "blend": 0.311,
+      "naive_average": 2.0491,
+      "GFS": 3.5138,
+      "IFS": 3.2669,
+      "AIFS": 0.6333
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 0.3084,
+      "naive_average": 2.8211,
+      "GFS": 5.1565,
+      "IFS": 4.1481,
+      "AIFS": 0.8414
+     }
+    },
+    "blend_gain_pct": {
+     "easy": 50.89,
+     "hard": 63.35
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "definition": "easy = lowest tercile of GFS/IFS/AIFS spread, hard = highest tercile",
+    "easy": {
+     "n": 154,
+     "mae": {
+      "blend": 1.2097,
+      "naive_average": 2.4424,
+      "GFS": 2.9169,
+      "IFS": 2.3279,
+      "AIFS": 2.2168
+     }
+    },
+    "hard": {
+     "n": 154,
+     "mae": {
+      "blend": 1.5427,
+      "naive_average": 3.5546,
+      "GFS": 5.4713,
+      "IFS": 3.7719,
+      "AIFS": 2.3863
+     }
+    },
+    "blend_gain_pct": {
+     "easy": 45.43,
+     "hard": 35.35
+    }
+   }
+  ],
+  "claim_template": "If blend_gain_pct.hard > blend_gain_pct.easy, the blend earns its keep precisely on the days that matter."
+ },
+ "oracle": {
+  "definition": "oracle = best single model chosen in hindsight for each day; recovery = share of the oracle's MAE advantage over the best fixed single model that the blend achieves",
+  "rows": [
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "n": 460,
+    "oracle_mae": 0.5131,
+    "best_fixed_model": "IFS",
+    "best_fixed_mae": 0.689,
+    "blend_mae": 0.6771,
+    "oracle_advantage_recovered_pct": 6.77,
+    "per_model_mae": {
+     "GFS": 0.8263,
+     "IFS": 0.689,
+     "AIFS": 0.7954
+    }
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "n": 460,
+    "oracle_mae": 0.133,
+    "best_fixed_model": "GFS",
+    "best_fixed_mae": 0.2697,
+    "blend_mae": 0.3685,
+    "oracle_advantage_recovered_pct": -72.29,
+    "per_model_mae": {
+     "GFS": 0.2697,
+     "IFS": 0.2819,
+     "AIFS": 0.295
+    }
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "n": 460,
+    "oracle_mae": 1.8228,
+    "best_fixed_model": "AIFS",
+    "best_fixed_mae": 2.0967,
+    "blend_mae": 1.77,
+    "oracle_advantage_recovered_pct": 119.28,
+    "per_model_mae": {
+     "GFS": 6.9907,
+     "IFS": 5.0097,
+     "AIFS": 2.0967
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "n": 460,
+    "oracle_mae": 0.4012,
+    "best_fixed_model": "IFS",
+    "best_fixed_mae": 0.4676,
+    "blend_mae": 0.4478,
+    "oracle_advantage_recovered_pct": 29.75,
+    "per_model_mae": {
+     "GFS": 0.6439,
+     "IFS": 0.4676,
+     "AIFS": 0.496
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "n": 460,
+    "oracle_mae": 0.5601,
+    "best_fixed_model": "AIFS",
+    "best_fixed_mae": 0.6623,
+    "blend_mae": 1.5887,
+    "oracle_advantage_recovered_pct": -906.9,
+    "per_model_mae": {
+     "GFS": 2.8241,
+     "IFS": 4.6718,
+     "AIFS": 0.6623
+    }
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "n": 460,
+    "oracle_mae": 0.7781,
+    "best_fixed_model": "GFS",
+    "best_fixed_mae": 1.6407,
+    "blend_mae": 1.0771,
+    "oracle_advantage_recovered_pct": 65.33,
+    "per_model_mae": {
+     "GFS": 1.6407,
+     "IFS": 2.1123,
+     "AIFS": 1.72
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "n": 460,
+    "oracle_mae": 0.3454,
+    "best_fixed_model": "AIFS",
+    "best_fixed_mae": 0.6032,
+    "blend_mae": 0.5112,
+    "oracle_advantage_recovered_pct": 35.69,
+    "per_model_mae": {
+     "GFS": 0.8149,
+     "IFS": 0.628,
+     "AIFS": 0.6032
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "n": 460,
+    "oracle_mae": 0.732,
+    "best_fixed_model": "AIFS",
+    "best_fixed_mae": 0.737,
+    "blend_mae": 0.2886,
+    "oracle_advantage_recovered_pct": 8978.06,
+    "per_model_mae": {
+     "GFS": 4.3665,
+     "IFS": 3.7892,
+     "AIFS": 0.737
+    }
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "n": 460,
+    "oracle_mae": 1.5913,
+    "best_fixed_model": "AIFS",
+    "best_fixed_mae": 2.2776,
+    "blend_mae": 1.3888,
+    "oracle_advantage_recovered_pct": 129.5,
+    "per_model_mae": {
+     "GFS": 4.1013,
+     "IFS": 2.9412,
+     "AIFS": 2.2776
+    }
+   }
+  ],
+  "overall": {
+   "oracle_mae": 0.7641,
+   "best_fixed_mae": 1.0493,
+   "blend_mae": 0.902,
+   "oracle_advantage_recovered_pct": 51.66
+  }
+ },
+ "ai_ablation": {
+  "definition": "physics_only = equal-weight GFS+IFS mean (pre-AI operational practice); ai_value_pct > 0 means the AI-including blend beats it",
+  "rows": [
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "n": 460,
+    "physics_only_mae": 0.6944,
+    "aifs_only_mae": 0.7954,
+    "full_blend_mae": 0.6771,
+    "ai_value_pct": 2.49
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "n": 460,
+    "physics_only_mae": 0.2178,
+    "aifs_only_mae": 0.295,
+    "full_blend_mae": 0.3685,
+    "ai_value_pct": -69.19
+   },
+   {
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "n": 460,
+    "physics_only_mae": 5.9379,
+    "aifs_only_mae": 2.0967,
+    "full_blend_mae": 1.77,
+    "ai_value_pct": 70.19
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "n": 460,
+    "physics_only_mae": 0.528,
+    "aifs_only_mae": 0.496,
+    "full_blend_mae": 0.4478,
+    "ai_value_pct": 15.19
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "n": 460,
+    "physics_only_mae": 3.74,
+    "aifs_only_mae": 0.6623,
+    "full_blend_mae": 1.5887,
+    "ai_value_pct": 57.52
+   },
+   {
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "n": 460,
+    "physics_only_mae": 1.2886,
+    "aifs_only_mae": 1.72,
+    "full_blend_mae": 1.0771,
+    "ai_value_pct": 16.41
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "n": 460,
+    "physics_only_mae": 0.6468,
+    "aifs_only_mae": 0.6032,
+    "full_blend_mae": 0.5112,
+    "ai_value_pct": 20.96
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "n": 460,
+    "physics_only_mae": 4.0779,
+    "aifs_only_mae": 0.737,
+    "full_blend_mae": 0.2886,
+    "ai_value_pct": 92.92
+   },
+   {
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "n": 460,
+    "physics_only_mae": 3.362,
+    "aifs_only_mae": 2.2776,
+    "full_blend_mae": 1.3888,
+    "ai_value_pct": 58.69
+   }
+  ]
+ },
+ "imd_classes": {
+  "thresholds_mm": {
+   "moderate": 15.6,
+   "heavy": 64.5,
+   "very_heavy": 115.5
+  },
+  "note": "zone-mean daily rainfall; test split is the NE-monsoon/winter period (rain events are rarer there than in the full year)",
+  "test": {
+   "moderate": {
+    "threshold_mm": 15.6,
+    "blend": {
+     "hits": 4,
+     "misses": 6,
+     "false_alarms": 2,
+     "correct_negatives": 1368,
+     "pod": 0.4,
+     "far": 0.3333333333333333,
+     "csi": 0.3333333333333333,
+     "n_events": 10
+    },
+    "GFS": {
+     "hits": 2,
+     "misses": 8,
+     "false_alarms": 5,
+     "correct_negatives": 1365,
+     "pod": 0.2,
+     "far": 0.7142857142857143,
+     "csi": 0.13333333333333333,
+     "n_events": 10
+    },
+    "IFS": {
+     "hits": 4,
+     "misses": 6,
+     "false_alarms": 6,
+     "correct_negatives": 1364,
+     "pod": 0.4,
+     "far": 0.6,
+     "csi": 0.25,
+     "n_events": 10
+    },
+    "AIFS": {
+     "hits": 2,
+     "misses": 8,
+     "false_alarms": 5,
+     "correct_negatives": 1365,
+     "pod": 0.2,
+     "far": 0.7142857142857143,
+     "csi": 0.13333333333333333,
+     "n_events": 10
+    }
+   },
+   "heavy": {
+    "threshold_mm": 64.5,
+    "blend": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "GFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "IFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "AIFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    }
+   },
+   "very_heavy": {
+    "threshold_mm": 115.5,
+    "blend": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "GFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "IFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "AIFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 1380,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    }
+   }
+  },
+  "full_year": {
+   "moderate": {
+    "threshold_mm": 15.6,
+    "blend": {
+     "hits": 370,
+     "misses": 160,
+     "false_alarms": 410,
+     "correct_negatives": 4535,
+     "pod": 0.6981132075471698,
+     "far": 0.5256410256410257,
+     "csi": 0.39361702127659576,
+     "n_events": 530
+    },
+    "GFS": {
+     "hits": 180,
+     "misses": 350,
+     "false_alarms": 154,
+     "correct_negatives": 4791,
+     "pod": 0.33962264150943394,
+     "far": 0.46107784431137727,
+     "csi": 0.2631578947368421,
+     "n_events": 530
+    },
+    "IFS": {
+     "hits": 301,
+     "misses": 229,
+     "false_alarms": 182,
+     "correct_negatives": 4763,
+     "pod": 0.5679245283018868,
+     "far": 0.37681159420289856,
+     "csi": 0.42275280898876405,
+     "n_events": 530
+    },
+    "AIFS": {
+     "hits": 338,
+     "misses": 192,
+     "false_alarms": 149,
+     "correct_negatives": 4796,
+     "pod": 0.6377358490566037,
+     "far": 0.3059548254620123,
+     "csi": 0.49779086892488955,
+     "n_events": 530
+    }
+   },
+   "heavy": {
+    "threshold_mm": 64.5,
+    "blend": {
+     "hits": 0,
+     "misses": 5,
+     "false_alarms": 0,
+     "correct_negatives": 5470,
+     "pod": 0.0,
+     "far": null,
+     "csi": 0.0,
+     "n_events": 5
+    },
+    "GFS": {
+     "hits": 0,
+     "misses": 5,
+     "false_alarms": 5,
+     "correct_negatives": 5465,
+     "pod": 0.0,
+     "far": 1.0,
+     "csi": 0.0,
+     "n_events": 5
+    },
+    "IFS": {
+     "hits": 0,
+     "misses": 5,
+     "false_alarms": 6,
+     "correct_negatives": 5464,
+     "pod": 0.0,
+     "far": 1.0,
+     "csi": 0.0,
+     "n_events": 5
+    },
+    "AIFS": {
+     "hits": 0,
+     "misses": 5,
+     "false_alarms": 2,
+     "correct_negatives": 5468,
+     "pod": 0.0,
+     "far": 1.0,
+     "csi": 0.0,
+     "n_events": 5
+    }
+   },
+   "very_heavy": {
+    "threshold_mm": 115.5,
+    "blend": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 5475,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "GFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 5475,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    },
+    "IFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 2,
+     "correct_negatives": 5473,
+     "pod": null,
+     "far": 1.0,
+     "csi": 0.0,
+     "n_events": 0
+    },
+    "AIFS": {
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "correct_negatives": 5475,
+     "pod": null,
+     "far": null,
+     "csi": null,
+     "n_events": 0
+    }
+   }
+  }
+ },
+ "trust_audit": {
+  "tiers": [
+   {
+    "tier": "0.4-0.6",
+    "n": 336,
+    "mean_trust": 0.541,
+    "mean_abs_error": 0.6731,
+    "median_abs_error": 0.1368
+   },
+   {
+    "tier": "0.6-0.7",
+    "n": 929,
+    "mean_trust": 0.664,
+    "mean_abs_error": 1.2643,
+    "median_abs_error": 0.7137
+   },
+   {
+    "tier": "0.7-0.8",
+    "n": 2120,
+    "mean_trust": 0.751,
+    "mean_abs_error": 0.8763,
+    "median_abs_error": 0.4184
+   },
+   {
+    "tier": "0.8-0.9",
+    "n": 752,
+    "mean_trust": 0.826,
+    "mean_abs_error": 0.6308,
+    "median_abs_error": 0.2658
+   },
+   {
+    "tier": "0.9-1.0",
+    "n": 3,
+    "mean_trust": 0.91,
+    "mean_abs_error": 0.4659,
+    "median_abs_error": 0.3684
+   }
+  ],
+  "abstain_audit": {
+   "abstained": {
+    "n": 380,
+    "mean_abs_error": 0.8612
+   },
+   "not_abstained": {
+    "n": 3760,
+    "mean_abs_error": 0.9061
+   }
+  },
+  "trust_vs_error_rank_correlation": {
+   "spearman_rho": -0.1301,
+   "p_value": 4.249103172112486e-17
+  },
+  "interpretation": "A negative rank correlation and monotone increasing mean error across tiers means the issued trust is informative: higher trust forecasts really do err less."
+ },
+ "calibration_sanity": {
+  "note": "positive improvement_pct means the bias-correction step reduced test MAE for that variable",
+  "rows": {
+   "precipitation": {
+    "raw_blend_mae": 0.5869,
+    "bias_corrected_mae": 0.5454,
+    "improvement_pct": 7.07
+   },
+   "temperature": {
+    "raw_blend_mae": 0.9896,
+    "bias_corrected_mae": 0.7486,
+    "improvement_pct": 24.36
+   },
+   "wind_speed": {
+    "raw_blend_mae": 2.2661,
+    "bias_corrected_mae": 1.412,
+    "improvement_pct": 37.69
+   }
+  }
+ },
+ "crossovers": [
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "precipitation",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 2.2229,
+     "GFS": 2.7234,
+     "IFS": 2.4722,
+     "AIFS": 2.19
+    },
+    "48": {
+     "blend": 2.0808,
+     "GFS": 2.9769,
+     "IFS": 2.7048,
+     "AIFS": 2.1765
+    },
+    "72": {
+     "blend": 2.1519,
+     "GFS": 2.9543,
+     "IFS": 2.8023,
+     "AIFS": 2.2757
+    },
+    "96": {
+     "blend": 2.371,
+     "GFS": 3.3953,
+     "IFS": 3.0897,
+     "AIFS": 2.4558
+    },
+    "120": {
+     "blend": 2.5388,
+     "GFS": 4.0245,
+     "IFS": 3.1035,
+     "AIFS": 2.4763
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (bay of bengal east coast, precipitation)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "temperature",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 0.3638,
+     "GFS": 0.3761,
+     "IFS": 0.3263,
+     "AIFS": 0.2419
+    },
+    "48": {
+     "blend": 0.3596,
+     "GFS": 0.346,
+     "IFS": 0.3409,
+     "AIFS": 0.2342
+    },
+    "72": {
+     "blend": 0.3784,
+     "GFS": 0.3458,
+     "IFS": 0.3733,
+     "AIFS": 0.2368
+    },
+    "96": {
+     "blend": 0.3904,
+     "GFS": 0.372,
+     "IFS": 0.3867,
+     "AIFS": 0.2401
+    },
+    "120": {
+     "blend": 0.4036,
+     "GFS": 0.3905,
+     "IFS": 0.3895,
+     "AIFS": 0.2594
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (bay of bengal east coast, temperature)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "bay_of_bengal_east_coast",
+   "variable": "wind_speed",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 1.6778,
+     "GFS": 4.1635,
+     "IFS": 3.8203,
+     "AIFS": 2.267
+    },
+    "48": {
+     "blend": 2.0736,
+     "GFS": 4.8569,
+     "IFS": 4.1915,
+     "AIFS": 2.6163
+    },
+    "72": {
+     "blend": 2.197,
+     "GFS": 5.1236,
+     "IFS": 4.2214,
+     "AIFS": 2.8142
+    },
+    "96": {
+     "blend": 2.5248,
+     "GFS": 5.7221,
+     "IFS": 4.7633,
+     "AIFS": 3.1452
+    },
+    "120": {
+     "blend": 2.5878,
+     "GFS": 6.099,
+     "IFS": 4.8492,
+     "AIFS": 3.3214
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (bay of bengal east coast, wind_speed)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "precipitation",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 2.2756,
+     "GFS": 1.9386,
+     "IFS": 1.6659,
+     "AIFS": 1.387
+    },
+    "48": {
+     "blend": 2.4238,
+     "GFS": 2.4105,
+     "IFS": 1.7657,
+     "AIFS": 1.3579
+    },
+    "72": {
+     "blend": 2.4719,
+     "GFS": 2.8729,
+     "IFS": 1.9724,
+     "AIFS": 1.4387
+    },
+    "96": {
+     "blend": 2.4591,
+     "GFS": 2.5314,
+     "IFS": 2.0681,
+     "AIFS": 1.5244
+    },
+    "120": {
+     "blend": 2.1742,
+     "GFS": 1.974,
+     "IFS": 1.6676,
+     "AIFS": 1.6526
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (indo gangetic plains, precipitation)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "temperature",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 1.2051,
+     "GFS": 3.4108,
+     "IFS": 5.0548,
+     "AIFS": 0.4296
+    },
+    "48": {
+     "blend": 1.2064,
+     "GFS": 3.2917,
+     "IFS": 5.0056,
+     "AIFS": 0.4911
+    },
+    "72": {
+     "blend": 1.2074,
+     "GFS": 3.2299,
+     "IFS": 4.9572,
+     "AIFS": 0.558
+    },
+    "96": {
+     "blend": 1.2368,
+     "GFS": 3.2649,
+     "IFS": 4.8952,
+     "AIFS": 0.6322
+    },
+    "120": {
+     "blend": 1.2483,
+     "GFS": 3.2197,
+     "IFS": 4.8314,
+     "AIFS": 0.7116
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (indo gangetic plains, temperature)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "indo_gangetic_plains",
+   "variable": "wind_speed",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 1.0004,
+     "GFS": 1.6413,
+     "IFS": 2.4908,
+     "AIFS": 1.8412
+    },
+    "48": {
+     "blend": 1.0497,
+     "GFS": 1.8868,
+     "IFS": 2.4614,
+     "AIFS": 2.0103
+    },
+    "72": {
+     "blend": 1.1437,
+     "GFS": 2.0027,
+     "IFS": 2.5239,
+     "AIFS": 2.0988
+    },
+    "96": {
+     "blend": 1.1736,
+     "GFS": 2.0337,
+     "IFS": 2.6108,
+     "AIFS": 2.2063
+    },
+    "120": {
+     "blend": 1.1959,
+     "GFS": 2.1474,
+     "IFS": 2.5397,
+     "AIFS": 2.3007
+    }
+   },
+   "best_single_by_lead": {
+    "24": "GFS",
+    "48": "GFS",
+    "72": "GFS",
+    "96": "GFS",
+    "120": "GFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: GFS is the best single model at every lead from +24h to +120h in the full-year record (indo gangetic plains, wind_speed)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "precipitation",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 3.4757,
+     "GFS": 3.6559,
+     "IFS": 2.9958,
+     "AIFS": 2.4966
+    },
+    "48": {
+     "blend": 3.7955,
+     "GFS": 3.95,
+     "IFS": 3.3653,
+     "AIFS": 2.8526
+    },
+    "72": {
+     "blend": 4.1075,
+     "GFS": 4.4874,
+     "IFS": 3.6037,
+     "AIFS": 3.0499
+    },
+    "96": {
+     "blend": 4.0565,
+     "GFS": 4.6849,
+     "IFS": 3.5309,
+     "AIFS": 3.0161
+    },
+    "120": {
+     "blend": 3.9538,
+     "GFS": 5.1819,
+     "IFS": 3.7519,
+     "AIFS": 3.1598
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (kerala western ghats, precipitation)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "temperature",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 0.427,
+     "GFS": 3.2606,
+     "IFS": 3.197,
+     "AIFS": 0.5284
+    },
+    "48": {
+     "blend": 0.4485,
+     "GFS": 3.3402,
+     "IFS": 3.217,
+     "AIFS": 0.5577
+    },
+    "72": {
+     "blend": 0.4641,
+     "GFS": 3.3625,
+     "IFS": 3.222,
+     "AIFS": 0.5933
+    },
+    "96": {
+     "blend": 0.4693,
+     "GFS": 3.3792,
+     "IFS": 3.1716,
+     "AIFS": 0.6155
+    },
+    "120": {
+     "blend": 0.4822,
+     "GFS": 3.4187,
+     "IFS": 3.2025,
+     "AIFS": 0.6316
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (kerala western ghats, temperature)",
+   "scope": "descriptive, full 12-month record"
+  },
+  {
+   "region": "kerala_western_ghats",
+   "variable": "wind_speed",
+   "rmse_by_lead": {
+    "24": {
+     "blend": 1.2515,
+     "GFS": 4.8597,
+     "IFS": 3.7749,
+     "AIFS": 2.366
+    },
+    "48": {
+     "blend": 1.3154,
+     "GFS": 4.8818,
+     "IFS": 3.7128,
+     "AIFS": 2.5121
+    },
+    "72": {
+     "blend": 1.4361,
+     "GFS": 4.859,
+     "IFS": 3.8779,
+     "AIFS": 2.5887
+    },
+    "96": {
+     "blend": 1.5273,
+     "GFS": 5.0685,
+     "IFS": 3.9433,
+     "AIFS": 2.6586
+    },
+    "120": {
+     "blend": 1.6985,
+     "GFS": 5.1248,
+     "IFS": 4.0462,
+     "AIFS": 2.7389
+    }
+   },
+   "best_single_by_lead": {
+    "24": "AIFS",
+    "48": "AIFS",
+    "72": "AIFS",
+    "96": "AIFS",
+    "120": "AIFS"
+   },
+   "crossovers": [],
+   "crossover_statement": "No lead-time crossover: AIFS is the best single model at every lead from +24h to +120h in the full-year record (kerala western ghats, wind_speed)",
+   "scope": "descriptive, full 12-month record"
+  }
+ ],
+ "skill_evolution": {
+  "window": "rolling 30-day RMSE, sampled weekly",
+  "scope": "descriptive, full 12-month record",
+  "points": [
+   {
+    "date": "2025-02-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.0401,
+     "GFS": 0.0419,
+     "IFS": 0.0416,
+     "AIFS": 0.0416
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.2717,
+     "GFS": 0.3082,
+     "IFS": 0.296,
+     "AIFS": 0.2824
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.2226,
+     "GFS": 0.2518,
+     "IFS": 0.2419,
+     "AIFS": 0.2308
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3713,
+     "GFS": 0.4077,
+     "IFS": 0.4081,
+     "AIFS": 0.3974
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.36,
+     "GFS": 0.3969,
+     "IFS": 0.3973,
+     "AIFS": 0.3866
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.3136,
+     "GFS": 1.4263,
+     "IFS": 1.2506,
+     "AIFS": 1.3461
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.6455,
+     "GFS": 1.8462,
+     "IFS": 1.517,
+     "AIFS": 1.7701
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.6503,
+     "GFS": 1.8501,
+     "IFS": 1.521,
+     "AIFS": 1.7728
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.9597,
+     "GFS": 2.159,
+     "IFS": 1.8523,
+     "AIFS": 2.0721
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.163,
+     "GFS": 2.4338,
+     "IFS": 1.9944,
+     "AIFS": 2.2987
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.6646,
+     "GFS": 1.8575,
+     "IFS": 1.647,
+     "AIFS": 1.7228
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.437,
+     "GFS": 3.9288,
+     "IFS": 2.6041,
+     "AIFS": 5.9722
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.6591,
+     "GFS": 6.5115,
+     "IFS": 4.3192,
+     "AIFS": 6.8543
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.2097,
+     "GFS": 7.1062,
+     "IFS": 5.6216,
+     "AIFS": 7.0741
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.752,
+     "GFS": 8.6763,
+     "IFS": 6.9441,
+     "AIFS": 8.013
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.052,
+     "GFS": 9.1097,
+     "IFS": 7.193,
+     "AIFS": 6.7774
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.7101,
+     "GFS": 8.3776,
+     "IFS": 7.214,
+     "AIFS": 5.8209
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.1492,
+     "GFS": 7.7796,
+     "IFS": 6.399,
+     "AIFS": 5.3496
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.6672,
+     "GFS": 8.0472,
+     "IFS": 6.7308,
+     "AIFS": 5.8936
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.595,
+     "GFS": 5.7498,
+     "IFS": 4.9952,
+     "AIFS": 3.9605
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.0559,
+     "GFS": 6.5903,
+     "IFS": 5.6784,
+     "AIFS": 4.6181
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.6114,
+     "GFS": 6.8768,
+     "IFS": 5.1024,
+     "AIFS": 4.5281
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.4285,
+     "GFS": 6.1571,
+     "IFS": 4.4085,
+     "AIFS": 3.4189
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.1604,
+     "GFS": 6.6786,
+     "IFS": 5.1002,
+     "AIFS": 4.1958
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.0984,
+     "GFS": 9.7504,
+     "IFS": 6.76,
+     "AIFS": 4.2913
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.9779,
+     "GFS": 9.172,
+     "IFS": 7.0468,
+     "AIFS": 5.299
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.4867,
+     "GFS": 10.536,
+     "IFS": 8.9649,
+     "AIFS": 6.72
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.1935,
+     "GFS": 10.5619,
+     "IFS": 8.8328,
+     "AIFS": 6.4686
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.6896,
+     "GFS": 7.9817,
+     "IFS": 7.6308,
+     "AIFS": 6.2015
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.4218,
+     "GFS": 7.7063,
+     "IFS": 7.6652,
+     "AIFS": 5.9577
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.7276,
+     "GFS": 8.5642,
+     "IFS": 8.0394,
+     "AIFS": 4.3706
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.9072,
+     "GFS": 8.9746,
+     "IFS": 7.5179,
+     "AIFS": 5.0911
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.7327,
+     "GFS": 8.8385,
+     "IFS": 7.4634,
+     "AIFS": 5.1571
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.5841,
+     "GFS": 9.3011,
+     "IFS": 7.9878,
+     "AIFS": 5.471
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.6022,
+     "GFS": 14.0392,
+     "IFS": 12.3956,
+     "AIFS": 7.5136
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.5004,
+     "GFS": 12.1294,
+     "IFS": 11.4565,
+     "AIFS": 6.156
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.4343,
+     "GFS": 12.0186,
+     "IFS": 11.285,
+     "AIFS": 6.033
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.3501,
+     "GFS": 11.5545,
+     "IFS": 11.1533,
+     "AIFS": 5.8145
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.464,
+     "GFS": 7.345,
+     "IFS": 9.5284,
+     "AIFS": 3.9607
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.8212,
+     "GFS": 3.3664,
+     "IFS": 3.4997,
+     "AIFS": 4.8865
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.0073,
+     "GFS": 3.6157,
+     "IFS": 3.7061,
+     "AIFS": 5.0182
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.8241,
+     "GFS": 3.4276,
+     "IFS": 3.5721,
+     "AIFS": 4.8968
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.6623,
+     "GFS": 3.1737,
+     "IFS": 2.6107,
+     "AIFS": 4.7785
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.9971,
+     "GFS": 2.5857,
+     "IFS": 2.2734,
+     "AIFS": 4.2851
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.9782,
+     "GFS": 1.0049,
+     "IFS": 1.0063,
+     "AIFS": 0.996
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.3614,
+     "GFS": 1.5624,
+     "IFS": 1.3153,
+     "AIFS": 1.3474
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.3589,
+     "GFS": 1.5602,
+     "IFS": 1.3112,
+     "AIFS": 1.3448
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.3912,
+     "GFS": 1.596,
+     "IFS": 1.3491,
+     "AIFS": 1.3817
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.3665,
+     "GFS": 1.5696,
+     "IFS": 1.3178,
+     "AIFS": 1.3547
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3106,
+     "GFS": 0.3518,
+     "IFS": 0.3335,
+     "AIFS": 0.3311
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3173,
+     "GFS": 0.3583,
+     "IFS": 0.3403,
+     "AIFS": 0.3386
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.5067,
+     "GFS": 0.5492,
+     "IFS": 0.5173,
+     "AIFS": 0.5516
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.5069,
+     "GFS": 0.5495,
+     "IFS": 0.5176,
+     "AIFS": 0.5518
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.223,
+     "GFS": 0.3227,
+     "IFS": 0.3603,
+     "AIFS": 0.3137
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.308,
+     "GFS": 0.3309,
+     "IFS": 0.3847,
+     "AIFS": 0.3453
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2647,
+     "GFS": 0.312,
+     "IFS": 0.3788,
+     "AIFS": 0.3016
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2563,
+     "GFS": 0.2941,
+     "IFS": 0.3471,
+     "AIFS": 0.3444
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2443,
+     "GFS": 0.309,
+     "IFS": 0.3126,
+     "AIFS": 0.3201
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.1998,
+     "GFS": 0.3843,
+     "IFS": 0.3045,
+     "AIFS": 0.3002
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2425,
+     "GFS": 0.3886,
+     "IFS": 0.3189,
+     "AIFS": 0.3275
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3191,
+     "GFS": 0.4541,
+     "IFS": 0.2903,
+     "AIFS": 0.3281
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.442,
+     "GFS": 0.5398,
+     "IFS": 0.3239,
+     "AIFS": 0.2927
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5844,
+     "GFS": 0.4919,
+     "IFS": 0.3423,
+     "AIFS": 0.3002
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8017,
+     "GFS": 0.5039,
+     "IFS": 0.3045,
+     "AIFS": 0.2364
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.9206,
+     "GFS": 0.5645,
+     "IFS": 0.392,
+     "AIFS": 0.199
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.9131,
+     "GFS": 0.5678,
+     "IFS": 0.5595,
+     "AIFS": 0.2595
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.0073,
+     "GFS": 0.5849,
+     "IFS": 0.5581,
+     "AIFS": 0.2532
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.044,
+     "GFS": 0.5894,
+     "IFS": 0.5595,
+     "AIFS": 0.2648
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8789,
+     "GFS": 0.5984,
+     "IFS": 0.6254,
+     "AIFS": 0.2717
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.932,
+     "GFS": 0.5432,
+     "IFS": 0.4764,
+     "AIFS": 0.2366
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8514,
+     "GFS": 0.5462,
+     "IFS": 0.4867,
+     "AIFS": 0.2227
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.6173,
+     "GFS": 0.5267,
+     "IFS": 0.5013,
+     "AIFS": 0.2378
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5701,
+     "GFS": 0.4876,
+     "IFS": 0.4527,
+     "AIFS": 0.2582
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3693,
+     "GFS": 0.5022,
+     "IFS": 0.4765,
+     "AIFS": 0.2436
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3648,
+     "GFS": 0.5009,
+     "IFS": 0.455,
+     "AIFS": 0.2504
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3417,
+     "GFS": 0.5027,
+     "IFS": 0.4504,
+     "AIFS": 0.2804
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.288,
+     "GFS": 0.5849,
+     "IFS": 0.4758,
+     "AIFS": 0.2878
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2804,
+     "GFS": 0.5867,
+     "IFS": 0.4239,
+     "AIFS": 0.3044
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2816,
+     "GFS": 0.5504,
+     "IFS": 0.4546,
+     "AIFS": 0.3017
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3068,
+     "GFS": 0.5629,
+     "IFS": 0.4874,
+     "AIFS": 0.2662
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3227,
+     "GFS": 0.4679,
+     "IFS": 0.5571,
+     "AIFS": 0.2565
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3076,
+     "GFS": 0.4335,
+     "IFS": 0.5685,
+     "AIFS": 0.2397
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3265,
+     "GFS": 0.4648,
+     "IFS": 0.6617,
+     "AIFS": 0.2471
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.323,
+     "GFS": 0.4941,
+     "IFS": 0.6737,
+     "AIFS": 0.2295
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3406,
+     "GFS": 0.5835,
+     "IFS": 0.7084,
+     "AIFS": 0.2392
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3223,
+     "GFS": 0.5644,
+     "IFS": 0.7787,
+     "AIFS": 0.2239
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3337,
+     "GFS": 0.6632,
+     "IFS": 0.7724,
+     "AIFS": 0.2699
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3309,
+     "GFS": 0.6653,
+     "IFS": 0.7437,
+     "AIFS": 0.265
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2705,
+     "GFS": 0.581,
+     "IFS": 0.6914,
+     "AIFS": 0.26
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2715,
+     "GFS": 0.5767,
+     "IFS": 0.5919,
+     "AIFS": 0.3159
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2963,
+     "GFS": 0.4646,
+     "IFS": 0.4504,
+     "AIFS": 0.3594
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3294,
+     "GFS": 0.3393,
+     "IFS": 0.3945,
+     "AIFS": 0.3747
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4205,
+     "GFS": 0.3716,
+     "IFS": 0.4359,
+     "AIFS": 0.4273
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4835,
+     "GFS": 0.344,
+     "IFS": 0.3519,
+     "AIFS": 0.4133
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5396,
+     "GFS": 0.3248,
+     "IFS": 0.3555,
+     "AIFS": 0.4172
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.554,
+     "GFS": 0.3621,
+     "IFS": 0.3887,
+     "AIFS": 0.451
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5477,
+     "GFS": 0.3654,
+     "IFS": 0.4075,
+     "AIFS": 0.4374
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5086,
+     "GFS": 0.348,
+     "IFS": 0.4317,
+     "AIFS": 0.4407
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4578,
+     "GFS": 0.3534,
+     "IFS": 0.4426,
+     "AIFS": 0.3878
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.449,
+     "GFS": 0.3566,
+     "IFS": 0.4373,
+     "AIFS": 0.326
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4144,
+     "GFS": 0.3397,
+     "IFS": 0.325,
+     "AIFS": 0.2779
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3979,
+     "GFS": 0.3197,
+     "IFS": 0.3041,
+     "AIFS": 0.2781
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3221,
+     "GFS": 0.2851,
+     "IFS": 0.1901,
+     "AIFS": 0.2812
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3082,
+     "GFS": 0.275,
+     "IFS": 0.238,
+     "AIFS": 0.293
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2819,
+     "GFS": 0.2945,
+     "IFS": 0.3103,
+     "AIFS": 0.2767
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2625,
+     "GFS": 0.2977,
+     "IFS": 0.3183,
+     "AIFS": 0.2657
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.9048,
+     "GFS": 6.017,
+     "IFS": 4.6671,
+     "AIFS": 4.2907
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.4385,
+     "GFS": 5.4901,
+     "IFS": 5.63,
+     "AIFS": 4.0472
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.238,
+     "GFS": 5.2171,
+     "IFS": 5.0508,
+     "AIFS": 3.6915
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7726,
+     "GFS": 5.3287,
+     "IFS": 4.9259,
+     "AIFS": 3.3056
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.569,
+     "GFS": 4.6863,
+     "IFS": 4.5883,
+     "AIFS": 2.9631
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.6328,
+     "GFS": 5.1346,
+     "IFS": 4.9434,
+     "AIFS": 3.1814
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7718,
+     "GFS": 5.3285,
+     "IFS": 4.5083,
+     "AIFS": 3.5664
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.3189,
+     "GFS": 4.9651,
+     "IFS": 4.659,
+     "AIFS": 3.577
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2626,
+     "GFS": 5.212,
+     "IFS": 4.2682,
+     "AIFS": 3.6944
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.1326,
+     "GFS": 5.8168,
+     "IFS": 4.4454,
+     "AIFS": 3.593
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.1629,
+     "GFS": 5.521,
+     "IFS": 3.4496,
+     "AIFS": 2.9947
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.4493,
+     "GFS": 6.6467,
+     "IFS": 4.7176,
+     "AIFS": 3.6945
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.6502,
+     "GFS": 6.9533,
+     "IFS": 5.5453,
+     "AIFS": 4.3128
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.0417,
+     "GFS": 6.371,
+     "IFS": 5.5301,
+     "AIFS": 4.3615
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.8683,
+     "GFS": 6.2925,
+     "IFS": 5.6125,
+     "AIFS": 4.6781
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7341,
+     "GFS": 6.0943,
+     "IFS": 5.8434,
+     "AIFS": 4.4129
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.4498,
+     "GFS": 5.0052,
+     "IFS": 4.6642,
+     "AIFS": 3.8974
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.443,
+     "GFS": 5.4314,
+     "IFS": 4.5489,
+     "AIFS": 3.7081
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7651,
+     "GFS": 5.998,
+     "IFS": 4.6041,
+     "AIFS": 3.5899
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.8377,
+     "GFS": 5.4195,
+     "IFS": 3.9344,
+     "AIFS": 3.324
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7393,
+     "GFS": 5.2487,
+     "IFS": 4.513,
+     "AIFS": 2.9992
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.8078,
+     "GFS": 5.066,
+     "IFS": 4.7933,
+     "AIFS": 3.1225
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.0298,
+     "GFS": 4.2337,
+     "IFS": 4.8151,
+     "AIFS": 3.1004
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.6756,
+     "GFS": 4.8803,
+     "IFS": 4.5564,
+     "AIFS": 3.2552
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.152,
+     "GFS": 5.6108,
+     "IFS": 6.0472,
+     "AIFS": 3.7029
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.0989,
+     "GFS": 6.2715,
+     "IFS": 5.5453,
+     "AIFS": 3.6016
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.3209,
+     "GFS": 6.323,
+     "IFS": 5.9275,
+     "AIFS": 4.195
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.0725,
+     "GFS": 5.4741,
+     "IFS": 6.1362,
+     "AIFS": 4.4356
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.0209,
+     "GFS": 5.1351,
+     "IFS": 5.2645,
+     "AIFS": 4.49
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7878,
+     "GFS": 4.5397,
+     "IFS": 5.2444,
+     "AIFS": 4.5137
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.8164,
+     "GFS": 4.7426,
+     "IFS": 5.2183,
+     "AIFS": 4.0727
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.8061,
+     "GFS": 6.0104,
+     "IFS": 6.2994,
+     "AIFS": 4.4375
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.7344,
+     "GFS": 6.1661,
+     "IFS": 6.718,
+     "AIFS": 3.8116
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 4.009,
+     "GFS": 7.0911,
+     "IFS": 7.9549,
+     "AIFS": 4.1192
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 4.8654,
+     "GFS": 8.8409,
+     "IFS": 8.4149,
+     "AIFS": 4.9553
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 4.577,
+     "GFS": 8.1702,
+     "IFS": 7.4742,
+     "AIFS": 4.6532
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 4.6829,
+     "GFS": 8.7181,
+     "IFS": 7.9417,
+     "AIFS": 4.859
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 4.5349,
+     "GFS": 8.5372,
+     "IFS": 7.2467,
+     "AIFS": 4.7149
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 3.3158,
+     "GFS": 6.2805,
+     "IFS": 6.5088,
+     "AIFS": 4.0278
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7095,
+     "GFS": 5.8965,
+     "IFS": 5.6254,
+     "AIFS": 3.1559
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.0323,
+     "GFS": 5.1746,
+     "IFS": 5.3433,
+     "AIFS": 2.2941
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1173,
+     "GFS": 5.2376,
+     "IFS": 5.1977,
+     "AIFS": 2.6696
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.4373,
+     "GFS": 6.0506,
+     "IFS": 5.1399,
+     "AIFS": 3.3644
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2064,
+     "GFS": 6.7064,
+     "IFS": 5.1154,
+     "AIFS": 3.1261
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1474,
+     "GFS": 7.7357,
+     "IFS": 4.8521,
+     "AIFS": 2.9354
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1021,
+     "GFS": 8.1817,
+     "IFS": 4.752,
+     "AIFS": 2.697
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.0591,
+     "GFS": 8.0782,
+     "IFS": 5.1887,
+     "AIFS": 2.0894
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.0772,
+     "GFS": 8.6236,
+     "IFS": 5.3925,
+     "AIFS": 2.0748
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.372,
+     "GFS": 8.9865,
+     "IFS": 6.1616,
+     "AIFS": 2.367
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.4918,
+     "GFS": 8.7869,
+     "IFS": 6.6231,
+     "AIFS": 2.4954
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.4916,
+     "GFS": 8.9458,
+     "IFS": 7.096,
+     "AIFS": 2.5723
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2927,
+     "GFS": 8.1375,
+     "IFS": 6.6992,
+     "AIFS": 2.423
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2987,
+     "GFS": 7.9769,
+     "IFS": 6.6268,
+     "AIFS": 2.4381
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.9086,
+     "GFS": 2.1981,
+     "IFS": 1.1433,
+     "AIFS": 2.3305
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.3498,
+     "GFS": 1.5551,
+     "IFS": 0.8099,
+     "AIFS": 1.6484
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.1626,
+     "GFS": 1.3528,
+     "IFS": 0.7658,
+     "AIFS": 1.3732
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.0106,
+     "GFS": 1.1784,
+     "IFS": 0.6732,
+     "AIFS": 1.1916
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3217,
+     "GFS": 0.4113,
+     "IFS": 0.3443,
+     "AIFS": 0.243
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3457,
+     "GFS": 0.4366,
+     "IFS": 0.3735,
+     "AIFS": 0.2766
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.0253,
+     "GFS": 1.3471,
+     "IFS": 1.0,
+     "AIFS": 0.6895
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.1006,
+     "GFS": 1.4394,
+     "IFS": 1.0968,
+     "AIFS": 0.9234
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.1024,
+     "GFS": 1.4421,
+     "IFS": 1.1015,
+     "AIFS": 0.9258
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.2764,
+     "GFS": 1.7376,
+     "IFS": 1.3507,
+     "AIFS": 1.0113
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.8553,
+     "GFS": 1.2261,
+     "IFS": 1.021,
+     "AIFS": 0.8229
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.1486,
+     "GFS": 1.166,
+     "IFS": 1.3169,
+     "AIFS": 1.4413
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.4601,
+     "GFS": 1.763,
+     "IFS": 1.7689,
+     "AIFS": 1.6701
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.4957,
+     "GFS": 1.8353,
+     "IFS": 1.7675,
+     "AIFS": 1.6891
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.4012,
+     "GFS": 1.7171,
+     "IFS": 1.6664,
+     "AIFS": 1.6647
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.0709,
+     "GFS": 3.4126,
+     "IFS": 2.6988,
+     "AIFS": 1.875
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.7666,
+     "GFS": 4.8803,
+     "IFS": 4.4726,
+     "AIFS": 2.7721
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.4709,
+     "GFS": 9.1351,
+     "IFS": 7.72,
+     "AIFS": 3.0644
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.1175,
+     "GFS": 10.161,
+     "IFS": 7.9627,
+     "AIFS": 3.6121
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.9382,
+     "GFS": 10.9555,
+     "IFS": 8.1432,
+     "AIFS": 4.0231
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.9336,
+     "GFS": 10.8902,
+     "IFS": 8.4489,
+     "AIFS": 4.6592
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.7262,
+     "GFS": 10.1662,
+     "IFS": 8.2166,
+     "AIFS": 5.6333
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.5103,
+     "GFS": 10.5008,
+     "IFS": 8.0288,
+     "AIFS": 6.9159
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.1014,
+     "GFS": 9.4693,
+     "IFS": 8.3956,
+     "AIFS": 6.8011
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.077,
+     "GFS": 9.0847,
+     "IFS": 8.3243,
+     "AIFS": 6.235
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.5016,
+     "GFS": 9.2844,
+     "IFS": 7.7996,
+     "AIFS": 5.9935
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.1947,
+     "GFS": 9.4216,
+     "IFS": 7.3213,
+     "AIFS": 3.9824
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.2403,
+     "GFS": 8.6244,
+     "IFS": 5.3212,
+     "AIFS": 3.7628
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.8665,
+     "GFS": 8.4044,
+     "IFS": 5.6098,
+     "AIFS": 3.537
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.7346,
+     "GFS": 7.6288,
+     "IFS": 5.1336,
+     "AIFS": 3.0697
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.8911,
+     "GFS": 5.0324,
+     "IFS": 4.6182,
+     "AIFS": 2.3071
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.6401,
+     "GFS": 3.6626,
+     "IFS": 4.2372,
+     "AIFS": 2.0066
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.5602,
+     "GFS": 3.3919,
+     "IFS": 4.1946,
+     "AIFS": 1.9247
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.5454,
+     "GFS": 3.1739,
+     "IFS": 2.0744,
+     "AIFS": 1.7322
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.6244,
+     "GFS": 5.1669,
+     "IFS": 2.3542,
+     "AIFS": 2.9845
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.4057,
+     "GFS": 4.6921,
+     "IFS": 2.8368,
+     "AIFS": 3.1811
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.2825,
+     "GFS": 4.6422,
+     "IFS": 2.626,
+     "AIFS": 3.1432
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.2824,
+     "GFS": 4.642,
+     "IFS": 2.6257,
+     "AIFS": 3.143
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.2647,
+     "GFS": 4.6173,
+     "IFS": 2.604,
+     "AIFS": 3.1213
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.4383,
+     "GFS": 0.5624,
+     "IFS": 0.5484,
+     "AIFS": 0.4356
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.0241,
+     "GFS": 0.0328,
+     "IFS": 0.0328,
+     "AIFS": 0.0329
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.0395,
+     "GFS": 0.0472,
+     "IFS": 0.0472,
+     "AIFS": 0.0472
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.0718,
+     "GFS": 0.0855,
+     "IFS": 0.0855,
+     "AIFS": 0.0786
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.0745,
+     "GFS": 0.0927,
+     "IFS": 0.0927,
+     "AIFS": 0.0828
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.2162,
+     "GFS": 0.2496,
+     "IFS": 0.245,
+     "AIFS": 0.2161
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.2202,
+     "GFS": 0.2544,
+     "IFS": 0.2499,
+     "AIFS": 0.2215
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.2451,
+     "GFS": 0.2798,
+     "IFS": 0.2746,
+     "AIFS": 0.2498
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.1526,
+     "GFS": 3.7184,
+     "IFS": 2.3419,
+     "AIFS": 2.4939
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.3035,
+     "GFS": 3.8406,
+     "IFS": 2.4613,
+     "AIFS": 2.6199
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.3029,
+     "GFS": 3.8416,
+     "IFS": 2.4607,
+     "AIFS": 2.6191
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.311,
+     "GFS": 3.8467,
+     "IFS": 2.4689,
+     "AIFS": 2.6259
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.3072,
+     "GFS": 3.6836,
+     "IFS": 2.5707,
+     "AIFS": 2.5065
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "indo_gangetic_plains",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.3065,
+     "GFS": 3.6832,
+     "IFS": 2.5699,
+     "AIFS": 2.5055
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.9783,
+     "GFS": 4.2159,
+     "IFS": 6.1215,
+     "AIFS": 3.8081
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.5506,
+     "GFS": 4.7539,
+     "IFS": 6.6954,
+     "AIFS": 2.7201
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.3729,
+     "GFS": 4.6029,
+     "IFS": 6.7848,
+     "AIFS": 2.2342
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.2653,
+     "GFS": 4.6376,
+     "IFS": 7.0067,
+     "AIFS": 1.9408
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8697,
+     "GFS": 4.9928,
+     "IFS": 7.3454,
+     "AIFS": 0.4675
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.9616,
+     "GFS": 4.842,
+     "IFS": 7.4043,
+     "AIFS": 0.4319
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.037,
+     "GFS": 4.6226,
+     "IFS": 7.1724,
+     "AIFS": 0.5575
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.4616,
+     "GFS": 4.6646,
+     "IFS": 6.9809,
+     "AIFS": 0.6087
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.7769,
+     "GFS": 4.485,
+     "IFS": 6.8541,
+     "AIFS": 0.6117
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.8019,
+     "GFS": 3.9649,
+     "IFS": 6.2444,
+     "AIFS": 0.6221
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.9138,
+     "GFS": 3.8739,
+     "IFS": 6.3352,
+     "AIFS": 0.5211
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 2.4772,
+     "GFS": 3.6839,
+     "IFS": 6.2684,
+     "AIFS": 0.7517
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 2.5059,
+     "GFS": 2.8168,
+     "IFS": 5.4535,
+     "AIFS": 0.9457
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 2.7799,
+     "GFS": 2.5693,
+     "IFS": 5.1299,
+     "AIFS": 1.0544
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 3.4501,
+     "GFS": 2.5273,
+     "IFS": 5.4085,
+     "AIFS": 1.0989
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 3.6391,
+     "GFS": 2.2721,
+     "IFS": 5.013,
+     "AIFS": 1.1213
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 3.3395,
+     "GFS": 2.0786,
+     "IFS": 4.8534,
+     "AIFS": 0.8103
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 3.0223,
+     "GFS": 2.1667,
+     "IFS": 4.6763,
+     "AIFS": 0.825
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 2.7203,
+     "GFS": 2.3573,
+     "IFS": 4.2427,
+     "AIFS": 0.6833
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8611,
+     "GFS": 2.3771,
+     "IFS": 3.68,
+     "AIFS": 0.6813
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8397,
+     "GFS": 2.7827,
+     "IFS": 3.737,
+     "AIFS": 0.6624
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7394,
+     "GFS": 2.816,
+     "IFS": 3.6012,
+     "AIFS": 0.6889
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7483,
+     "GFS": 2.8348,
+     "IFS": 3.4061,
+     "AIFS": 0.7225
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7202,
+     "GFS": 3.2478,
+     "IFS": 3.4115,
+     "AIFS": 0.6599
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8308,
+     "GFS": 3.4473,
+     "IFS": 3.5605,
+     "AIFS": 0.6383
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7422,
+     "GFS": 3.5524,
+     "IFS": 3.5838,
+     "AIFS": 0.5836
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7328,
+     "GFS": 3.6079,
+     "IFS": 3.8149,
+     "AIFS": 0.5803
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.6673,
+     "GFS": 3.6478,
+     "IFS": 4.0108,
+     "AIFS": 0.5044
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.558,
+     "GFS": 3.75,
+     "IFS": 4.1875,
+     "AIFS": 0.4542
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4853,
+     "GFS": 3.8987,
+     "IFS": 4.3817,
+     "AIFS": 0.5173
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5796,
+     "GFS": 4.1275,
+     "IFS": 4.5819,
+     "AIFS": 0.5169
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.6124,
+     "GFS": 4.2357,
+     "IFS": 4.759,
+     "AIFS": 0.4533
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7257,
+     "GFS": 4.3471,
+     "IFS": 5.047,
+     "AIFS": 0.5003
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.819,
+     "GFS": 4.5874,
+     "IFS": 5.4507,
+     "AIFS": 0.4076
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8705,
+     "GFS": 4.3104,
+     "IFS": 5.3663,
+     "AIFS": 0.5266
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8929,
+     "GFS": 4.1642,
+     "IFS": 5.256,
+     "AIFS": 0.6173
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8479,
+     "GFS": 4.0399,
+     "IFS": 5.4173,
+     "AIFS": 0.5899
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7423,
+     "GFS": 3.8283,
+     "IFS": 5.2618,
+     "AIFS": 0.5796
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.6312,
+     "GFS": 3.4197,
+     "IFS": 5.0367,
+     "AIFS": 0.5731
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4431,
+     "GFS": 3.5124,
+     "IFS": 5.4548,
+     "AIFS": 0.4066
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5326,
+     "GFS": 3.4098,
+     "IFS": 5.3429,
+     "AIFS": 0.4354
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5215,
+     "GFS": 3.013,
+     "IFS": 5.0237,
+     "AIFS": 0.4714
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.0005,
+     "GFS": 2.7129,
+     "IFS": 4.6224,
+     "AIFS": 0.7155
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.7455,
+     "GFS": 2.4477,
+     "IFS": 4.239,
+     "AIFS": 0.8518
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 2.8552,
+     "GFS": 1.9528,
+     "IFS": 3.6401,
+     "AIFS": 0.9418
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 3.5387,
+     "GFS": 1.8682,
+     "IFS": 3.3732,
+     "AIFS": 0.9561
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 3.5579,
+     "GFS": 2.4556,
+     "IFS": 3.8609,
+     "AIFS": 0.8158
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 3.4071,
+     "GFS": 3.0786,
+     "IFS": 4.4848,
+     "AIFS": 0.8127
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 2.9492,
+     "GFS": 3.1801,
+     "IFS": 4.7234,
+     "AIFS": 0.7471
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.7259,
+     "GFS": 3.659,
+     "IFS": 5.3721,
+     "AIFS": 0.7964
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.2264,
+     "GFS": 3.9159,
+     "IFS": 5.7182,
+     "AIFS": 0.8027
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.1549,
+     "GFS": 3.7255,
+     "IFS": 5.6854,
+     "AIFS": 0.9635
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.1187,
+     "GFS": 3.6875,
+     "IFS": 5.6648,
+     "AIFS": 0.9523
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5894,
+     "GFS": 2.4464,
+     "IFS": 3.6552,
+     "AIFS": 3.6544
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3737,
+     "GFS": 2.2517,
+     "IFS": 3.4323,
+     "AIFS": 2.8333
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3455,
+     "GFS": 2.1937,
+     "IFS": 3.1617,
+     "AIFS": 2.5941
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3212,
+     "GFS": 2.2457,
+     "IFS": 3.039,
+     "AIFS": 2.586
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2459,
+     "GFS": 2.3296,
+     "IFS": 2.9548,
+     "AIFS": 1.9352
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.1739,
+     "GFS": 2.2662,
+     "IFS": 2.6078,
+     "AIFS": 2.2039
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2353,
+     "GFS": 2.2364,
+     "IFS": 2.8686,
+     "AIFS": 2.5293
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.153,
+     "GFS": 2.0536,
+     "IFS": 2.8388,
+     "AIFS": 2.5181
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2435,
+     "GFS": 2.1702,
+     "IFS": 3.2297,
+     "AIFS": 2.879
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.509,
+     "GFS": 2.1617,
+     "IFS": 3.4529,
+     "AIFS": 3.4943
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5013,
+     "GFS": 2.5424,
+     "IFS": 3.5323,
+     "AIFS": 3.4547
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5431,
+     "GFS": 2.8304,
+     "IFS": 3.5668,
+     "AIFS": 3.6148
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6496,
+     "GFS": 3.2724,
+     "IFS": 3.3336,
+     "AIFS": 3.5932
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.424,
+     "GFS": 3.6246,
+     "IFS": 2.9653,
+     "AIFS": 3.3326
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3434,
+     "GFS": 3.9422,
+     "IFS": 2.7794,
+     "AIFS": 3.0696
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2584,
+     "GFS": 3.9621,
+     "IFS": 2.8634,
+     "AIFS": 3.3651
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3113,
+     "GFS": 4.0602,
+     "IFS": 2.9749,
+     "AIFS": 3.3148
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6691,
+     "GFS": 4.1175,
+     "IFS": 3.2148,
+     "AIFS": 3.1607
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.7449,
+     "GFS": 4.0058,
+     "IFS": 3.2067,
+     "AIFS": 2.9146
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.0257,
+     "GFS": 3.9473,
+     "IFS": 3.4082,
+     "AIFS": 2.6448
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.7524,
+     "GFS": 4.3773,
+     "IFS": 4.0776,
+     "AIFS": 2.9679
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.6994,
+     "GFS": 4.2462,
+     "IFS": 4.0364,
+     "AIFS": 2.9159
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.5637,
+     "GFS": 3.9784,
+     "IFS": 3.934,
+     "AIFS": 2.9626
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.5787,
+     "GFS": 3.9699,
+     "IFS": 4.0454,
+     "AIFS": 3.0058
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.4081,
+     "GFS": 2.6812,
+     "IFS": 3.1625,
+     "AIFS": 2.2687
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.1977,
+     "GFS": 2.2101,
+     "IFS": 3.4245,
+     "AIFS": 2.1731
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2503,
+     "GFS": 2.0295,
+     "IFS": 3.4292,
+     "AIFS": 2.3833
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2704,
+     "GFS": 1.9565,
+     "IFS": 3.6688,
+     "AIFS": 2.2027
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2964,
+     "GFS": 1.951,
+     "IFS": 3.6854,
+     "AIFS": 2.1466
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3401,
+     "GFS": 1.97,
+     "IFS": 3.4707,
+     "AIFS": 2.1396
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3303,
+     "GFS": 2.0104,
+     "IFS": 3.6473,
+     "AIFS": 2.0715
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3588,
+     "GFS": 2.0092,
+     "IFS": 3.4402,
+     "AIFS": 2.3019
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.263,
+     "GFS": 1.9118,
+     "IFS": 3.2713,
+     "AIFS": 2.2626
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.282,
+     "GFS": 1.855,
+     "IFS": 3.0618,
+     "AIFS": 2.2133
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2144,
+     "GFS": 1.7068,
+     "IFS": 2.4385,
+     "AIFS": 2.322
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2023,
+     "GFS": 1.7312,
+     "IFS": 2.2013,
+     "AIFS": 1.8031
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.1323,
+     "GFS": 1.6133,
+     "IFS": 2.2074,
+     "AIFS": 1.7796
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.1281,
+     "GFS": 1.5909,
+     "IFS": 2.4224,
+     "AIFS": 1.8992
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.031,
+     "GFS": 1.5262,
+     "IFS": 2.5638,
+     "AIFS": 1.89
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 0.9644,
+     "GFS": 1.3367,
+     "IFS": 2.3291,
+     "AIFS": 1.8307
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 0.9388,
+     "GFS": 1.3295,
+     "IFS": 2.5405,
+     "AIFS": 1.9416
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 0.9406,
+     "GFS": 1.325,
+     "IFS": 2.4833,
+     "AIFS": 1.958
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 0.9395,
+     "GFS": 1.3033,
+     "IFS": 2.4352,
+     "AIFS": 1.8882
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 0.7111,
+     "GFS": 0.9357,
+     "IFS": 2.676,
+     "AIFS": 2.0213
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 0.7959,
+     "GFS": 1.1963,
+     "IFS": 2.6185,
+     "AIFS": 2.0055
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2199,
+     "GFS": 2.0129,
+     "IFS": 2.3365,
+     "AIFS": 1.783
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.2352,
+     "GFS": 2.1038,
+     "IFS": 2.3819,
+     "AIFS": 1.8277
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.4717,
+     "GFS": 2.43,
+     "IFS": 2.3598,
+     "AIFS": 2.0024
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.7736,
+     "GFS": 2.712,
+     "IFS": 2.1453,
+     "AIFS": 1.9941
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.639,
+     "GFS": 2.4719,
+     "IFS": 2.4602,
+     "AIFS": 2.0367
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6958,
+     "GFS": 2.6104,
+     "IFS": 2.6231,
+     "AIFS": 1.9428
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6221,
+     "GFS": 2.4989,
+     "IFS": 2.5656,
+     "AIFS": 1.8919
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "indo_gangetic_plains",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6327,
+     "GFS": 2.5034,
+     "IFS": 2.5613,
+     "AIFS": 1.8518
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.5563,
+     "GFS": 1.2779,
+     "IFS": 1.0911,
+     "AIFS": 1.1688
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.1489,
+     "GFS": 1.1146,
+     "IFS": 1.5663,
+     "AIFS": 1.3971
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.1592,
+     "GFS": 2.1497,
+     "IFS": 2.0449,
+     "AIFS": 1.7064
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.0833,
+     "GFS": 2.2987,
+     "IFS": 2.4384,
+     "AIFS": 2.0491
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.9533,
+     "GFS": 2.2734,
+     "IFS": 2.4468,
+     "AIFS": 2.005
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.0482,
+     "GFS": 4.3523,
+     "IFS": 2.8102,
+     "AIFS": 2.6232
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.9699,
+     "GFS": 4.3243,
+     "IFS": 2.9125,
+     "AIFS": 2.6784
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.9856,
+     "GFS": 4.3017,
+     "IFS": 2.9246,
+     "AIFS": 2.6554
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 3.5359,
+     "GFS": 4.7687,
+     "IFS": 3.1767,
+     "AIFS": 2.5789
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.1358,
+     "GFS": 4.9691,
+     "IFS": 4.7374,
+     "AIFS": 3.4978
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.2305,
+     "GFS": 5.128,
+     "IFS": 4.7617,
+     "AIFS": 3.4732
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.4341,
+     "GFS": 5.955,
+     "IFS": 5.7223,
+     "AIFS": 3.9384
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.502,
+     "GFS": 9.6454,
+     "IFS": 7.3691,
+     "AIFS": 5.2241
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 10.497,
+     "GFS": 14.5815,
+     "IFS": 9.2089,
+     "AIFS": 8.6625
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 10.8202,
+     "GFS": 14.8327,
+     "IFS": 9.3265,
+     "AIFS": 8.8378
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 12.1206,
+     "GFS": 16.0295,
+     "IFS": 10.3639,
+     "AIFS": 8.916
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 11.3736,
+     "GFS": 15.2047,
+     "IFS": 10.2139,
+     "AIFS": 9.2238
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 9.3791,
+     "GFS": 10.9908,
+     "IFS": 8.0668,
+     "AIFS": 5.8836
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 9.5718,
+     "GFS": 12.1163,
+     "IFS": 8.5339,
+     "AIFS": 6.5091
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 9.9989,
+     "GFS": 10.0578,
+     "IFS": 8.1048,
+     "AIFS": 7.012
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 11.2588,
+     "GFS": 12.7644,
+     "IFS": 9.4401,
+     "AIFS": 8.169
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 11.9451,
+     "GFS": 11.6474,
+     "IFS": 9.4235,
+     "AIFS": 8.203
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 12.1208,
+     "GFS": 10.9468,
+     "IFS": 8.9026,
+     "AIFS": 7.719
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 12.2037,
+     "GFS": 11.6732,
+     "IFS": 9.1191,
+     "AIFS": 7.5583
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 9.6424,
+     "GFS": 7.6842,
+     "IFS": 6.2129,
+     "AIFS": 4.8767
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.3775,
+     "GFS": 6.849,
+     "IFS": 5.4924,
+     "AIFS": 4.0399
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 8.0767,
+     "GFS": 7.4454,
+     "IFS": 6.322,
+     "AIFS": 4.5723
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.6978,
+     "GFS": 5.554,
+     "IFS": 5.4407,
+     "AIFS": 3.6757
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.4288,
+     "GFS": 4.7473,
+     "IFS": 4.6174,
+     "AIFS": 3.4642
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.2092,
+     "GFS": 5.1767,
+     "IFS": 5.1067,
+     "AIFS": 3.9402
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.1681,
+     "GFS": 3.7278,
+     "IFS": 3.7382,
+     "AIFS": 2.9628
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.6757,
+     "GFS": 4.6389,
+     "IFS": 4.1567,
+     "AIFS": 3.4609
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.5195,
+     "GFS": 7.6763,
+     "IFS": 6.4173,
+     "AIFS": 5.2898
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.322,
+     "GFS": 12.5421,
+     "IFS": 10.1896,
+     "AIFS": 8.5637
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.7999,
+     "GFS": 13.4515,
+     "IFS": 10.5084,
+     "AIFS": 8.9184
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.5484,
+     "GFS": 13.3249,
+     "IFS": 10.3844,
+     "AIFS": 8.6908
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 7.4311,
+     "GFS": 12.8378,
+     "IFS": 9.7877,
+     "AIFS": 8.3818
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 6.0116,
+     "GFS": 8.1544,
+     "IFS": 5.5615,
+     "AIFS": 4.0742
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.8415,
+     "GFS": 8.0992,
+     "IFS": 6.4448,
+     "AIFS": 5.201
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.1175,
+     "GFS": 6.9543,
+     "IFS": 5.8725,
+     "AIFS": 5.1177
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 5.1978,
+     "GFS": 6.9658,
+     "IFS": 5.8636,
+     "AIFS": 5.095
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 4.804,
+     "GFS": 6.0794,
+     "IFS": 5.7373,
+     "AIFS": 4.8557
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 2.5287,
+     "GFS": 3.1994,
+     "IFS": 2.1329,
+     "AIFS": 2.1434
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.6372,
+     "GFS": 2.6709,
+     "IFS": 1.1978,
+     "AIFS": 0.9356
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.2835,
+     "GFS": 0.7961,
+     "IFS": 0.5509,
+     "AIFS": 0.613
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3152,
+     "GFS": 0.7719,
+     "IFS": 0.8103,
+     "AIFS": 0.6855
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.2814,
+     "GFS": 1.1395,
+     "IFS": 0.8089,
+     "AIFS": 0.701
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3488,
+     "GFS": 1.3037,
+     "IFS": 1.0522,
+     "AIFS": 0.7456
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.4388,
+     "GFS": 1.164,
+     "IFS": 0.9629,
+     "AIFS": 0.5189
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.4345,
+     "GFS": 1.1701,
+     "IFS": 0.9674,
+     "AIFS": 0.5034
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 0.3976,
+     "GFS": 0.7441,
+     "IFS": 0.7601,
+     "AIFS": 0.4046
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.2816,
+     "GFS": 1.481,
+     "IFS": 1.1339,
+     "AIFS": 1.0214
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "kerala_western_ghats",
+    "variable": "precipitation",
+    "rmse": {
+     "blend": 1.2849,
+     "GFS": 1.3751,
+     "IFS": 0.9523,
+     "AIFS": 1.0044
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 2.0256,
+     "GFS": 5.1363,
+     "IFS": 4.4495,
+     "AIFS": 2.2744
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.5372,
+     "GFS": 4.9715,
+     "IFS": 4.4673,
+     "AIFS": 1.6851
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.3187,
+     "GFS": 4.6514,
+     "IFS": 4.4045,
+     "AIFS": 1.454
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.2302,
+     "GFS": 4.4929,
+     "IFS": 4.4317,
+     "AIFS": 1.2928
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.9063,
+     "GFS": 4.1631,
+     "IFS": 4.5126,
+     "AIFS": 0.6581
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8684,
+     "GFS": 3.7928,
+     "IFS": 4.3831,
+     "AIFS": 0.6257
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.8658,
+     "GFS": 3.4419,
+     "IFS": 4.3536,
+     "AIFS": 0.571
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.0097,
+     "GFS": 3.2921,
+     "IFS": 4.3363,
+     "AIFS": 0.4323
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.0048,
+     "GFS": 3.1621,
+     "IFS": 4.2398,
+     "AIFS": 0.4207
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.0539,
+     "GFS": 3.1043,
+     "IFS": 4.1587,
+     "AIFS": 0.3738
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 1.114,
+     "GFS": 3.3183,
+     "IFS": 4.0794,
+     "AIFS": 0.4044
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.9966,
+     "GFS": 3.2128,
+     "IFS": 3.8599,
+     "AIFS": 0.3727
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7821,
+     "GFS": 2.9287,
+     "IFS": 3.4154,
+     "AIFS": 0.3984
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.7042,
+     "GFS": 2.7859,
+     "IFS": 3.0154,
+     "AIFS": 0.4092
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4748,
+     "GFS": 2.6247,
+     "IFS": 2.8143,
+     "AIFS": 0.3656
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.5188,
+     "GFS": 2.4077,
+     "IFS": 2.4152,
+     "AIFS": 0.4062
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4893,
+     "GFS": 2.5145,
+     "IFS": 2.3959,
+     "AIFS": 0.4263
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4508,
+     "GFS": 2.6142,
+     "IFS": 2.4577,
+     "AIFS": 0.4258
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4138,
+     "GFS": 2.3856,
+     "IFS": 2.0601,
+     "AIFS": 0.4501
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3269,
+     "GFS": 2.5393,
+     "IFS": 2.1482,
+     "AIFS": 0.4395
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.41,
+     "GFS": 2.3869,
+     "IFS": 2.0464,
+     "AIFS": 0.4422
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4491,
+     "GFS": 2.3995,
+     "IFS": 2.0209,
+     "AIFS": 0.4617
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4736,
+     "GFS": 2.4454,
+     "IFS": 2.1161,
+     "AIFS": 0.5175
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4946,
+     "GFS": 2.3442,
+     "IFS": 2.0707,
+     "AIFS": 0.554
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4796,
+     "GFS": 2.487,
+     "IFS": 2.1228,
+     "AIFS": 0.5792
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4138,
+     "GFS": 2.7583,
+     "IFS": 2.399,
+     "AIFS": 0.682
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4354,
+     "GFS": 2.6939,
+     "IFS": 2.2629,
+     "AIFS": 0.6895
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4252,
+     "GFS": 2.8334,
+     "IFS": 2.3606,
+     "AIFS": 0.7028
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3447,
+     "GFS": 3.0345,
+     "IFS": 2.6269,
+     "AIFS": 0.7125
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3513,
+     "GFS": 2.998,
+     "IFS": 2.5825,
+     "AIFS": 0.678
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2911,
+     "GFS": 3.0627,
+     "IFS": 2.5979,
+     "AIFS": 0.6738
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2913,
+     "GFS": 3.1526,
+     "IFS": 2.7931,
+     "AIFS": 0.7383
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3214,
+     "GFS": 3.0767,
+     "IFS": 2.8565,
+     "AIFS": 0.7532
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3121,
+     "GFS": 3.0568,
+     "IFS": 2.9184,
+     "AIFS": 0.7193
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.445,
+     "GFS": 3.1223,
+     "IFS": 3.0436,
+     "AIFS": 0.6915
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4395,
+     "GFS": 3.285,
+     "IFS": 3.2691,
+     "AIFS": 0.6667
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4381,
+     "GFS": 3.2767,
+     "IFS": 3.2439,
+     "AIFS": 0.6745
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4616,
+     "GFS": 3.4532,
+     "IFS": 3.2911,
+     "AIFS": 0.7584
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3925,
+     "GFS": 3.5842,
+     "IFS": 3.3105,
+     "AIFS": 0.8053
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4174,
+     "GFS": 3.6526,
+     "IFS": 3.1853,
+     "AIFS": 0.8949
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4437,
+     "GFS": 3.6379,
+     "IFS": 3.1876,
+     "AIFS": 0.8525
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4406,
+     "GFS": 4.0715,
+     "IFS": 3.2597,
+     "AIFS": 0.8453
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4931,
+     "GFS": 4.1739,
+     "IFS": 3.3288,
+     "AIFS": 0.9642
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.4054,
+     "GFS": 4.5834,
+     "IFS": 3.6574,
+     "AIFS": 0.8824
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3702,
+     "GFS": 4.6955,
+     "IFS": 3.7172,
+     "AIFS": 0.8982
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3989,
+     "GFS": 4.5283,
+     "IFS": 3.5888,
+     "AIFS": 0.856
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3297,
+     "GFS": 4.4195,
+     "IFS": 3.7848,
+     "AIFS": 0.7315
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3115,
+     "GFS": 4.3282,
+     "IFS": 3.8344,
+     "AIFS": 0.6877
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3378,
+     "GFS": 4.3347,
+     "IFS": 3.9786,
+     "AIFS": 0.7119
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2696,
+     "GFS": 4.4484,
+     "IFS": 4.2011,
+     "AIFS": 0.7324
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.2919,
+     "GFS": 4.6971,
+     "IFS": 4.3144,
+     "AIFS": 0.767
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.34,
+     "GFS": 4.6223,
+     "IFS": 4.2334,
+     "AIFS": 0.7574
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "rmse": {
+     "blend": 0.3382,
+     "GFS": 4.6228,
+     "IFS": 4.2494,
+     "AIFS": 0.74
+    }
+   },
+   {
+    "date": "2025-02-26",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.8492,
+     "GFS": 6.9549,
+     "IFS": 5.6407,
+     "AIFS": 4.2444
+    }
+   },
+   {
+    "date": "2025-03-05",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5095,
+     "GFS": 7.8339,
+     "IFS": 7.7754,
+     "AIFS": 3.3359
+    }
+   },
+   {
+    "date": "2025-03-12",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5338,
+     "GFS": 7.6777,
+     "IFS": 7.4869,
+     "AIFS": 3.0447
+    }
+   },
+   {
+    "date": "2025-03-19",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6614,
+     "GFS": 7.3623,
+     "IFS": 7.5952,
+     "AIFS": 3.057
+    }
+   },
+   {
+    "date": "2025-03-26",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6163,
+     "GFS": 7.1314,
+     "IFS": 8.1399,
+     "AIFS": 2.5904
+    }
+   },
+   {
+    "date": "2025-04-02",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6868,
+     "GFS": 5.8759,
+     "IFS": 6.7814,
+     "AIFS": 2.8325
+    }
+   },
+   {
+    "date": "2025-04-09",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6572,
+     "GFS": 4.9607,
+     "IFS": 6.5223,
+     "AIFS": 2.9316
+    }
+   },
+   {
+    "date": "2025-04-16",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6632,
+     "GFS": 4.5682,
+     "IFS": 6.026,
+     "AIFS": 2.9028
+    }
+   },
+   {
+    "date": "2025-04-23",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6322,
+     "GFS": 4.3634,
+     "IFS": 5.4917,
+     "AIFS": 2.6938
+    }
+   },
+   {
+    "date": "2025-04-30",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5073,
+     "GFS": 4.2913,
+     "IFS": 5.1915,
+     "AIFS": 2.5323
+    }
+   },
+   {
+    "date": "2025-05-07",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.561,
+     "GFS": 4.5715,
+     "IFS": 5.5088,
+     "AIFS": 2.5885
+    }
+   },
+   {
+    "date": "2025-05-14",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.7912,
+     "GFS": 5.276,
+     "IFS": 5.317,
+     "AIFS": 2.9711
+    }
+   },
+   {
+    "date": "2025-05-21",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1959,
+     "GFS": 6.3377,
+     "IFS": 4.9016,
+     "AIFS": 3.7819
+    }
+   },
+   {
+    "date": "2025-05-28",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.5988,
+     "GFS": 6.9403,
+     "IFS": 4.8908,
+     "AIFS": 4.6063
+    }
+   },
+   {
+    "date": "2025-06-04",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.533,
+     "GFS": 7.121,
+     "IFS": 4.6021,
+     "AIFS": 4.4806
+    }
+   },
+   {
+    "date": "2025-06-11",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.5917,
+     "GFS": 7.174,
+     "IFS": 4.3617,
+     "AIFS": 4.6759
+    }
+   },
+   {
+    "date": "2025-06-18",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1241,
+     "GFS": 6.5473,
+     "IFS": 4.1542,
+     "AIFS": 4.2106
+    }
+   },
+   {
+    "date": "2025-06-25",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.4571,
+     "GFS": 6.0731,
+     "IFS": 3.7338,
+     "AIFS": 3.2626
+    }
+   },
+   {
+    "date": "2025-07-02",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.611,
+     "GFS": 6.7908,
+     "IFS": 3.8656,
+     "AIFS": 3.4991
+    }
+   },
+   {
+    "date": "2025-07-09",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.7441,
+     "GFS": 7.1472,
+     "IFS": 4.0984,
+     "AIFS": 3.3371
+    }
+   },
+   {
+    "date": "2025-07-16",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.9426,
+     "GFS": 6.8788,
+     "IFS": 4.1326,
+     "AIFS": 3.2704
+    }
+   },
+   {
+    "date": "2025-07-23",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2547,
+     "GFS": 7.4578,
+     "IFS": 4.5615,
+     "AIFS": 3.3854
+    }
+   },
+   {
+    "date": "2025-07-30",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.27,
+     "GFS": 6.9773,
+     "IFS": 4.8181,
+     "AIFS": 3.3223
+    }
+   },
+   {
+    "date": "2025-08-06",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.081,
+     "GFS": 5.9669,
+     "IFS": 4.1882,
+     "AIFS": 3.0765
+    }
+   },
+   {
+    "date": "2025-08-13",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1139,
+     "GFS": 6.1556,
+     "IFS": 4.5366,
+     "AIFS": 3.141
+    }
+   },
+   {
+    "date": "2025-08-20",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.664,
+     "GFS": 5.7584,
+     "IFS": 4.7384,
+     "AIFS": 2.6255
+    }
+   },
+   {
+    "date": "2025-08-27",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6249,
+     "GFS": 5.6814,
+     "IFS": 4.5984,
+     "AIFS": 2.6159
+    }
+   },
+   {
+    "date": "2025-09-03",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5358,
+     "GFS": 6.1741,
+     "IFS": 4.8734,
+     "AIFS": 2.4197
+    }
+   },
+   {
+    "date": "2025-09-10",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3638,
+     "GFS": 6.17,
+     "IFS": 4.6475,
+     "AIFS": 2.2724
+    }
+   },
+   {
+    "date": "2025-09-17",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.427,
+     "GFS": 5.9605,
+     "IFS": 4.1773,
+     "AIFS": 2.3104
+    }
+   },
+   {
+    "date": "2025-09-24",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3839,
+     "GFS": 5.4171,
+     "IFS": 3.7399,
+     "AIFS": 2.2727
+    }
+   },
+   {
+    "date": "2025-10-01",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.3352,
+     "GFS": 4.747,
+     "IFS": 3.4231,
+     "AIFS": 2.0297
+    }
+   },
+   {
+    "date": "2025-10-08",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.4086,
+     "GFS": 4.239,
+     "IFS": 3.2312,
+     "AIFS": 2.3922
+    }
+   },
+   {
+    "date": "2025-10-15",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1555,
+     "GFS": 4.9455,
+     "IFS": 3.83,
+     "AIFS": 3.1067
+    }
+   },
+   {
+    "date": "2025-10-22",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1474,
+     "GFS": 5.2267,
+     "IFS": 4.1062,
+     "AIFS": 3.3734
+    }
+   },
+   {
+    "date": "2025-10-29",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2238,
+     "GFS": 5.3135,
+     "IFS": 4.2875,
+     "AIFS": 3.5632
+    }
+   },
+   {
+    "date": "2025-11-05",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.3341,
+     "GFS": 5.1251,
+     "IFS": 3.9774,
+     "AIFS": 3.4278
+    }
+   },
+   {
+    "date": "2025-11-12",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.7935,
+     "GFS": 4.335,
+     "IFS": 3.3479,
+     "AIFS": 2.8186
+    }
+   },
+   {
+    "date": "2025-11-19",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.0395,
+     "GFS": 4.7216,
+     "IFS": 3.5567,
+     "AIFS": 3.1698
+    }
+   },
+   {
+    "date": "2025-11-26",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1426,
+     "GFS": 4.8538,
+     "IFS": 3.4886,
+     "AIFS": 3.1454
+    }
+   },
+   {
+    "date": "2025-12-03",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2223,
+     "GFS": 5.0725,
+     "IFS": 3.6133,
+     "AIFS": 3.5736
+    }
+   },
+   {
+    "date": "2025-12-10",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.2538,
+     "GFS": 5.4852,
+     "IFS": 3.7227,
+     "AIFS": 3.7093
+    }
+   },
+   {
+    "date": "2025-12-17",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 2.1715,
+     "GFS": 5.556,
+     "IFS": 3.3555,
+     "AIFS": 3.5527
+    }
+   },
+   {
+    "date": "2025-12-24",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.8941,
+     "GFS": 4.8677,
+     "IFS": 2.8772,
+     "AIFS": 3.0485
+    }
+   },
+   {
+    "date": "2025-12-31",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.7884,
+     "GFS": 4.983,
+     "IFS": 3.3296,
+     "AIFS": 2.6844
+    }
+   },
+   {
+    "date": "2026-01-07",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.8329,
+     "GFS": 5.2045,
+     "IFS": 3.4858,
+     "AIFS": 2.7167
+    }
+   },
+   {
+    "date": "2026-01-14",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6947,
+     "GFS": 4.5749,
+     "IFS": 3.7612,
+     "AIFS": 2.424
+    }
+   },
+   {
+    "date": "2026-01-21",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5467,
+     "GFS": 4.7522,
+     "IFS": 4.2239,
+     "AIFS": 2.6743
+    }
+   },
+   {
+    "date": "2026-01-28",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6138,
+     "GFS": 4.4493,
+     "IFS": 3.664,
+     "AIFS": 2.6405
+    }
+   },
+   {
+    "date": "2026-02-04",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5677,
+     "GFS": 4.2955,
+     "IFS": 3.9594,
+     "AIFS": 2.6777
+    }
+   },
+   {
+    "date": "2026-02-11",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.6397,
+     "GFS": 4.3488,
+     "IFS": 4.3627,
+     "AIFS": 2.4083
+    }
+   },
+   {
+    "date": "2026-02-18",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5272,
+     "GFS": 4.0325,
+     "IFS": 3.8666,
+     "AIFS": 2.2295
+    }
+   },
+   {
+    "date": "2026-02-25",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "rmse": {
+     "blend": 1.5443,
+     "GFS": 4.0222,
+     "IFS": 3.9461,
+     "AIFS": 2.1304
+    }
+   }
+  ]
+ },
+ "bias_fingerprints": {
+  "scope": "descriptive, full 12-month record",
+  "min_days": 30,
+  "cards": [
+   {
+    "model": "GFS",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "season": "winter",
+    "n_days": 450,
+    "mean_bias": -6.922,
+    "statement": "GFS under-forecasts wind speed in bay of bengal east coast during winter by 6.92 on average over 450 days"
+   },
+   {
+    "model": "IFS",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "season": "pre_monsoon",
+    "n_days": 460,
+    "mean_bias": -6.326,
+    "statement": "IFS under-forecasts temperature in indo gangetic plains during pre monsoon by 6.33 on average over 460 days"
+   },
+   {
+    "model": "GFS",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "season": "monsoon",
+    "n_days": 610,
+    "mean_bias": -5.501,
+    "statement": "GFS under-forecasts wind speed in kerala western ghats during monsoon by 5.5 on average over 610 days"
+   },
+   {
+    "model": "GFS",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "season": "pre_monsoon",
+    "n_days": 460,
+    "mean_bias": -5.329,
+    "statement": "GFS under-forecasts wind speed in kerala western ghats during pre monsoon by 5.33 on average over 460 days"
+   },
+   {
+    "model": "IFS",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "season": "pre_monsoon",
+    "n_days": 460,
+    "mean_bias": -5.284,
+    "statement": "IFS under-forecasts wind speed in kerala western ghats during pre monsoon by 5.28 on average over 460 days"
+   },
+   {
+    "model": "IFS",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "season": "post_monsoon",
+    "n_days": 305,
+    "mean_bias": -5.171,
+    "statement": "IFS under-forecasts temperature in indo gangetic plains during post monsoon by 5.17 on average over 305 days"
+   },
+   {
+    "model": "IFS",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "season": "winter",
+    "n_days": 450,
+    "mean_bias": -4.88,
+    "statement": "IFS under-forecasts wind speed in bay of bengal east coast during winter by 4.88 on average over 450 days"
+   },
+   {
+    "model": "IFS",
+    "region": "bay_of_bengal_east_coast",
+    "variable": "wind_speed",
+    "season": "post_monsoon",
+    "n_days": 305,
+    "mean_bias": -4.724,
+    "statement": "IFS under-forecasts wind speed in bay of bengal east coast during post monsoon by 4.72 on average over 305 days"
+   },
+   {
+    "model": "IFS",
+    "region": "indo_gangetic_plains",
+    "variable": "temperature",
+    "season": "winter",
+    "n_days": 450,
+    "mean_bias": -4.658,
+    "statement": "IFS under-forecasts temperature in indo gangetic plains during winter by 4.66 on average over 450 days"
+   },
+   {
+    "model": "GFS",
+    "region": "kerala_western_ghats",
+    "variable": "temperature",
+    "season": "winter",
+    "n_days": 450,
+    "mean_bias": -4.452,
+    "statement": "GFS under-forecasts temperature in kerala western ghats during winter by 4.45 on average over 450 days"
+   },
+   {
+    "model": "GFS",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "season": "post_monsoon",
+    "n_days": 305,
+    "mean_bias": -4.138,
+    "statement": "GFS under-forecasts wind speed in kerala western ghats during post monsoon by 4.14 on average over 305 days"
+   },
+   {
+    "model": "GFS",
+    "region": "kerala_western_ghats",
+    "variable": "wind_speed",
+    "season": "winter",
+    "n_days": 450,
+    "mean_bias": -4.068,
+    "statement": "GFS under-forecasts wind speed in kerala western ghats during winter by 4.07 on average over 450 days"
+   }
+  ]
+ },
+ "rpi": {
+  "as_of": "2026-02-25",
+  "note": "computed on the latest archived cycle of the 12-month record; refreshes automatically as new cycles are ingested",
+  "levels": {
+   "SEVERE": 85.0,
+   "WARNING": 65.0,
+   "ALERT": 45.0,
+   "WATCH": 25.0
+  },
+  "alerts": []
+ }
+}

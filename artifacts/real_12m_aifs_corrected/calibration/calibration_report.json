@@ -1,0 +1,464 @@
+{
+  "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+  "created_at": "2026-09-30T15:16:33.838490+00:00",
+  "test_used_for_fitting": false,
+  "database_split_boundaries": {
+    "val_start": "2025-10-06 00:00:00",
+    "test_start": "2025-11-30 00:00:00"
+  },
+  "manifest_validation_period": {
+    "start": "2025-10-03",
+    "end": "2025-11-25"
+  },
+  "manifest_test_period": {
+    "start": "2025-11-26",
+    "end": "2026-02-25"
+  },
+  "manifest_validation_event_counts": {
+    "temperature": {
+      "positive": 0,
+      "negative": 810,
+      "regions": {
+        "kerala_western_ghats": {
+          "positive": 0,
+          "negative": 270
+        },
+        "bay_of_bengal_east_coast": {
+          "positive": 0,
+          "negative": 270
+        },
+        "indo_gangetic_plains": {
+          "positive": 0,
+          "negative": 270
+        }
+      }
+    },
+    "wind_speed": {
+      "positive": 0,
+      "negative": 810,
+      "regions": {
+        "kerala_western_ghats": {
+          "positive": 0,
+          "negative": 270
+        },
+        "bay_of_bengal_east_coast": {
+          "positive": 0,
+          "negative": 270
+        },
+        "indo_gangetic_plains": {
+          "positive": 0,
+          "negative": 270
+        }
+      }
+    }
+  },
+  "calibrators": [
+    {
+      "variable": "temperature",
+      "event": "heatwave",
+      "threshold": 40.0,
+      "positive_count": 0,
+      "negative_count": 2220,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "global",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:05.657224+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    },
+    {
+      "variable": "temperature",
+      "event": "heatwave",
+      "threshold": 40.0,
+      "positive_count": 0,
+      "negative_count": 740,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "kerala_western_ghats",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:05.662213+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    },
+    {
+      "variable": "temperature",
+      "event": "heatwave",
+      "threshold": 40.0,
+      "positive_count": 0,
+      "negative_count": 740,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "bay_of_bengal_east_coast",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:05.669496+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    },
+    {
+      "variable": "temperature",
+      "event": "heatwave",
+      "threshold": 40.0,
+      "positive_count": 0,
+      "negative_count": 740,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "indo_gangetic_plains",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:05.675038+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    },
+    {
+      "variable": "wind_speed",
+      "event": "gale",
+      "threshold": 62.0,
+      "positive_count": 0,
+      "negative_count": 2220,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "global",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:18.360143+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    },
+    {
+      "variable": "wind_speed",
+      "event": "gale",
+      "threshold": 62.0,
+      "positive_count": 0,
+      "negative_count": 740,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "kerala_western_ghats",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:18.367963+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    },
+    {
+      "variable": "wind_speed",
+      "event": "gale",
+      "threshold": 62.0,
+      "positive_count": 0,
+      "negative_count": 740,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "bay_of_bengal_east_coast",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:18.374905+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    },
+    {
+      "variable": "wind_speed",
+      "event": "gale",
+      "threshold": 62.0,
+      "positive_count": 0,
+      "negative_count": 740,
+      "calibration_source": "time_ordered_oof_train",
+      "calibration_period": {
+        "start": "2025-05-11T00:00:00",
+        "end": "2025-10-05T00:00:00"
+      },
+      "out_of_fold": true,
+      "validation_counts": {
+        "global": {
+          "positive": 0,
+          "negative": 825
+        },
+        "regions": {
+          "kerala_western_ghats": {
+            "positive": 0,
+            "negative": 275
+          },
+          "bay_of_bengal_east_coast": {
+            "positive": 0,
+            "negative": 275
+          },
+          "indo_gangetic_plains": {
+            "positive": 0,
+            "negative": 275
+          }
+        }
+      },
+      "region": "indo_gangetic_plains",
+      "model_version": "synoptiq-real-12m-20260930-aifs-unitfix",
+      "created_at": "2026-09-30T15:13:18.382349+00:00",
+      "fitted": false,
+      "status": "Insufficient real calibration events in the non-test calibration set."
+    }
+  ],
+  "test_evaluation": {
+    "status": "complete",
+    "data_split": "untouched_test_after_calibrators_frozen",
+    "test_start": "2025-11-30 00:00:00",
+    "events": [
+      {
+        "region": "kerala_western_ghats",
+        "variable": "temperature",
+        "event": "heatwave",
+        "threshold": 40.0,
+        "calibration_source": null,
+        "n_test": 440,
+        "positive_count": 0,
+        "negative_count": 440,
+        "brier_score": null,
+        "event_frequency": 0.0,
+        "mean_predicted_probability": null,
+        "expected_calibration_error": null,
+        "reliability": [],
+        "status": "No fitted real calibrator; probability metrics unavailable."
+      },
+      {
+        "region": "kerala_western_ghats",
+        "variable": "wind_speed",
+        "event": "gale",
+        "threshold": 62.0,
+        "calibration_source": null,
+        "n_test": 440,
+        "positive_count": 0,
+        "negative_count": 440,
+        "brier_score": null,
+        "event_frequency": 0.0,
+        "mean_predicted_probability": null,
+        "expected_calibration_error": null,
+        "reliability": [],
+        "status": "No fitted real calibrator; probability metrics unavailable."
+      },
+      {
+        "region": "bay_of_bengal_east_coast",
+        "variable": "temperature",
+        "event": "heatwave",
+        "threshold": 40.0,
+        "calibration_source": null,
+        "n_test": 440,
+        "positive_count": 0,
+        "negative_count": 440,
+        "brier_score": null,
+        "event_frequency": 0.0,
+        "mean_predicted_probability": null,
+        "expected_calibration_error": null,
+        "reliability": [],
+        "status": "No fitted real calibrator; probability metrics unavailable."
+      },
+      {
+        "region": "bay_of_bengal_east_coast",
+        "variable": "wind_speed",
+        "event": "gale",
+        "threshold": 62.0,
+        "calibration_source": null,
+        "n_test": 440,
+        "positive_count": 0,
+        "negative_count": 440,
+        "brier_score": null,
+        "event_frequency": 0.0,
+        "mean_predicted_probability": null,
+        "expected_calibration_error": null,
+        "reliability": [],
+        "status": "No fitted real calibrator; probability metrics unavailable."
+      },
+      {
+        "region": "indo_gangetic_plains",
+        "variable": "temperature",
+        "event": "heatwave",
+        "threshold": 40.0,
+        "calibration_source": null,
+        "n_test": 440,
+        "positive_count": 0,
+        "negative_count": 440,
+        "brier_score": null,
+        "event_frequency": 0.0,
+        "mean_predicted_probability": null,
+        "expected_calibration_error": null,
+        "reliability": [],
+        "status": "No fitted real calibrator; probability metrics unavailable."
+      },
+      {
+        "region": "indo_gangetic_plains",
+        "variable": "wind_speed",
+        "event": "gale",
+        "threshold": 62.0,
+        "calibration_source": null,
+        "n_test": 440,
+        "positive_count": 0,
+        "negative_count": 440,
+        "brier_score": null,
+        "event_frequency": 0.0,
+        "mean_predicted_probability": null,
+        "expected_calibration_error": null,
+        "reliability": [],
+        "status": "No fitted real calibrator; probability metrics unavailable."
+      }
+    ]
+  }
+}

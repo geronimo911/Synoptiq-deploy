@@ -1,0 +1,17 @@
+# Synoptiq scheduled jobs — install with: crontab deploy/crontab.example
+# Paths assume the app is at /opt/synoptiq; adjust for your install.
+SHELL=/bin/bash
+SYNOPTIQ_MODE=real
+SYNOPTIQ_ARTIFACTS_DIR=/opt/synoptiq/artifacts/real_12m_aifs_corrected
+SYNOPTIQ_LIVE_DATA_DIR=/opt/synoptiq/data/real/live
+
+# 1. Live provider refresh every 15 minutes (GFS / IFS / AIFS).
+#    The worker is single-flight-safe: overlapping runs skip, never duplicate.
+*/15 * * * * cd /opt/synoptiq && .venv/bin/python training/realdata/live_refresh.py --once >> ops/cron.log 2>&1
+
+# 2. Routine operational workflow, daily at 06:20 IST (00:50 UTC) — rebuilds
+#    artifacts, exports the bulletin and CAP alerts, logs the run.
+50 0 * * * cd /opt/synoptiq && bash scripts/run_routine_blend.sh >> ops/cron.log 2>&1
+
+# 3. Weekly artifact + model-card regeneration (keeps published numbers current).
+0 2 * * 0 cd /opt/synoptiq && .venv/bin/python backend/scripts/build_advanced_artifacts.py --blends artifacts/real_12m_aifs_corrected/inference/historical_blends.jsonl --out-dir artifacts/real_12m_aifs_corrected/research >> ops/cron.log 2>&1

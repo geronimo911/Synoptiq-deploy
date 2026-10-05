@@ -1,0 +1,12 @@
+# Alternative to the always-on worker: a systemd timer every 15 minutes.
+# (The worker is single-flight-safe, so running both is harmless.)
+[Unit]
+Description=Run the Synoptiq live refresh every 15 minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

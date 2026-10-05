@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>synoptiq-bay_of_bengal_east_coast-20250530</identifier>
+  <sender>synoptiq@blend.local</sender>
+  <sent>2026-10-01T06:19:23+00:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>en-IN</language>
+    <category>Met</category>
+    <event>High Wind</event>
+    <responseType>Prepare</responseType>
+    <urgency>Future</urgency>
+    <severity>Moderate</severity>
+    <certainty>Possible</certainty>
+    <eventCode>
+      <valueName>IMD_COLOUR</valueName>
+      <value>YELLOW</value>
+    </eventCode>
+    <effective>2025-05-30T00:00:00+00:00</effective>
+    <onset>2025-05-30T00:00:00+00:00</onset>
+    <expires>2025-06-01T00:00:00+00:00</expires>
+    <senderName>Synoptiq Hybrid AI-NWP Blend</senderName>
+    <headline>YELLOW ALERT: Moderate high wind impact forecast for bay of bengal east coast (Impact Severity Index 3.86/10)</headline>
+    <description>YELLOW ALERT. bay of bengal east coast is forecast in the moderate-impact class. Recommended action: monitor updates, brief local bodies, and prepare shelters and relief stocks.</description>
+    <instruction>YELLOW ALERT. bay of bengal east coast is forecast in the moderate-impact class. Recommended action: monitor updates, brief local bodies, and prepare shelters and relief stocks.</instruction>
+      <area>
+        <areaDesc>bay of bengal east coast</areaDesc>
+      </area>
+  </info>
+</alert>

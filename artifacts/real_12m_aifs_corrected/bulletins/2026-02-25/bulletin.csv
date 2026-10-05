@@ -1,0 +1,4 @@
+valid_date,zone,isi,colour,severity,precipitation_mm,wind_kmh,temperature_c,dominating_model_rain,conformal90_rain,regime,advisory
+2026-02-25,bay_of_bengal_east_coast,1.93,GREEN,Low,0.02,15.39,26.07,AIFS,8.199,western_disturbance,GREEN. bay of bengal east coast is forecast in the low-impact class. No special action beyond routine monitoring.
+2026-02-25,kerala_western_ghats,1.9,GREEN,Low,0.63,12.02,26.12,AIFS,8.199,western_disturbance,GREEN. kerala western ghats is forecast in the low-impact class. No special action beyond routine monitoring.
+2026-02-25,indo_gangetic_plains,1.21,GREEN,Low,0.12,9.69,19.93,AIFS,8.199,western_disturbance,GREEN. indo gangetic plains is forecast in the low-impact class. No special action beyond routine monitoring.

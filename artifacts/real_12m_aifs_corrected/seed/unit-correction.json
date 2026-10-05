@@ -1,0 +1,9 @@
+{
+  "source_unit": "kg m^-2 (equivalent to mm water depth)",
+  "legacy_interpretation": "metres",
+  "correction_factor": 0.001,
+  "corrected_rows": 5475,
+  "aifs_precipitation_max_before": 72853.088,
+  "aifs_precipitation_max_after": 72.853088,
+  "other_rows_unchanged": true
+}

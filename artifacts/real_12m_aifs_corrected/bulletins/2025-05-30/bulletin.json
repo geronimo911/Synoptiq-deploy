@@ -1,0 +1,140 @@
+{
+ "bulletin_id": "synoptiq-bulletin-2025-05-30",
+ "issued_utc": "2026-10-01T06:19:23.857386+00:00",
+ "valid_date": "2025-05-30",
+ "source": {
+  "record": "REAL_12M archived blend record",
+  "blend": "Synoptiq hybrid GFS/IFS/AIFS meta-model",
+  "truth_reference": "IMERG Late V07 rainfall; NASA POWER temperature/wind"
+ },
+ "synoptic_regime": {
+  "regime": "depression",
+  "label": "Cyclonic Low / Depression",
+  "policy_shift": "In the Cyclonic Low / Depression regime the issued weights stay within 2% of the all-weather profile \u2014 no material policy shift."
+ },
+ "zones": [
+  {
+   "zone": "kerala_western_ghats",
+   "isi": 6.52,
+   "colour": "ORANGE",
+   "severity": "Severe",
+   "vulnerability_factor": 0.9,
+   "components": {
+    "precipitation": {
+     "value": 48.03,
+     "threshold": 64.5,
+     "ratio": 0.745,
+     "contribution": 0.369
+    },
+    "wind_speed": {
+     "value": 29.67,
+     "threshold": 40.0,
+     "ratio": 0.742,
+     "contribution": 0.167
+    },
+    "temperature": {
+     "value": 25.86,
+     "threshold": 40.0,
+     "ratio": 0.647,
+     "contribution": 0.116
+    }
+   },
+   "advisory": "ORANGE ALERT. kerala western ghats is forecast in the severe-impact class. Recommended action: alert district control rooms, keep NDRF/SDRF on standby, advise suspension of non-essential outdoor activity and verify drainage/embankment readiness.",
+   "vulnerability_rationale": "Steep Western Ghats slopes with high landslide susceptibility; 2018/2019 Wayanad-Idukki slope failures.",
+   "dominating_model": {
+    "precipitation": "AIFS",
+    "temperature": "AIFS",
+    "wind_speed": "AIFS"
+   },
+   "conformal_90": {
+    "precipitation": 8.199,
+    "temperature": 0.865,
+    "wind_speed": 3.777
+   }
+  },
+  {
+   "zone": "bay_of_bengal_east_coast",
+   "isi": 3.86,
+   "colour": "YELLOW",
+   "severity": "Moderate",
+   "vulnerability_factor": 0.85,
+   "components": {
+    "precipitation": {
+     "value": 5.97,
+     "threshold": 64.5,
+     "ratio": 0.093,
+     "contribution": 0.043
+    },
+    "wind_speed": {
+     "value": 41.29,
+     "threshold": 40.0,
+     "ratio": 1.032,
+     "contribution": 0.219
+    },
+    "temperature": {
+     "value": 28.95,
+     "threshold": 40.0,
+     "ratio": 0.724,
+     "contribution": 0.123
+    }
+   },
+   "advisory": "YELLOW ALERT. bay of bengal east coast is forecast in the moderate-impact class. Recommended action: monitor updates, brief local bodies, and prepare shelters and relief stocks.",
+   "vulnerability_rationale": "Low-lying cyclone-exposed coastline (Odisha/Andhra); storm-surge and deltaic inundation history.",
+   "dominating_model": {
+    "precipitation": "AIFS",
+    "temperature": "AIFS",
+    "wind_speed": "AIFS"
+   },
+   "conformal_90": {
+    "precipitation": 8.199,
+    "temperature": 0.865,
+    "wind_speed": 3.777
+   }
+  },
+  {
+   "zone": "indo_gangetic_plains",
+   "isi": 1.66,
+   "colour": "GREEN",
+   "severity": "Low",
+   "vulnerability_factor": 0.75,
+   "components": {
+    "precipitation": {
+     "value": 2.36,
+     "threshold": 64.5,
+     "ratio": 0.037,
+     "contribution": 0.015
+    },
+    "wind_speed": {
+     "value": 10.72,
+     "threshold": 40.0,
+     "ratio": 0.268,
+     "contribution": 0.05
+    },
+    "temperature": {
+     "value": 26.9,
+     "threshold": 40.0,
+     "ratio": 0.673,
+     "contribution": 0.101
+    }
+   },
+   "advisory": "GREEN. indo gangetic plains is forecast in the low-impact class. No special action beyond routine monitoring.",
+   "vulnerability_rationale": "Dense urban centres with constrained drainage (Patna/Kolkata waterlogging) over a large flood plain.",
+   "dominating_model": {
+    "precipitation": "AIFS",
+    "temperature": "AIFS",
+    "wind_speed": "GFS"
+   },
+   "conformal_90": {
+    "precipitation": 8.199,
+    "temperature": 0.865,
+    "wind_speed": 3.777
+   }
+  }
+ ],
+ "extreme_layer_notes": {
+  "precipitation": "Variance-reduction (drizzle-smearing) signature confirmed: the blend's 99th percentile is 0.64x the observed 99th percentile, i.e. the forecast field is systematically calmer than reality at the tail. On high-impact days (obs >= 64.5 mm) the calibrated blend averages 48.034 mm against 74.859 mm observed, and the sharpest single model averages 44.693 mm \u2014 every model under-forecasts the same events, so max-fusion cannot recover the peak. Peak-preserving fusion is INACTIVE (alpha=0): the validation split did not justify a tail correction, so the system communicates extreme risk through the conformal band and the EVT tail instead of silently sharpening the field.",
+  "temperature": "No material peak smearing at the 99th percentile (ratio 0.99). Peak-preserving fusion is INACTIVE (alpha=0): the validation split did not justify a tail correction, so the system communicates extreme risk through the conformal band and the EVT tail instead of silently sharpening the field.",
+  "wind_speed": "No material peak smearing at the 99th percentile (ratio 0.99). Peak-preserving fusion is INACTIVE (alpha=0): the validation split did not justify a tail correction, so the system communicates extreme risk through the conformal band and the EVT tail instead of silently sharpening the field. Descriptive full-record sweep suggests alpha=0.95 would cut high-impact MAE from 4.158 to 3.3792 for this variable \u2014 flagged for recalibration when the validation window includes this variable's season."
+ },
+ "generated_by": "backend/scripts/export_bulletin.py"
+}

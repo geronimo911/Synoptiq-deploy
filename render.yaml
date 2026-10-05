@@ -1,0 +1,58 @@
+services:
+  # Single FastAPI web service. There is intentionally NO cron service: live
+  # freshness is demand-driven via POST /api/v1/system/refresh-if-stale.
+  - type: web
+    name: synoptiq-api
+    runtime: python
+    rootDir: .
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt -r training/requirements-realdata.txt
+    startCommand: python training/realdata/seed_corrected_history.py && uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: SYNOPTIQ_MODE
+        value: real
+      - key: SYNOPTIQ_DATABASE_ROLE
+        value: PRODUCTION
+      # Injected automatically by the Render PostgreSQL instance below. Never
+      # copy this value into source; the app reads os.environ["DATABASE_URL"].
+      - key: DATABASE_URL
+        fromDatabase:
+          name: synoptiq-postgres
+          property: connectionString
+      - key: SYNOPTIQ_MODEL_VERSION
+        value: synoptiq-real-12m-20260930-aifs-unitfix
+      - key: SYNOPTIQ_ARTIFACTS_DIR
+        value: artifacts/real_12m_aifs_corrected
+      - key: SYNOPTIQ_MODELS_DIR
+        value: artifacts/real_12m_aifs_corrected/models
+      - key: SYNOPTIQ_CALIBRATION_DIR
+        value: artifacts/real_12m_aifs_corrected/calibration
+      - key: SYNOPTIQ_METRICS_DIR
+        value: artifacts/real_12m_aifs_corrected/metrics
+      - key: SYNOPTIQ_LIVE_DATA_DIR
+        value: data/real/live_aifs_unitfix
+      - key: SYNOPTIQ_HISTORY_SEED_ARCHIVE
+        value: artifacts/real_12m_aifs_corrected/seed/training_aifs_corrected.zip
+      # --- Demand-driven refresh policy -------------------------------------
+      # No in-process scheduled refresh; refresh only when a client asks.
+      - key: SYNOPTIQ_AUTO_REFRESH
+        value: "0"
+      - key: SYNOPTIQ_REFRESH_ON_REQUEST
+        value: "1"
+      # Freshness THRESHOLD (minutes), not a schedule: a refresh runs only when
+      # the last cycle is older than this.
+      - key: SYNOPTIQ_REFRESH_MIN_AGE_MINUTES
+        value: "15"
+      # Exact deployed Vercel origin (comma-separated for several). Set in the
+      # Render dashboard; never hard-coded in Python.
+      - key: SYNOPTIQ_CORS_ORIGINS
+        sync: false
+      - key: NASA_EARTHDATA_USERNAME
+        sync: false
+      - key: NASA_EARTHDATA_PASSWORD
+        sync: false
+
+databases:
+  - name: synoptiq-postgres
+    plan: free

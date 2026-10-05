@@ -1,0 +1,37 @@
+{
+  "region": "indo_gangetic_plains",
+  "variable": "precipitation",
+  "n_test_contexts": 440,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-06 00:00:00",
+    "test_start": "2025-11-30 00:00:00"
+  },
+  "metric": "CSI@20mm",
+  "best_single_model": "AIFS",
+  "best_single_model_csi": 0.0,
+  "synoptiq_csi": 0.2,
+  "synoptiq_mae": 0.4678,
+  "synoptiq_rmse": 1.5057,
+  "per_model_metrics": {
+    "AIFS": {
+      "csi": 0.0,
+      "mae": 0.5178059340909091,
+      "rmse": 1.6600126413079284
+    },
+    "GFS": {
+      "csi": 0.0,
+      "mae": 0.6723613636363637,
+      "rmse": 2.3628483115049552
+    },
+    "IFS": {
+      "csi": 0.0,
+      "mae": 0.4880909090909091,
+      "rmse": 1.5600646053055855
+    }
+  },
+  "naive_average_mae": 0.5258,
+  "naive_average_rmse": 1.7949,
+  "relative_csi_improvement_pct": 0.0,
+  "fss_metric_type": "not applicable at this threshold summary; FSS-proxy remains diagnostic only"
+}

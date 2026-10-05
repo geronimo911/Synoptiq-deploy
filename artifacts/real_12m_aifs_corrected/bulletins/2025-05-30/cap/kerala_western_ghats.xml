@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>synoptiq-kerala_western_ghats-20250530</identifier>
+  <sender>synoptiq@blend.local</sender>
+  <sent>2026-10-01T06:19:23+00:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>en-IN</language>
+    <category>Met</category>
+    <event>Heavy Rainfall</event>
+    <responseType>Prepare</responseType>
+    <urgency>Expected</urgency>
+    <severity>Severe</severity>
+    <certainty>Likely</certainty>
+    <eventCode>
+      <valueName>IMD_COLOUR</valueName>
+      <value>ORANGE</value>
+    </eventCode>
+    <effective>2025-05-30T00:00:00+00:00</effective>
+    <onset>2025-05-30T00:00:00+00:00</onset>
+    <expires>2025-06-01T00:00:00+00:00</expires>
+    <senderName>Synoptiq Hybrid AI-NWP Blend</senderName>
+    <headline>ORANGE ALERT: Severe heavy rainfall impact forecast for kerala western ghats (Impact Severity Index 6.52/10)</headline>
+    <description>ORANGE ALERT. kerala western ghats is forecast in the severe-impact class. Recommended action: alert district control rooms, keep NDRF/SDRF on standby, advise suspension of non-essential outdoor activity and verify drainage/embankment readiness.</description>
+    <instruction>ORANGE ALERT. kerala western ghats is forecast in the severe-impact class. Recommended action: alert district control rooms, keep NDRF/SDRF on standby, advise suspension of non-essential outdoor activity and verify drainage/embankment readiness.</instruction>
+      <area>
+        <areaDesc>kerala western ghats</areaDesc>
+      </area>
+  </info>
+</alert>

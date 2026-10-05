@@ -1,0 +1,216 @@
+{
+ "scope": "Impact Severity Index is computed from the archived blend record; vulnerability factors are documented pilot-zone assumptions (see VULNERABILITY rationale fields)",
+ "hazard_weights": {
+  "precipitation": 0.55,
+  "wind_speed": 0.25,
+  "temperature": 0.2
+ },
+ "colour_bands": [
+  {
+   "colour": "RED",
+   "floor": 7.0,
+   "word": "Extreme"
+  },
+  {
+   "colour": "ORANGE",
+   "floor": 4.0,
+   "word": "Severe"
+  },
+  {
+   "colour": "YELLOW",
+   "floor": 2.0,
+   "word": "Moderate"
+  },
+  {
+   "colour": "GREEN",
+   "floor": 0.0,
+   "word": "Low"
+  }
+ ],
+ "latest": {
+  "date": "2026-02-25",
+  "zones": [
+   {
+    "zone": "bay_of_bengal_east_coast",
+    "isi": 1.93,
+    "colour": "GREEN",
+    "severity": "Low",
+    "vulnerability_factor": 0.85,
+    "components": {
+     "precipitation": {
+      "value": 0.02,
+      "threshold": 64.5,
+      "ratio": 0.0,
+      "contribution": 0.0
+     },
+     "wind_speed": {
+      "value": 15.39,
+      "threshold": 40.0,
+      "ratio": 0.385,
+      "contribution": 0.082
+     },
+     "temperature": {
+      "value": 26.07,
+      "threshold": 40.0,
+      "ratio": 0.652,
+      "contribution": 0.111
+     }
+    },
+    "advisory": "GREEN. bay of bengal east coast is forecast in the low-impact class. No special action beyond routine monitoring.",
+    "vulnerability_rationale": "Low-lying cyclone-exposed coastline (Odisha/Andhra); storm-surge and deltaic inundation history."
+   },
+   {
+    "zone": "kerala_western_ghats",
+    "isi": 1.9,
+    "colour": "GREEN",
+    "severity": "Low",
+    "vulnerability_factor": 0.9,
+    "components": {
+     "precipitation": {
+      "value": 0.63,
+      "threshold": 64.5,
+      "ratio": 0.01,
+      "contribution": 0.005
+     },
+     "wind_speed": {
+      "value": 12.02,
+      "threshold": 40.0,
+      "ratio": 0.301,
+      "contribution": 0.068
+     },
+     "temperature": {
+      "value": 26.12,
+      "threshold": 40.0,
+      "ratio": 0.653,
+      "contribution": 0.118
+     }
+    },
+    "advisory": "GREEN. kerala western ghats is forecast in the low-impact class. No special action beyond routine monitoring.",
+    "vulnerability_rationale": "Steep Western Ghats slopes with high landslide susceptibility; 2018/2019 Wayanad-Idukki slope failures."
+   },
+   {
+    "zone": "indo_gangetic_plains",
+    "isi": 1.21,
+    "colour": "GREEN",
+    "severity": "Low",
+    "vulnerability_factor": 0.75,
+    "components": {
+     "precipitation": {
+      "value": 0.12,
+      "threshold": 64.5,
+      "ratio": 0.002,
+      "contribution": 0.001
+     },
+     "wind_speed": {
+      "value": 9.69,
+      "threshold": 40.0,
+      "ratio": 0.242,
+      "contribution": 0.045
+     },
+     "temperature": {
+      "value": 19.93,
+      "threshold": 40.0,
+      "ratio": 0.498,
+      "contribution": 0.075
+     }
+    },
+    "advisory": "GREEN. indo gangetic plains is forecast in the low-impact class. No special action beyond routine monitoring.",
+    "vulnerability_rationale": "Dense urban centres with constrained drainage (Patna/Kolkata waterlogging) over a large flood plain."
+   }
+  ]
+ },
+ "strongest_archived_event": {
+  "date": "2025-05-30",
+  "zones": [
+   {
+    "zone": "kerala_western_ghats",
+    "isi": 6.52,
+    "colour": "ORANGE",
+    "severity": "Severe",
+    "vulnerability_factor": 0.9,
+    "components": {
+     "precipitation": {
+      "value": 48.03,
+      "threshold": 64.5,
+      "ratio": 0.745,
+      "contribution": 0.369
+     },
+     "wind_speed": {
+      "value": 29.67,
+      "threshold": 40.0,
+      "ratio": 0.742,
+      "contribution": 0.167
+     },
+     "temperature": {
+      "value": 25.86,
+      "threshold": 40.0,
+      "ratio": 0.647,
+      "contribution": 0.116
+     }
+    },
+    "advisory": "ORANGE ALERT. kerala western ghats is forecast in the severe-impact class. Recommended action: alert district control rooms, keep NDRF/SDRF on standby, advise suspension of non-essential outdoor activity and verify drainage/embankment readiness.",
+    "vulnerability_rationale": "Steep Western Ghats slopes with high landslide susceptibility; 2018/2019 Wayanad-Idukki slope failures."
+   },
+   {
+    "zone": "bay_of_bengal_east_coast",
+    "isi": 3.86,
+    "colour": "YELLOW",
+    "severity": "Moderate",
+    "vulnerability_factor": 0.85,
+    "components": {
+     "precipitation": {
+      "value": 5.97,
+      "threshold": 64.5,
+      "ratio": 0.093,
+      "contribution": 0.043
+     },
+     "wind_speed": {
+      "value": 41.29,
+      "threshold": 40.0,
+      "ratio": 1.032,
+      "contribution": 0.219
+     },
+     "temperature": {
+      "value": 28.95,
+      "threshold": 40.0,
+      "ratio": 0.724,
+      "contribution": 0.123
+     }
+    },
+    "advisory": "YELLOW ALERT. bay of bengal east coast is forecast in the moderate-impact class. Recommended action: monitor updates, brief local bodies, and prepare shelters and relief stocks.",
+    "vulnerability_rationale": "Low-lying cyclone-exposed coastline (Odisha/Andhra); storm-surge and deltaic inundation history."
+   },
+   {
+    "zone": "indo_gangetic_plains",
+    "isi": 1.66,
+    "colour": "GREEN",
+    "severity": "Low",
+    "vulnerability_factor": 0.75,
+    "components": {
+     "precipitation": {
+      "value": 2.36,
+      "threshold": 64.5,
+      "ratio": 0.037,
+      "contribution": 0.015
+     },
+     "wind_speed": {
+      "value": 10.72,
+      "threshold": 40.0,
+      "ratio": 0.268,
+      "contribution": 0.05
+     },
+     "temperature": {
+      "value": 26.9,
+      "threshold": 40.0,
+      "ratio": 0.673,
+      "contribution": 0.101
+     }
+    },
+    "advisory": "GREEN. indo gangetic plains is forecast in the low-impact class. No special action beyond routine monitoring.",
+    "vulnerability_rationale": "Dense urban centres with constrained drainage (Patna/Kolkata waterlogging) over a large flood plain."
+   }
+  ]
+ },
+ "district_ready": "district shapefiles plug into compute_isi() by passing the district's vulnerability factor; the hazard -> ISI -> colour -> CAP chain is unchanged.",
+ "generated_at": "2026-10-01T06:46:54.946507+00:00"
+}

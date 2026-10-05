@@ -1,0 +1,484 @@
+{
+ "scope": "alpha and the conformal quantile are fitted on the validation split only; test numbers are out-of-sample",
+ "thresholds": {
+  "precipitation": 64.5,
+  "wind_speed": 40.0,
+  "temperature": 40.0
+ },
+ "variables": {
+  "precipitation": {
+   "threshold": 64.5,
+   "alpha_calibration": {
+    "n_validation_high_impact": 0,
+    "alpha": null,
+    "note": "too few high-impact validation days to calibrate alpha; the layer stays inactive (alpha = 0) rather than guessing"
+   },
+   "alpha": 0.0,
+   "peak_smearing_audit": {
+    "n_test_high_impact": 0,
+    "scope": "full 12-month record (descriptive) \u2014 test split has too few high-impact days to audit on its own",
+    "mean_observed": 74.859,
+    "mean_blend": 48.034,
+    "mean_peak_preserved": 48.034,
+    "mean_best_single": 44.693,
+    "bias_blend": -26.825,
+    "bias_peak_preserved": -26.825,
+    "mae_blend": 26.8246,
+    "mae_peak_preserved": 26.8246,
+    "mae_change_pct": 0.0,
+    "descriptive_alpha_sweep": [
+     {
+      "alpha": 0.0,
+      "under_forecast_bias": 26.825,
+      "mae": 26.8246
+     },
+     {
+      "alpha": 0.05,
+      "under_forecast_bias": 26.992,
+      "mae": 26.9917
+     },
+     {
+      "alpha": 0.1,
+      "under_forecast_bias": 27.159,
+      "mae": 27.1587
+     },
+     {
+      "alpha": 0.15,
+      "under_forecast_bias": 27.326,
+      "mae": 27.3258
+     },
+     {
+      "alpha": 0.2,
+      "under_forecast_bias": 27.493,
+      "mae": 27.4929
+     },
+     {
+      "alpha": 0.25,
+      "under_forecast_bias": 27.66,
+      "mae": 27.6599
+     },
+     {
+      "alpha": 0.3,
+      "under_forecast_bias": 27.827,
+      "mae": 27.827
+     },
+     {
+      "alpha": 0.35,
+      "under_forecast_bias": 27.994,
+      "mae": 27.994
+     },
+     {
+      "alpha": 0.4,
+      "under_forecast_bias": 28.161,
+      "mae": 28.1611
+     },
+     {
+      "alpha": 0.45,
+      "under_forecast_bias": 28.328,
+      "mae": 28.3282
+     },
+     {
+      "alpha": 0.5,
+      "under_forecast_bias": 28.495,
+      "mae": 28.4952
+     },
+     {
+      "alpha": 0.55,
+      "under_forecast_bias": 28.662,
+      "mae": 28.6623
+     },
+     {
+      "alpha": 0.6,
+      "under_forecast_bias": 28.829,
+      "mae": 28.8293
+     },
+     {
+      "alpha": 0.65,
+      "under_forecast_bias": 28.996,
+      "mae": 28.9964
+     },
+     {
+      "alpha": 0.7,
+      "under_forecast_bias": 29.163,
+      "mae": 29.1634
+     },
+     {
+      "alpha": 0.75,
+      "under_forecast_bias": 29.331,
+      "mae": 29.3305
+     },
+     {
+      "alpha": 0.8,
+      "under_forecast_bias": 29.498,
+      "mae": 29.4976
+     },
+     {
+      "alpha": 0.85,
+      "under_forecast_bias": 29.665,
+      "mae": 29.6646
+     },
+     {
+      "alpha": 0.9,
+      "under_forecast_bias": 29.832,
+      "mae": 29.8317
+     },
+     {
+      "alpha": 0.95,
+      "under_forecast_bias": 29.999,
+      "mae": 29.9987
+     },
+     {
+      "alpha": 1.0,
+      "under_forecast_bias": 30.166,
+      "mae": 30.1658
+     }
+    ],
+    "p99_ratio_blend": 0.644,
+    "p99_ratio_best_single": 1.069,
+    "p99_ratio_peak_preserved": 0.644,
+    "interpretation": "p99_ratio < 1 means the forecast field is calmer than reality at the 99th percentile \u2014 the variance-reduction (drizzle-smearing) signature; 1.0 is perfect peak intensity"
+   },
+   "gpd_tail": {
+    "n": 165,
+    "xi": 0.1212,
+    "sigma": 7.6668,
+    "mean_exceedance": 8.7237,
+    "threshold_u95": 25.075,
+    "example_exceedance_probability": {
+     "10": 0.29791,
+     "25": 0.06406,
+     "50": 0.00818
+    }
+   },
+   "conformal": {
+    "q90": 8.199,
+    "nominal_coverage": 0.9,
+    "measured_test_coverage": 0.9877,
+    "example_band": {
+     "level": 0.9,
+     "low": 21.801,
+     "high": 38.199,
+     "half_width": 8.199,
+     "method": "split_conformal_validation_residuals"
+    },
+    "method": "split conformal, validation residuals"
+   },
+   "conclusion": "Variance-reduction (drizzle-smearing) signature confirmed: the blend's 99th percentile is 0.64x the observed 99th percentile, i.e. the forecast field is systematically calmer than reality at the tail. On high-impact days (obs >= 64.5 mm) the calibrated blend averages 48.034 mm against 74.859 mm observed, and the sharpest single model averages 44.693 mm \u2014 every model under-forecasts the same events, so max-fusion cannot recover the peak. Peak-preserving fusion is INACTIVE (alpha=0): the validation split did not justify a tail correction, so the system communicates extreme risk through the conformal band and the EVT tail instead of silently sharpening the field."
+  },
+  "temperature": {
+   "threshold": 40.0,
+   "alpha_calibration": {
+    "n_validation_high_impact": 0,
+    "alpha": null,
+    "note": "too few high-impact validation days to calibrate alpha; the layer stays inactive (alpha = 0) rather than guessing"
+   },
+   "alpha": 0.0,
+   "peak_smearing_audit": {
+    "n_test_high_impact": 0,
+    "scope": "full 12-month record (descriptive) \u2014 test split has too few high-impact days to audit on its own",
+    "note": "too few high-impact test days to audit",
+    "p99_ratio_blend": 0.99,
+    "p99_ratio_best_single": 1.024,
+    "p99_ratio_peak_preserved": 0.99,
+    "interpretation": "p99_ratio < 1 means the forecast field is calmer than reality at the 99th percentile \u2014 the variance-reduction (drizzle-smearing) signature; 1.0 is perfect peak intensity"
+   },
+   "gpd_tail": {
+    "n": 165,
+    "xi": 0.2125,
+    "sigma": 0.5683,
+    "mean_exceedance": 0.7216,
+    "threshold_u95": 30.181,
+    "example_exceedance_probability": {
+     "3": 0.02901,
+     "6": 0.00394,
+     "10": 0.00066
+    }
+   },
+   "conformal": {
+    "q90": 0.865,
+    "nominal_coverage": 0.9,
+    "measured_test_coverage": 0.8116,
+    "example_band": {
+     "level": 0.9,
+     "low": 29.135,
+     "high": 30.865,
+     "half_width": 0.865,
+     "method": "split_conformal_validation_residuals"
+    },
+    "method": "split conformal, validation residuals"
+   },
+   "conclusion": "No material peak smearing at the 99th percentile (ratio 0.99). Peak-preserving fusion is INACTIVE (alpha=0): the validation split did not justify a tail correction, so the system communicates extreme risk through the conformal band and the EVT tail instead of silently sharpening the field."
+  },
+  "wind_speed": {
+   "threshold": 40.0,
+   "alpha_calibration": {
+    "n_validation_high_impact": 10,
+    "objective": "symmetric MAE",
+    "alpha": 0.0,
+    "validation_tail_loss_at_alpha": 5.4094,
+    "validation_tail_loss_at_alpha_0": 5.4094,
+    "validation_mae_at_alpha": 5.4094,
+    "validation_mae_at_alpha_0": 5.4094,
+    "curve": [
+     {
+      "alpha": 0.0,
+      "tail_loss": 5.4094,
+      "mae": 5.4094
+     },
+     {
+      "alpha": 0.05,
+      "tail_loss": 5.4246,
+      "mae": 5.4246
+     },
+     {
+      "alpha": 0.1,
+      "tail_loss": 5.4398,
+      "mae": 5.4398
+     },
+     {
+      "alpha": 0.15,
+      "tail_loss": 5.455,
+      "mae": 5.455
+     },
+     {
+      "alpha": 0.2,
+      "tail_loss": 5.4885,
+      "mae": 5.4885
+     },
+     {
+      "alpha": 0.25,
+      "tail_loss": 5.53,
+      "mae": 5.53
+     },
+     {
+      "alpha": 0.3,
+      "tail_loss": 5.5715,
+      "mae": 5.5715
+     },
+     {
+      "alpha": 0.35,
+      "tail_loss": 5.613,
+      "mae": 5.613
+     },
+     {
+      "alpha": 0.4,
+      "tail_loss": 5.6546,
+      "mae": 5.6546
+     },
+     {
+      "alpha": 0.45,
+      "tail_loss": 5.6961,
+      "mae": 5.6961
+     },
+     {
+      "alpha": 0.5,
+      "tail_loss": 5.7376,
+      "mae": 5.7376
+     },
+     {
+      "alpha": 0.55,
+      "tail_loss": 5.7792,
+      "mae": 5.7792
+     },
+     {
+      "alpha": 0.6,
+      "tail_loss": 5.8207,
+      "mae": 5.8207
+     },
+     {
+      "alpha": 0.65,
+      "tail_loss": 5.8622,
+      "mae": 5.8622
+     },
+     {
+      "alpha": 0.7,
+      "tail_loss": 5.9037,
+      "mae": 5.9037
+     },
+     {
+      "alpha": 0.75,
+      "tail_loss": 5.9453,
+      "mae": 5.9453
+     },
+     {
+      "alpha": 0.8,
+      "tail_loss": 5.9868,
+      "mae": 5.9868
+     },
+     {
+      "alpha": 0.85,
+      "tail_loss": 6.0283,
+      "mae": 6.0283
+     },
+     {
+      "alpha": 0.9,
+      "tail_loss": 6.0698,
+      "mae": 6.0698
+     },
+     {
+      "alpha": 0.95,
+      "tail_loss": 6.1114,
+      "mae": 6.1114
+     },
+     {
+      "alpha": 1.0,
+      "tail_loss": 6.1529,
+      "mae": 6.1529
+     }
+    ]
+   },
+   "alpha": 0.0,
+   "peak_smearing_audit": {
+    "n_test_high_impact": 0,
+    "scope": "full 12-month record (descriptive) \u2014 test split has too few high-impact days to audit on its own",
+    "mean_observed": 44.518,
+    "mean_blend": 42.038,
+    "mean_peak_preserved": 42.038,
+    "mean_best_single": 43.738,
+    "bias_blend": -2.479,
+    "bias_peak_preserved": -2.479,
+    "mae_blend": 4.158,
+    "mae_peak_preserved": 4.158,
+    "mae_change_pct": 0.0,
+    "descriptive_alpha_sweep": [
+     {
+      "alpha": 0.0,
+      "under_forecast_bias": 3.319,
+      "mae": 4.158
+     },
+     {
+      "alpha": 0.05,
+      "under_forecast_bias": 3.244,
+      "mae": 4.0945
+     },
+     {
+      "alpha": 0.1,
+      "under_forecast_bias": 3.17,
+      "mae": 4.0309
+     },
+     {
+      "alpha": 0.15,
+      "under_forecast_bias": 3.096,
+      "mae": 3.9674
+     },
+     {
+      "alpha": 0.2,
+      "under_forecast_bias": 3.023,
+      "mae": 3.906
+     },
+     {
+      "alpha": 0.25,
+      "under_forecast_bias": 2.95,
+      "mae": 3.8464
+     },
+     {
+      "alpha": 0.3,
+      "under_forecast_bias": 2.879,
+      "mae": 3.7887
+     },
+     {
+      "alpha": 0.35,
+      "under_forecast_bias": 2.808,
+      "mae": 3.7311
+     },
+     {
+      "alpha": 0.4,
+      "under_forecast_bias": 2.737,
+      "mae": 3.6742
+     },
+     {
+      "alpha": 0.45,
+      "under_forecast_bias": 2.671,
+      "mae": 3.6273
+     },
+     {
+      "alpha": 0.5,
+      "under_forecast_bias": 2.605,
+      "mae": 3.5813
+     },
+     {
+      "alpha": 0.55,
+      "under_forecast_bias": 2.544,
+      "mae": 3.5438
+     },
+     {
+      "alpha": 0.6,
+      "under_forecast_bias": 2.485,
+      "mae": 3.5097
+     },
+     {
+      "alpha": 0.65,
+      "under_forecast_bias": 2.425,
+      "mae": 3.4757
+     },
+     {
+      "alpha": 0.7,
+      "under_forecast_bias": 2.366,
+      "mae": 3.4424
+     },
+     {
+      "alpha": 0.75,
+      "under_forecast_bias": 2.311,
+      "mae": 3.4178
+     },
+     {
+      "alpha": 0.8,
+      "under_forecast_bias": 2.26,
+      "mae": 3.4014
+     },
+     {
+      "alpha": 0.85,
+      "under_forecast_bias": 2.21,
+      "mae": 3.386
+     },
+     {
+      "alpha": 0.9,
+      "under_forecast_bias": 2.165,
+      "mae": 3.3803
+     },
+     {
+      "alpha": 0.95,
+      "under_forecast_bias": 2.122,
+      "mae": 3.3792
+     },
+     {
+      "alpha": 1.0,
+      "under_forecast_bias": 2.08,
+      "mae": 3.3803
+     }
+    ],
+    "p99_ratio_blend": 0.994,
+    "p99_ratio_best_single": 0.995,
+    "p99_ratio_peak_preserved": 0.994,
+    "interpretation": "p99_ratio < 1 means the forecast field is calmer than reality at the 99th percentile \u2014 the variance-reduction (drizzle-smearing) signature; 1.0 is perfect peak intensity"
+   },
+   "gpd_tail": {
+    "n": 165,
+    "xi": -0.1796,
+    "sigma": 3.8845,
+    "mean_exceedance": 3.293,
+    "threshold_u95": 37.52,
+    "example_exceedance_probability": {
+     "3": 0.43544,
+     "6": 0.1638,
+     "10": 0.03158
+    }
+   },
+   "conformal": {
+    "q90": 3.777,
+    "nominal_coverage": 0.9,
+    "measured_test_coverage": 0.9594,
+    "example_band": {
+     "level": 0.9,
+     "low": 26.223,
+     "high": 33.777,
+     "half_width": 3.777,
+     "method": "split_conformal_validation_residuals"
+    },
+    "method": "split conformal, validation residuals"
+   },
+   "conclusion": "No material peak smearing at the 99th percentile (ratio 0.99). Peak-preserving fusion is INACTIVE (alpha=0): the validation split did not justify a tail correction, so the system communicates extreme risk through the conformal band and the EVT tail instead of silently sharpening the field. Descriptive full-record sweep suggests alpha=0.95 would cut high-impact MAE from 4.158 to 3.3792 for this variable \u2014 flagged for recalibration when the validation window includes this variable's season."
+  }
+ },
+ "generated_at": "2026-10-01T06:46:54.943959+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "region": "bay_of_bengal_east_coast",
+  "variable": "precipitation",
+  "n_test_contexts": 460,
+  "weight_source": "meta_model",
+  "split_boundaries": {
+    "val_start": "2025-10-03 00:00:00",
+    "test_start": "2025-11-26 00:00:00"
+  },
+  "metric": "CSI@50mm",
+  "best_single_model": "AIFS",
+  "best_single_model_csi": 0.0,
+  "synoptiq_csi": 0.0,
+  "synoptiq_mae": 0.7081,
+  "synoptiq_rmse": 1.7849,
+  "per_model_metrics": {
+    "AIFS": {
+      "csi": 0.0,
+      "mae": 731.5523043478261,
+      "rmse": 4100.977548695583
+    },
+    "GFS": {
+      "csi": 0.0,
+      "mae": 0.8262608695652175,
+      "rmse": 2.052830062430252
+    },
+    "IFS": {
+      "csi": 0.0,
+      "mae": 0.6890391304347826,
+      "rmse": 1.7041181947679365
+    }
+  },
+  "naive_average_mae": 243.6733,
+  "naive_average_rmse": 1366.8195,
+  "relative_csi_improvement_pct": 0.0,
+  "fss_metric_type": "not applicable at this threshold summary; FSS-proxy remains diagnostic only"
+}
