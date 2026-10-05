@@ -3,6 +3,8 @@ from datetime import datetime
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
+from fastapi import HTTPException
 
 from app import api_v1
 from app.blending import calibration
@@ -64,15 +66,12 @@ def test_extreme_guidance_explains_missing_validation_calibrator(tmp_path, monke
     monkeypatch.setattr(api_v1, "CALIBRATION_DIR", tmp_path)
     monkeypatch.setattr(api_v1, "_internal_region", lambda _: "bay_of_bengal_east_coast")
     monkeypatch.setattr(api_v1, "_latest_context", lambda *args: datetime(2026, 1, 1))
-    monkeypatch.setattr(api_v1, "_blend_public", lambda *args: {
-        "sources": [
-            {"model": "GFS", "forecast_value": 26.0},
-            {"model": "IFS", "forecast_value": 28.0},
-            {"model": "AIFS", "forecast_value": 30.0},
+    monkeypatch.setattr(api_v1, "run_blend_pipeline", lambda *args, **kwargs: SimpleNamespace(
+        raw_sources=[
+            SimpleNamespace(model=model, forecast_value=value)
+            for model, value in (("GFS", 26.0), ("IFS", 28.0), ("AIFS", 30.0))
         ],
-        "final_value": 28.0,
-    })
-    monkeypatch.setattr(api_v1, "run_blend_pipeline", lambda *args: SimpleNamespace(
+        blended_value_calibrated=28.0,
         exceedance_probabilities={"heavy": 0.4, "heatwave": 0.3, "gale": 0.2},
         trust_score=0.72,
         bust_probability=0.18,
@@ -110,13 +109,17 @@ def test_extreme_guidance_applies_temperature_and_wind_artifacts(tmp_path, monke
     )
     monkeypatch.setattr(api_v1, "_internal_region", lambda _: "bay_of_bengal_east_coast")
     monkeypatch.setattr(api_v1, "_latest_context", lambda *args: datetime(2026, 1, 1))
-    monkeypatch.setattr(api_v1, "_blend_public", lambda *args: {
-        "sources": [{"model": "GFS"}, {"model": "IFS"}, {"model": "AIFS"}],
-        "final_value": 28.0,
-    })
 
-    def run_pipeline(_db, region, variable, *_args):
+    def run_pipeline(_db, region, variable, *_args, **_kwargs):
         return SimpleNamespace(
+            raw_sources=[
+                SimpleNamespace(model=model, forecast_value=28.0)
+                for model in ("GFS", "IFS", "AIFS")
+            ],
+            blended_value_calibrated=28.0,
+            trust_score=0.7,
+            bust_probability=0.2,
+            disagreement=1.0,
             exceedance_probabilities=calibration.exceedance_probabilities(10.0, variable, region),
         )
 
@@ -130,3 +133,78 @@ def test_extreme_guidance_applies_temperature_and_wind_artifacts(tmp_path, monke
         assert item["calibration_source"] == "global"
         assert item["probability"] is not None
         assert 0.0 <= item["probability"] <= 1.0
+
+
+def test_weights_map_preserves_blend_service_unavailable_status(monkeypatch):
+    monkeypatch.setattr(api_v1, "_require_real_production", lambda: {})
+    monkeypatch.setattr(
+        api_v1, "_latest_context", lambda *_args: datetime(2026, 10, 5)
+    )
+    monkeypatch.setattr(api_v1, "run_blend_pipeline", lambda *args, **kwargs: (_ for _ in ()).throw(
+        RuntimeError("real skill model is unavailable")
+    ))
+
+    with pytest.raises(HTTPException) as error:
+        api_v1.weights_map(
+            "KWG", "precipitation", "sw_monsoon", "active_monsoon", object()
+        )
+
+    assert error.value.status_code == 503
+    assert error.value.detail == "real skill model is unavailable"
+
+
+def test_extreme_guidance_preserves_blend_service_unavailable_status(monkeypatch):
+    monkeypatch.setattr(api_v1, "_require_real_production", lambda: {})
+    monkeypatch.setattr(
+        api_v1, "_latest_context", lambda *_args: datetime(2026, 10, 5)
+    )
+    monkeypatch.setattr(api_v1, "run_blend_pipeline", lambda *args, **kwargs: (_ for _ in ()).throw(
+        RuntimeError("real skill model is unavailable")
+    ))
+
+    with pytest.raises(HTTPException) as error:
+        api_v1.extreme_guidance("BOB", 72, object())
+
+    assert error.value.status_code == 503
+    assert error.value.detail == "real skill model is unavailable"
+
+
+def test_extreme_guidance_returns_two_available_real_sources(monkeypatch):
+    from app.schemas import ForecastRecord, WeightExplanation
+
+    monkeypatch.setattr(api_v1, "_require_real_production", lambda: {})
+    monkeypatch.setattr(
+        api_v1, "_latest_context", lambda *_args: datetime(2026, 10, 5)
+    )
+    monkeypatch.setattr(api_v1, "exceedance_calibration_source", lambda *_args: None)
+
+    def two_provider_result(_db, region, variable, valid_time, lead_hours, **_kwargs):
+        sources = [
+            ForecastRecord(
+                model=model, run_time=valid_time, valid_time=valid_time,
+                lead_hours=lead_hours, variable=variable, lat=15, lon=82,
+                forecast_value=value,
+            )
+            for model, value in (("IFS", 10.0), ("AIFS", 20.0))
+        ]
+        return SimpleNamespace(
+            raw_sources=sources,
+            weights=[WeightExplanation(model="IFS", weight=0.4),
+                     WeightExplanation(model="AIFS", weight=0.6)],
+            blended_value_calibrated=16.0,
+            exceedance_probabilities={},
+            trust_score=0.7,
+            bust_probability=0.2,
+            abstain=False,
+            disagreement=5.0,
+        )
+
+    monkeypatch.setattr(api_v1, "run_blend_pipeline", two_provider_result)
+
+    response = api_v1.extreme_guidance("BOB", 72, object())
+
+    assert len(response["guidance"]) == len(api_v1.VARIABLES)
+    assert all(item["forecast_value"] == 16.0 for item in response["guidance"])
+    assert all(not item["calibrated"] for item in response["guidance"])
+    assert all(item["source_range"] == {"minimum": 10.0, "maximum": 20.0}
+               for item in response["guidance"])

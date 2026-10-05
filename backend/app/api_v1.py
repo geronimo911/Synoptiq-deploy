@@ -199,9 +199,15 @@ def _latest_context(db: Session, internal_region: str, variable: str, lead_hours
     return row.valid_time
 
 
-def _blend_public(db: Session, region_code: str, variable: str, lead_hours: int,
-                  valid_time: datetime | None = None, regime_override: str | None = None,
-                  season_override: str | None = None):
+def _run_blend_context(
+    db: Session,
+    region_code: str,
+    variable: str,
+    lead_hours: int,
+    valid_time: datetime | None = None,
+    regime_override: str | None = None,
+    season_override: str | None = None,
+):
     _require_real_production()
     internal = _internal_region(region_code)
     if variable not in VARIABLES:
@@ -217,7 +223,16 @@ def _blend_public(db: Session, region_code: str, variable: str, lead_hours: int,
         raise HTTPException(503, str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(404, str(exc)) from exc
+    return internal, valid_time, result
 
+
+def _blend_public(db: Session, region_code: str, variable: str, lead_hours: int,
+                  valid_time: datetime | None = None, regime_override: str | None = None,
+                  season_override: str | None = None):
+    internal, valid_time, result = _run_blend_context(
+        db, region_code, variable, lead_hours, valid_time,
+        regime_override=regime_override, season_override=season_override,
+    )
     source_map = {s.model: s for s in result.raw_sources}
     sources = []
     for model in MODELS:
@@ -774,26 +789,36 @@ def forecast_blend(region: str, variable: str, lead_hours: int,
 @router.get("/weights/map")
 def weights_map(region: str, variable: str, season: str, regime: str,
                 db: Session = Depends(get_db)):
+    internal = _internal_region(region)
+    if variable not in VARIABLES:
+        raise HTTPException(422, f"Unknown variable '{variable}'.")
+    _require_real_production()
     points = []
     for lead in LEAD_HOURS:
         try:
-            internal = _internal_region(region)
             # The requested season/regime describe the context we want to
             # simulate, not necessarily the season/regime stored on the
             # selected forecast row. Use the latest available forecast for
             # the region/variable/lead and override the context in the
             # blending pipeline.
             vt = _latest_context(db, internal, variable, lead)
-            data = _blend_public(db, region, variable, lead, vt, regime_override=regime, season_override=season)
-        except HTTPException:
-            continue
+        except HTTPException as exc:
+            if exc.status_code == 404:
+                continue
+            raise
+        try:
+            _, _, result = _run_blend_context(
+                db, region, variable, lead, vt,
+                regime_override=regime, season_override=season,
+            )
+        except HTTPException as exc:
+            if exc.status_code == 404:
+                continue
+            raise
         points.append({
             "lead_hours": lead,
-            "weights": {
-                s["model"]: _optional_metric(s["weight"])
-                for s in data["sources"]
-            },
-            "trust_score": data["trust"]["trust_score"],
+            "weights": {weight.model: _optional_metric(weight.weight) for weight in result.weights},
+            "trust_score": _optional_metric(result.trust_score),
         })
     if not points:
         raise HTTPException(404, "No forecast contexts match the requested season/regime.")
@@ -884,40 +909,49 @@ def verification(region: str | None = None, variable: str | None = None):
 
 @router.get("/extreme/guidance")
 def extreme_guidance(region: str, lead_hours: int, db: Session = Depends(get_db)):
+    internal = _internal_region(region)
+    if lead_hours not in LEAD_HOURS:
+        raise HTTPException(422, f"Unsupported lead time {lead_hours}. Available: {LEAD_HOURS}")
+    _require_real_production()
     guidance = []
     valid_time = None
     for variable in VARIABLES:
         try:
-            internal = _internal_region(region)
             current_time = _latest_context(db, internal, variable, lead_hours)
-            if valid_time is None:
-                valid_time = current_time
-            data = _blend_public(db, region, variable, lead_hours, current_time)
-            internal_result = run_blend_pipeline(db, internal, variable, current_time, lead_hours)
-        except HTTPException:
-            continue
+        except HTTPException as exc:
+            if exc.status_code == 404:
+                continue
+            raise
+        try:
+            _, current_time, internal_result = _run_blend_context(
+                db, region, variable, lead_hours, current_time,
+            )
+        except HTTPException as exc:
+            if exc.status_code == 404:
+                continue
+            raise
+        if valid_time is None:
+            valid_time = current_time
         threshold_key = next(k for k in THRESHOLDS[variable] if k != "unit")
         probability = internal_result.exceedance_probabilities.get(threshold_key)
         calibration_source = exceedance_calibration_source(variable, threshold_key, internal)
         calibrated = (
-            len(data.get("sources", [])) == len(MODELS)
+            len(internal_result.raw_sources) == len(MODELS)
             and calibration_source is not None
             and probability is not None
             and math.isfinite(float(probability))
         )
-        forecast_value = data["final_value"]
+        forecast_value = internal_result.blended_value_calibrated
         probability_reason = None if calibrated else (
             "Insufficient real calibration events in the non-test calibration set."
         )
         source_values = [
-            float(source["forecast_value"])
-            for source in data.get("sources", [])
-            if source.get("forecast_value") is not None
+            float(source.forecast_value)
+            for source in internal_result.raw_sources
+            if source.forecast_value is not None
         ]
-        bust_probability = getattr(internal_result, "bust_probability", None)
-        bust_flag = getattr(internal_result, "bust_flag", None)
-        if bust_flag is None and bust_probability is not None:
-            bust_flag = float(bust_probability) > 0.6
+        bust_probability = internal_result.bust_probability
+        bust_flag = float(bust_probability) > 0.6 if bust_probability is not None else None
         guidance.append({
             "variable": variable,
             "threshold": THRESHOLDS[variable][threshold_key],
@@ -929,10 +963,10 @@ def extreme_guidance(region: str, lead_hours: int, db: Session = Depends(get_db)
             "probability_reason": probability_reason,
             "forecast_value": forecast_value,
             "threshold_exceeded": forecast_value >= THRESHOLDS[variable][threshold_key],
-            "trust_score": getattr(internal_result, "trust_score", None),
+            "trust_score": internal_result.trust_score,
             "bust_probability": bust_probability,
             "bust_flag": bust_flag,
-            "disagreement": getattr(internal_result, "disagreement", None),
+            "disagreement": internal_result.disagreement,
             "source_range": (
                 {"minimum": min(source_values), "maximum": max(source_values)}
                 if source_values else None

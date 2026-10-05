@@ -101,11 +101,14 @@ def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
                 )
                 continue
             if not raw:
+                last_error = RuntimeError(f"cycle {cycle.isoformat()} returned no forecast rows")
                 continue
             try:
-                return _aggregate_archive_rows(
+                rows = _aggregate_archive_rows(
                     model, raw, retrieved_at, "NOAA/AWS", "noaa-gfs-bdp-pds"
                 )
+                validate_rows(model, rows, retrieved_at)
+                return rows
             except Exception as exc:
                 last_error = exc
                 logging.warning(
@@ -113,7 +116,10 @@ def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
                     cycle.isoformat(), type(exc).__name__, exc,
                 )
         if last_error:
-            raise RuntimeError("No published NOAA GFS cycle was usable") from last_error
+            raise RuntimeError(
+                "No complete valid NOAA GFS cycle was found among the newest-first "
+                f"candidates; last failure: {last_error}"
+            ) from last_error
         raise RuntimeError("No published NOAA GFS cycle returned forecast rows")
 
     import fetch_ecmwf

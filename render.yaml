@@ -3,11 +3,11 @@ services:
   # freshness is demand-driven via POST /api/v1/system/refresh-if-stale.
   - type: web
     name: synoptiq-api
-    runtime: python
+    runtime: docker
     rootDir: .
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     plan: free
-    buildCommand: pip install -r backend/requirements.txt -r training/requirements-realdata.txt
-    startCommand: python training/realdata/seed_corrected_history.py && uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: SYNOPTIQ_MODE

@@ -107,6 +107,7 @@ def test_gfs_fallback_walks_back_through_cycles(monkeypatch):
         live_refresh, "_aggregate_archive_rows",
         lambda model, raw, now, provider, transport: raw,
     )
+    monkeypatch.setattr(live_refresh, "validate_rows", lambda *_args: {})
 
     now = datetime(2026, 10, 5, 15, 37, tzinfo=timezone.utc)
     rows = live_refresh._fallback_rows("GFS", now)
@@ -114,6 +115,45 @@ def test_gfs_fallback_walks_back_through_cycles(monkeypatch):
     assert rows, "fallback must recover from an older cycle"
     assert len(tried) >= 2, f"must try more than one cycle, tried hours={tried}"
     assert tried[0] == 12 and tried[1] == 6, f"must walk newest-first, got {tried}"
+
+
+def test_gfs_fallback_skips_incomplete_cycle_before_accepting(monkeypatch):
+    import fetch_gfs
+    import live_refresh
+
+    now = datetime(2026, 10, 5, 15, 37, tzinfo=timezone.utc)
+    tried: list[int] = []
+
+    def fake_fetch_cycle(date_str, hour, steps):
+        tried.append(hour)
+        return [{"run_date": date_str, "run_hour": hour}]
+
+    def forecast_rows(_model, _raw, retrieved_at, _provider, _transport):
+        rows = []
+        for zone in live_refresh.ZONES:
+            for variable in ("temperature", "precipitation", "wind_speed"):
+                for lead in live_refresh.LEADS:
+                    if len(tried) == 1 and zone == "bay_of_bengal_east_coast" and lead == 48:
+                        continue
+                    rows.append({
+                        "model": "GFS",
+                        "model_generation": "live:GFS",
+                        "region": zone,
+                        "variable": variable,
+                        "lead_hours": lead,
+                        "forecast_value": 1.0,
+                        "valid_time": (retrieved_at.replace(tzinfo=None)
+                                       + live_refresh.timedelta(hours=lead)),
+                    })
+        return rows
+
+    monkeypatch.setattr(fetch_gfs, "fetch_cycle", fake_fetch_cycle)
+    monkeypatch.setattr(live_refresh, "_aggregate_archive_rows", forecast_rows)
+
+    rows = live_refresh._fallback_rows("GFS", now)
+
+    assert len(rows) == len(live_refresh.ZONES) * 3 * len(live_refresh.LEADS)
+    assert tried[:2] == [12, 6]
 
 
 def test_gfs_fallback_raises_when_no_cycle_is_usable(monkeypatch):
@@ -125,6 +165,28 @@ def test_gfs_fallback_raises_when_no_cycle_is_usable(monkeypatch):
     now = datetime(2026, 10, 5, 15, 37, tzinfo=timezone.utc)
     with pytest.raises(RuntimeError, match="GFS"):
         live_refresh._fallback_rows("GFS", now)
+
+
+def test_gfs_provider_records_unavailable_reason_instead_of_raising(monkeypatch):
+    import live_refresh
+
+    now = datetime(2026, 10, 5, 15, 37, tzinfo=timezone.utc)
+
+    def no_primary(_model, _now):
+        raise RuntimeError("primary unavailable")
+
+    def no_fallback(_model, _now):
+        raise RuntimeError("no valid NOAA cycle: fallback missing bay_of_bengal_east_coast lead 48")
+
+    monkeypatch.setattr(live_refresh, "_live_rows", no_primary)
+    monkeypatch.setattr(live_refresh, "_fallback_rows", no_fallback)
+    monkeypatch.setattr(live_refresh.time, "sleep", lambda _seconds: None)
+
+    rows, state = live_refresh.fetch_provider("GFS", now)
+
+    assert rows == []
+    assert state["status"] == "UNAVAILABLE"
+    assert "bay_of_bengal_east_coast lead 48" in state["reason"]
 
 
 # --------------------------------------------------------------------------
