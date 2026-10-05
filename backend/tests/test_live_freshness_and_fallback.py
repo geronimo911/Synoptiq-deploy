@@ -432,7 +432,7 @@ def test_latest_ingestion_prefers_the_complete_row(tmp_path):
     db.close()
 
 
-def test_primary_provider_retries_are_bounded_before_real_fallback(monkeypatch):
+def test_primary_provider_is_attempted_once_before_real_fallback(monkeypatch):
     import live_refresh
 
     calls = []
@@ -453,6 +453,6 @@ def test_primary_provider_retries_are_bounded_before_real_fallback(monkeypatch):
     )
 
     assert rows == []
-    assert calls == ["IFS", "IFS"]
+    assert calls == ["IFS"]
     assert state["status"] == "UNAVAILABLE"
     assert state["reason"] == "RuntimeError: no complete archive cycle"

@@ -168,7 +168,7 @@ def fetch_day(model: str, target_date: str) -> list[dict]:
     return rows[target_date]
 
 
-def fetch_live_cycle(model: str, run_date: str, timeout: float = 90.0) -> list[dict]:
+def fetch_live_cycle(model: str, run_date: str, timeout: float = 45.0) -> list[dict]:
     """Fetch current real forecasts in the raw shape consumed by live ingestion."""
     model_id, source_model = MODELS[model]
     points = [point for region_points in REPRESENTATIVE_POINTS.values() for point in region_points]

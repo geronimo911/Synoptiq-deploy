@@ -351,7 +351,7 @@ def fetch_provider(model: str, now: datetime) -> tuple[list[dict], dict]:
     forecast_reference_time = _forecast_reference_time(now)
     fallback_used = False
     error = None
-    for attempt, delay in enumerate((0, 5)):
+    for attempt, delay in enumerate((0,)):
         if delay:
             time.sleep(delay)
         try:
