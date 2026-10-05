@@ -282,12 +282,24 @@ def validate_rows(model: str, rows: list[dict], now: datetime) -> dict:
     expected = {(zone, variable, lead) for zone in ZONES for variable in ("temperature", "precipitation", "wind_speed") for lead in LEADS}
     observed = set(zip(frame["region"], frame["variable"], frame["lead_hours"])) if not frame.empty else set()
     finite = bool(not frame.empty and np.isfinite(frame["forecast_value"].to_numpy(dtype=float)).all())
-    future = bool(not frame.empty and (pd.to_datetime(frame["valid_time"]) > now.replace(tzinfo=None)).all())
+    now_naive = now.astimezone(timezone.utc).replace(tzinfo=None) if now.tzinfo else now
+    valid_times = pd.to_datetime(frame["valid_time"]) if not frame.empty else pd.Series(dtype="datetime64[ns]")
+    future = bool(not frame.empty and (valid_times > now_naive).all())
+    aligned = bool(
+        not frame.empty
+        and all(
+            valid_time == now_naive + timedelta(hours=int(lead))
+            for valid_time, lead in zip(valid_times, frame["lead_hours"])
+        )
+    )
     complete = observed == expected and len(frame) == len(expected)
     duplicate = int(frame.duplicated(["model", "region", "variable", "lead_hours", "valid_time"]).sum()) if not frame.empty else 0
-    if not complete or not finite or not future or duplicate:
-        raise RuntimeError(f"{model} invalid live cycle: complete={complete} finite={finite} future={future} duplicates={duplicate}")
-    return {"rows": len(frame), "regions": len(set(frame["region"])), "variables": len(set(frame["variable"])), "leads": len(set(frame["lead_hours"])), "finite": finite, "complete": complete, "future": future}
+    if not complete or not finite or not future or not aligned or duplicate:
+        raise RuntimeError(
+            f"{model} invalid live cycle: complete={complete} finite={finite} "
+            f"future={future} aligned={aligned} duplicates={duplicate}"
+        )
+    return {"rows": len(frame), "regions": len(set(frame["region"])), "variables": len(set(frame["variable"])), "leads": len(set(frame["lead_hours"])), "finite": finite, "complete": complete, "future": future, "aligned": aligned}
 
 
 def fetch_provider(model: str, now: datetime) -> tuple[list[dict], dict]:
@@ -401,6 +413,10 @@ def _previous_live_provider(model: str, now: datetime) -> tuple[list[dict], dict
                 "regime", "regime_probs",
             )
         } for row in rows]
+        try:
+            validate_rows(model, snapshots, ingestion_time.astimezone(timezone.utc))
+        except RuntimeError:
+            return [], None
         return snapshots, dict(state)
     finally:
         db.close()

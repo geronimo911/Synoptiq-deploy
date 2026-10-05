@@ -189,6 +189,32 @@ def test_gfs_provider_records_unavailable_reason_instead_of_raising(monkeypatch)
     assert "bay_of_bengal_east_coast lead 48" in state["reason"]
 
 
+def test_provider_validation_rejects_rows_that_cannot_join_the_shared_lead():
+    import live_refresh
+
+    now = datetime(2026, 10, 5, 15, 37, tzinfo=timezone.utc)
+    rows = [
+        {
+            "model": "GFS",
+            "region": zone,
+            "variable": variable,
+            "lead_hours": lead,
+            "forecast_value": 1.0,
+            "valid_time": (now.replace(tzinfo=None) + live_refresh.timedelta(hours=lead)),
+        }
+        for zone in live_refresh.ZONES
+        for variable in ("temperature", "precipitation", "wind_speed")
+        for lead in live_refresh.LEADS
+    ]
+
+    coverage = live_refresh.validate_rows("GFS", rows, now)
+    assert coverage["aligned"] is True
+
+    rows[0]["valid_time"] -= live_refresh.timedelta(hours=6)
+    with pytest.raises(RuntimeError, match="aligned=False"):
+        live_refresh.validate_rows("GFS", rows, now)
+
+
 @pytest.mark.parametrize(
     ("model", "precipitation_field", "expected_precipitation"),
     [

@@ -23,6 +23,11 @@ export const Route = createFileRoute("/trust-atlas")({
 const regionLabel = (r: string) => r.replace(/_/g, " ");
 const varLabel = (v: string) => v.replace(/_/g, " ");
 const LEADS = [24, 48, 72, 96, 120];
+const AOI_LABELS: Record<string, string> = {
+  kerala_western_ghats: "Kerala Western Ghats",
+  bay_of_bengal_east_coast: "Bay of Bengal East Coast",
+  indo_gangetic_plains: "Indo-Gangetic Plains",
+};
 
 function ModelChip({ model, colour, weight }: { model: string; colour: string; weight: number }) {
   return (
@@ -54,11 +59,17 @@ function Page() {
         <TopBar mode={mode} />
         <div className="page-state" role="alert">
           <h2>TRUST ATLAS UNAVAILABLE</h2>
-          <p>{q.error instanceof Error ? q.error.message : "The atlas artifact could not be reached."}</p>
+          <p>
+            {q.error instanceof Error
+              ? q.error.message
+              : "The atlas artifact could not be reached."}
+          </p>
           <p className="research-note">
             Generate it with <code>python backend/scripts/build_advanced_artifacts.py</code>.
           </p>
-          <button className="research-btn" onClick={() => void q.refetch()}>Retry</button>
+          <button className="research-btn" onClick={() => void q.refetch()}>
+            Retry
+          </button>
         </div>
       </>
     );
@@ -92,7 +103,9 @@ function Page() {
             <Target />
             <span>DOMINATING MODEL NOW</span>
             <strong>{activeCell?.dominating_model ?? "—"}</strong>
-            <small>{varLabel(variable)} · {regionLabel(activeRegion)}</small>
+            <small>
+              {varLabel(variable)} · {regionLabel(activeRegion)}
+            </small>
           </div>
           <div>
             <Info />
@@ -103,6 +116,19 @@ function Page() {
         </div>
 
         <section className="panel research-panel">
+          <div className="aoi-selector" role="group" aria-label="Select area of interest">
+            {regions.map((zone) => (
+              <button
+                key={zone}
+                type="button"
+                className={`research-btn ${zone === activeRegion ? "active" : ""}`}
+                aria-pressed={zone === activeRegion}
+                onClick={() => setRegion(zone)}
+              >
+                {AOI_LABELS[zone] ?? regionLabel(zone)}
+              </button>
+            ))}
+          </div>
           <div className="panel-head">
             <div>
               <span className="kicker">SPATIAL WEIGHT MAP</span>
@@ -110,8 +136,11 @@ function Page() {
             </div>
             <div className="rpi-controls">
               {["precipitation", "temperature", "wind_speed"].map((v) => (
-                <button key={v} className={`research-btn ${v === variable ? "active" : ""}`}
-                  onClick={() => setVariable(v)}>
+                <button
+                  key={v}
+                  className={`research-btn ${v === variable ? "active" : ""}`}
+                  onClick={() => setVariable(v)}
+                >
                   {varLabel(v)}
                 </button>
               ))}
@@ -124,7 +153,9 @@ function Page() {
                 lat: centroid.lat,
                 lon: centroid.lon,
                 model: cells.find((cell) => cell.region === zone)?.dominating_model ?? "—",
-                colour: colours[cells.find((cell) => cell.region === zone)?.dominating_model ?? "GFS"] ?? "#94a3b8",
+                colour:
+                  colours[cells.find((cell) => cell.region === zone)?.dominating_model ?? "GFS"] ??
+                  "#94a3b8",
               }))}
               selected={activeRegion}
               onSelect={setRegion}
@@ -136,7 +167,11 @@ function Page() {
                     <MapPin /> {regionLabel(activeCell.region)} · {varLabel(activeCell.variable)}
                   </h3>
                   <p className="research-note">{activeCell.reason}</p>
-                  <p className="atlas-comparison">Issued weights show what Synoptiq trusts; test MAE shows whether each raw model earned that trust on held-out cases. The comparison is shown for GFS, IFS, and AIFS below.</p>
+                  <p className="atlas-comparison">
+                    Issued weights show what Synoptiq trusts; test MAE shows whether each raw model
+                    earned that trust on held-out cases. The comparison is shown for GFS, IFS, and
+                    AIFS below.
+                  </p>
                   <div className="weight-bars">
                     {Object.entries(activeCell.mean_weights)
                       .sort((a, b) => b[1] - a[1])
@@ -144,8 +179,13 @@ function Page() {
                         <div key={model} className="weight-bar-row">
                           <span>{model}</span>
                           <div className="weight-bar-track">
-                            <div className="weight-bar-fill"
-                              style={{ width: `${w * 100}%`, background: colours[model] ?? "#94a3b8" }} />
+                            <div
+                              className="weight-bar-fill"
+                              style={{
+                                width: `${w * 100}%`,
+                                background: colours[model] ?? "#94a3b8",
+                              }}
+                            />
                           </div>
                           <em>{(w * 100).toFixed(1)}%</em>
                           <small>
@@ -175,7 +215,9 @@ function Page() {
               <thead>
                 <tr>
                   <th>Zone</th>
-                  {LEADS.map((l) => <th key={l}>+{l}h</th>)}
+                  {LEADS.map((l) => (
+                    <th key={l}>+{l}h</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -188,8 +230,12 @@ function Page() {
                       const colour = colours[cell.dominating_model] ?? "#94a3b8";
                       return (
                         <td key={l}>
-                          <span className="model-chip" style={{ borderColor: colour, color: colour }}>
-                            {cell.dominating_model} {(cell.mean_weights[cell.dominating_model] * 100).toFixed(0)}%
+                          <span
+                            className="model-chip"
+                            style={{ borderColor: colour, color: colour }}
+                          >
+                            {cell.dominating_model}{" "}
+                            {(cell.mean_weights[cell.dominating_model] * 100).toFixed(0)}%
                           </span>
                         </td>
                       );
@@ -200,12 +246,15 @@ function Page() {
             </table>
           </div>
           <p className="research-note">
-            Colour encodes the model with the largest issued weight for that
-            zone/variable/lead cell: {Object.entries(colours).map(([m, c]) => (
-              <span key={m} className="model-chip" style={{ borderColor: c, color: c }}>{m}</span>
+            Colour encodes the model with the largest issued weight for that zone/variable/lead
+            cell:{" "}
+            {Object.entries(colours).map(([m, c]) => (
+              <span key={m} className="model-chip" style={{ borderColor: c, color: c }}>
+                {m}
+              </span>
             ))}
-            . Hover a zone on the map (or click) for the full weight breakdown,
-            the measured test MAE per model and the regime conditioning.
+            . Hover a zone on the map (or click) for the full weight breakdown, the measured test
+            MAE per model and the regime conditioning.
           </p>
         </section>
       </div>

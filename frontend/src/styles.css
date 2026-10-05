@@ -184,6 +184,8 @@ button[data-slot],.btn-instrument{}.page-state{min-height:60vh;display:grid;plac
 .model-chip { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; font-weight: 600; border: 1px solid; border-radius: 6px; padding: 0.1rem 0.4rem; margin-right: 0.3rem; }
 .atlas-grid { display: grid; grid-template-columns: minmax(280px, 420px) 1fr; gap: 1.5rem; align-items: start; }
 @media (max-width: 900px) { .atlas-grid { grid-template-columns: 1fr; } }
+.aoi-selector { display: flex; flex-wrap: wrap; gap: .5rem; padding: .75rem 1rem 0; }
+.aoi-selector .research-btn { min-height: 2.5rem; }
 .atlas-map { width: 100%; background: radial-gradient(circle at 50% 40%, rgba(56,189,248,0.06), transparent 70%); border: 1px solid rgba(148,163,184,0.18); border-radius: 12px; }
 .atlas-map-real { width: 100%; min-height: 480px; overflow: hidden; border: 1px solid rgba(148,163,184,0.18); border-radius: 12px; background: #07131b; }
 .atlas-map-real .maplibregl-ctrl-attrib { font-size: .56rem; }

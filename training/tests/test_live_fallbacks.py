@@ -185,7 +185,7 @@ def test_previous_aifs_cycle_is_found_by_provider_rows_not_ingestion_run_time(mo
         SimpleNamespace(**{
             "model": "AIFS", "model_generation": "live:AIFS Single v2",
             "region": zone, "run_time": datetime(2026, 9, 30),
-            "valid_time": datetime(2026, 10, 1) + timedelta(hours=lead - 24),
+            "valid_time": latest.ingestion_time + timedelta(hours=lead),
             "lead_hours": lead, "variable": variable, "lat": 0.0, "lon": 0.0,
             "forecast_value": 1.0, "season": "post_monsoon", "regime": "normal",
             "regime_probs": None,
