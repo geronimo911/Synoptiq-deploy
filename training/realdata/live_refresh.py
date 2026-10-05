@@ -92,7 +92,7 @@ def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
                 raw = fetch_gfs.fetch_cycle(
                     cycle.strftime("%Y-%m-%d"),
                     cycle.hour,
-                    list(range(6, 145, 6)),
+                    list(range(6, 181, 6)),
                 )
             except Exception as exc:
                 last_error = exc
@@ -142,7 +142,7 @@ def _fallback_rows(model: str, retrieved_at: datetime) -> list[dict]:
     # the per-step fetch fails fast (404) when it is not yet published, and
     # a complete-but-slightly-younger cycle is always better than a stale one.
     candidates = [latest_cycle - timedelta(hours=cycle_hours * offset) for offset in range(4)]
-    steps = list(range(6, 175, 6)) if model == "AIFS" else list(range(6, 145, 6))
+    steps = list(range(6, 175, 6)) if model == "AIFS" else list(range(6, 181, 6))
     last_error = None
     # cloud mirrors first: data.ecmwf.int is rate-limited (500 concurrent
     # connections) and is the most likely to fail; azure/google/aws are the
@@ -204,39 +204,26 @@ def _aggregate_archive_rows(model: str, raw_rows: list[dict], retrieved_at: date
     for zone, group in frame.groupby("zone"):
         indexed = group.set_index("step")
         for lead in LEADS:
-            if model == "AIFS":
-                valid_time = retrieved_at + timedelta(hours=lead)
-                source_offset = (valid_time - cycle_time).total_seconds() / 3600
-                temperatures = [
-                    _interpolate_step(indexed, "t2m_c", source_offset + offset)
-                    for offset in (0, 6, 12, 18)
-                ]
-                winds = [
-                    _interpolate_step(indexed, "wind_ms", source_offset + offset)
-                    for offset in (0, 6, 12, 18)
-                ]
+            valid_time = retrieved_at + timedelta(hours=lead)
+            source_offset = (valid_time - cycle_time).total_seconds() / 3600
+            temperatures = [
+                _interpolate_step(indexed, "t2m_c", source_offset + offset)
+                for offset in (0, 6, 12, 18)
+            ]
+            winds = [
+                _interpolate_step(indexed, "wind_ms", source_offset + offset)
+                for offset in (0, 6, 12, 18)
+            ]
+            if model == "GFS":
+                precipitation_start = _interpolate_gfs_precip(indexed, source_offset)
+                precipitation_end = _interpolate_gfs_precip(indexed, source_offset + 24)
+                precipitation = max(0.0, precipitation_end - precipitation_start)
+            else:
                 precipitation_start = _interpolate_step(indexed, "tp_cum_m", source_offset)
                 precipitation_end = _interpolate_step(indexed, "tp_cum_m", source_offset + 24)
-                temperature_value = float(np.mean(temperatures))
-                wind_value = max(winds) * 3.6
                 precipitation = max(0.0, precipitation_end - precipitation_start) * 1000.0
-            else:
-                steps = [lead + offset for offset in (0, 6, 12, 18)]
-                if any(step not in indexed.index for step in steps):
-                    raise RuntimeError(f"fallback missing {zone} lead {lead}")
-                subset = indexed.loc[steps]
-                temperature_value = float(subset["t2m_c"].mean())
-                wind_value = float(subset["wind_ms"].max()) * 3.6
-                if model == "GFS":
-                    precip_steps = [lead + offset for offset in (6, 12, 18, 24)]
-                    if any(step not in indexed.index for step in precip_steps):
-                        raise RuntimeError(f"fallback missing {zone} precipitation lead {lead}")
-                    precipitation = float(indexed.loc[precip_steps, "apcp6_mm"].clip(lower=0).sum())
-                else:
-                    if lead + 24 not in indexed.index:
-                        raise RuntimeError(f"fallback missing {zone} cumulative precipitation lead {lead}")
-                    precipitation = max(0.0, float(indexed.loc[lead + 24, "tp_cum_m"] - indexed.loc[lead, "tp_cum_m"]) * 1000.0)
-                valid_time = cycle_time + timedelta(hours=lead)
+            temperature_value = float(np.mean(temperatures))
+            wind_value = max(winds) * 3.6
             common = {
                 "model": model, "region": zone, "valid_time": valid_time.replace(tzinfo=None),
                 "lead_hours": lead, "run_time": cycle_time.replace(tzinfo=None),
@@ -277,6 +264,18 @@ def _interpolate_step(indexed: pd.DataFrame, field: str, target_hour: float) -> 
     upper_value = float(indexed.loc[upper_step, field])
     fraction = (target_hour - lower_step) / (upper_step - lower_step)
     return lower_value + fraction * (upper_value - lower_value)
+
+
+def _interpolate_gfs_precip(indexed: pd.DataFrame, target_hour: float) -> float:
+    steps = sorted(int(step) for step in indexed.index if int(step) > 0)
+    if not steps or any(right - left != 6 for left, right in zip(steps, steps[1:])):
+        raise RuntimeError("GFS precipitation steps are missing or not six-hourly")
+    if target_hour < 0 or target_hour > steps[-1]:
+        raise RuntimeError(f"GFS cycle does not cover precipitation offset {target_hour:g}h")
+    increments = indexed.loc[steps, "apcp6_mm"].astype(float).clip(lower=0)
+    cumulative = np.concatenate(([0.0], increments.cumsum().to_numpy()))
+    return float(np.interp(target_hour, [0.0, *steps], cumulative))
+
 
 def validate_rows(model: str, rows: list[dict], now: datetime) -> dict:
     frame = pd.DataFrame(rows)

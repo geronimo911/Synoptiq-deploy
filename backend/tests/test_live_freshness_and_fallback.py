@@ -189,6 +189,52 @@ def test_gfs_provider_records_unavailable_reason_instead_of_raising(monkeypatch)
     assert "bay_of_bengal_east_coast lead 48" in state["reason"]
 
 
+@pytest.mark.parametrize(
+    ("model", "precipitation_field", "expected_precipitation"),
+    [
+        ("GFS", "apcp6_mm", 4.0),
+        ("IFS", "tp_cum_m", 24.0),
+    ],
+)
+def test_fallback_provider_rows_align_to_common_target_valid_time(
+    monkeypatch, model, precipitation_field, expected_precipitation
+):
+    import fetch_openmeteo
+    import live_refresh
+
+    monkeypatch.setattr(
+        fetch_openmeteo,
+        "REPRESENTATIVE_POINTS",
+        {"kerala_western_ghats": [(10.0, 76.0)]},
+    )
+    retrieved_at = datetime(2026, 10, 5, 15, tzinfo=timezone.utc)
+    raw_rows = []
+    for step in range(6, 181, 6):
+        row = {
+            "run_date": "2026-10-05",
+            "run_hour": 12,
+            "zone": "kerala_western_ghats",
+            "step": step,
+            "t2m_c": float(step),
+            "wind_ms": float(step),
+        }
+        row[precipitation_field] = 1.0 if model == "GFS" else step * 0.001
+        raw_rows.append(row)
+
+    rows = live_refresh._aggregate_archive_rows(
+        model, raw_rows, retrieved_at, "provider", "transport"
+    )
+    target = retrieved_at.replace(tzinfo=None) + live_refresh.timedelta(hours=24)
+    lead_rows = [row for row in rows if row["lead_hours"] == 24]
+
+    assert lead_rows
+    assert {row["valid_time"] for row in lead_rows} == {target}
+    assert {row["run_time"] for row in lead_rows} == {datetime(2026, 10, 5, 12)}
+    assert next(row["forecast_value"] for row in lead_rows if row["variable"] == "temperature") == pytest.approx(36.0)
+    assert next(row["forecast_value"] for row in lead_rows if row["variable"] == "wind_speed") == pytest.approx(162.0)
+    assert next(row["forecast_value"] for row in lead_rows if row["variable"] == "precipitation") == pytest.approx(expected_precipitation)
+
+
 # --------------------------------------------------------------------------
 # 3. deterministic live-ingestion read
 # --------------------------------------------------------------------------

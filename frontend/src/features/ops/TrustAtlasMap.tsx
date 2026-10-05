@@ -33,12 +33,57 @@ function zonesToFeatureCollection(zones: Zone[]) {
   };
 }
 
-export function TrustAtlasMap({ zones, selected, onSelect }: { zones: Zone[]; selected: string; onSelect: (zone: string) => void }) {
+function syncMarkers(
+  instance: maplibregl.Map,
+  zones: Zone[],
+  markers: maplibregl.Marker[],
+  selected: string,
+  onSelect: (zone: string) => void,
+) {
+  markers.forEach((marker) => marker.remove());
+  markers.splice(
+    0,
+    markers.length,
+    ...zones.map((zone) => {
+      const label = document.createElement("button");
+      label.type = "button";
+      label.className = `atlas-zone-label${zone.zone === selected ? " selected" : ""}`;
+      label.setAttribute("aria-label", `Select ${aoiCode(zone.zone)}, ${zone.model} dominates`);
+      label.style.setProperty("--zone-colour", zone.colour);
+
+      const code = document.createElement("b");
+      code.textContent = aoiCode(zone.zone);
+      const model = document.createElement("small");
+      model.textContent = zone.model;
+
+      label.append(code, model);
+      label.addEventListener("click", (event) => {
+        event.stopPropagation();
+        onSelect(zone.zone);
+      });
+      return new maplibregl.Marker({ element: label, anchor: "top", offset: [0, 14] })
+        .setLngLat([zone.lon, zone.lat])
+        .addTo(instance);
+    }),
+  );
+}
+
+export function TrustAtlasMap({
+  zones,
+  selected,
+  onSelect,
+}: {
+  zones: Zone[];
+  selected: string;
+  onSelect: (zone: string) => void;
+}) {
   const element = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const markers = useRef<maplibregl.Marker[]>([]);
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
+  const selectedRef = useRef(selected);
+  selectedRef.current = selected;
   // Latest zones, read by the map's `load` handler so the init effect does not
   // need `zones` as a dependency (which used to rebuild the whole map).
   const zonesRef = useRef(zones);
@@ -54,7 +99,10 @@ export function TrustAtlasMap({ zones, selected, onSelect }: { zones: Zone[]; se
       zoom: 4.5,
       minZoom: 3.8,
       maxZoom: 10,
-      maxBounds: [[64, 3], [101, 39]],
+      maxBounds: [
+        [64, 3],
+        [101, 39],
+      ],
       style: {
         version: 8,
         sources: {
@@ -75,37 +123,85 @@ export function TrustAtlasMap({ zones, selected, onSelect }: { zones: Zone[]; se
             id: "osm-basemap",
             type: "raster",
             source: "osm",
-            paint: { "raster-opacity": 0.35, "raster-saturation": -0.75, "raster-brightness-min": 0.12, "raster-brightness-max": 0.78 },
+            paint: {
+              "raster-opacity": 0.35,
+              "raster-saturation": -0.75,
+              "raster-brightness-min": 0.12,
+              "raster-brightness-max": 0.78,
+            },
           },
-          { id: "india-fill", type: "fill", source: "india", paint: { "fill-color": "#1bc8aa", "fill-opacity": 0.045 } },
-          { id: "india-boundary", type: "line", source: "india", paint: { "line-color": "#45e6d3", "line-width": 1.5, "line-opacity": 0.7 } },
+          {
+            id: "india-fill",
+            type: "fill",
+            source: "india",
+            paint: { "fill-color": "#1bc8aa", "fill-opacity": 0.045 },
+          },
+          {
+            id: "india-boundary",
+            type: "line",
+            source: "india",
+            paint: { "line-color": "#45e6d3", "line-width": 1.5, "line-opacity": 0.7 },
+          },
         ],
       },
-      attributionControl: true,
+      attributionControl: {},
     });
     instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     instance.on("load", () => {
-      instance.fitBounds([[67, 5], [98, 38]], { padding: 18, duration: 0 });
+      instance.fitBounds(
+        [
+          [67, 5],
+          [98, 38],
+        ],
+        { padding: 18, duration: 0 },
+      );
       // Seed the zone source from whatever the latest props are.
-      instance.addSource("atlas-zones", { type: "geojson", data: zonesToFeatureCollection(zonesRef.current) });
+      instance.addSource("atlas-zones", {
+        type: "geojson",
+        data: zonesToFeatureCollection(zonesRef.current),
+      });
       instance.addLayer({
         id: "atlas-zone-halo",
         type: "circle",
         source: "atlas-zones",
-        paint: { "circle-radius": 26, "circle-color": ["get", "colour"], "circle-opacity": 0.2, "circle-stroke-width": 2, "circle-stroke-color": ["get", "colour"] },
+        paint: {
+          "circle-radius": ["case", ["==", ["get", "zone"], selectedRef.current], 34, 26],
+          "circle-color": ["get", "colour"],
+          "circle-opacity": ["case", ["==", ["get", "zone"], selectedRef.current], 0.38, 0.24],
+          "circle-blur": 0.85,
+          "circle-stroke-width": 2,
+          "circle-stroke-color": ["get", "colour"],
+        },
       });
       instance.addLayer({
         id: "atlas-zone-dot",
         type: "circle",
         source: "atlas-zones",
-        paint: { "circle-radius": 7, "circle-color": ["get", "colour"], "circle-stroke-width": 2, "circle-stroke-color": "#07131b" },
+        paint: {
+          "circle-radius": ["case", ["==", ["get", "zone"], selectedRef.current], 9, 7],
+          "circle-color": ["get", "colour"],
+          "circle-opacity": 1,
+          "circle-stroke-width": 2,
+          "circle-stroke-color": "#e6f1f8",
+        },
       });
-      instance.on("click", "atlas-zone-dot", (event) => {
-        const zone = event.features?.[0]?.properties?.zone;
+      instance.on("click", "atlas-zone-halo", (event) => {
+        const zone = event.features?.[0]?.properties?.["zone"];
         if (typeof zone === "string") onSelectRef.current(zone);
       });
-      instance.on("mouseenter", "atlas-zone-dot", () => { instance.getCanvas().style.cursor = "pointer"; });
-      instance.on("mouseleave", "atlas-zone-dot", () => { instance.getCanvas().style.cursor = ""; });
+      instance.on("mouseenter", "atlas-zone-halo", () => {
+        instance.getCanvas().style.cursor = "pointer";
+      });
+      instance.on("mouseleave", "atlas-zone-halo", () => {
+        instance.getCanvas().style.cursor = "";
+      });
+      syncMarkers(
+        instance,
+        zonesRef.current,
+        markers.current,
+        selectedRef.current,
+        onSelectRef.current,
+      );
     });
     map.current = instance;
     return () => {
@@ -122,35 +218,38 @@ export function TrustAtlasMap({ zones, selected, onSelect }: { zones: Zone[]; se
     if (!instance || !instance.isStyleLoaded()) return;
     const source = instance.getSource("atlas-zones") as maplibregl.GeoJSONSource | undefined;
     source?.setData(zonesToFeatureCollection(zones));
-
-    // Labels are DOM markers rather than a symbol layer: a symbol layer needs a
-    // `glyphs` font endpoint in the style, and none is configured, so its text
-    // could never render.
-    markers.current.forEach((marker) => marker.remove());
-    markers.current = zones.map((zone) => {
-      const label = document.createElement("div");
-      label.className = "atlas-zone-label";
-      label.style.setProperty("--zone-colour", zone.colour);
-
-      const code = document.createElement("b");
-      code.textContent = aoiCode(zone.zone);
-      const model = document.createElement("small");
-      model.textContent = zone.model;
-
-      label.append(code, model);
-      label.addEventListener("click", () => onSelectRef.current(zone.zone));
-      return new maplibregl.Marker({ element: label, anchor: "top", offset: [0, 14] })
-        .setLngLat([zone.lon, zone.lat])
-        .addTo(instance);
-    });
+    syncMarkers(instance, zones, markers.current, selectedRef.current, onSelectRef.current);
   }, [zones]);
 
   useEffect(() => {
     const instance = map.current;
     if (!instance?.isStyleLoaded() || !instance.getLayer("atlas-zone-halo")) return;
-    instance.setPaintProperty("atlas-zone-halo", "circle-radius", ["case", ["==", ["get", "zone"], selected], 34, 26]);
-    instance.setPaintProperty("atlas-zone-halo", "circle-opacity", ["case", ["==", ["get", "zone"], selected], 0.34, 0.2]);
+    instance.setPaintProperty("atlas-zone-halo", "circle-radius", [
+      "case",
+      ["==", ["get", "zone"], selected],
+      34,
+      26,
+    ]);
+    instance.setPaintProperty("atlas-zone-halo", "circle-opacity", [
+      "case",
+      ["==", ["get", "zone"], selected],
+      0.38,
+      0.24,
+    ]);
+    instance.setPaintProperty("atlas-zone-dot", "circle-radius", [
+      "case",
+      ["==", ["get", "zone"], selected],
+      9,
+      7,
+    ]);
+    syncMarkers(instance, zonesRef.current, markers.current, selected, onSelectRef.current);
   }, [selected]);
 
-  return <div className="atlas-map-real" ref={element} aria-label="Accurate India map showing Synoptiq pilot zones" />;
+  return (
+    <div
+      className="atlas-map-real"
+      ref={element}
+      aria-label="Accurate India map showing Synoptiq pilot zones"
+    />
+  );
 }

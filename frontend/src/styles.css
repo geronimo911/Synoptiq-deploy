@@ -190,8 +190,17 @@ button[data-slot],.btn-instrument{}.page-state{min-height:60vh;display:grid;plac
 .atlas-map-real .maplibregl-ctrl-group { background: rgba(7,19,27,.88); border-color: rgba(148,163,184,.3); }
 .atlas-map-real .maplibregl-ctrl-group button { filter: invert(1); }
 .atlas-map-real .atlas-zone-label {
-  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  min-width: 44px; min-height: 44px; padding: 3px 6px;
+  border: 1px solid color-mix(in srgb, var(--zone-colour, #94a3b8) 50%, transparent);
+  border-radius: 8px; background: rgba(4, 13, 20, .82);
   cursor: pointer; user-select: none; white-space: nowrap;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--zone-colour, #94a3b8) 35%, transparent);
+}
+.atlas-map-real .atlas-zone-label:hover,
+.atlas-map-real .atlas-zone-label.selected {
+  border-color: var(--zone-colour, #94a3b8);
+  box-shadow: 0 0 8px var(--zone-colour, #94a3b8), 0 0 22px var(--zone-colour, #94a3b8);
 }
 .atlas-map-real .atlas-zone-label b {
   font-family: "IBM Plex Mono", monospace; font-size: .72rem; font-weight: 600;
