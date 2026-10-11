@@ -14,6 +14,8 @@ import {
 } from "@/features/data/mock";
 
 // Same-origin gateway for Synoptiq. LIVE mode proxies only to the configured FastAPI backend.
+const GET_TIMEOUT_MS = 25_000;
+const POST_TIMEOUT_MS = 30_000;
 
 const region = z.enum(["KWG", "BOB", "IGP"]);
 const variable = z.enum(["precipitation", "temperature", "wind_speed"]);
@@ -113,14 +115,17 @@ async function handle({ request, params }: { request: Request; params: { _splat?
             ? { "content-type": request.headers.get("content-type") ?? "application/json" }
             : {}),
         },
-        // POST is used for the demand-driven refresh, which can take longer
-        // than a plain read.
-        signal: AbortSignal.timeout(hasBody ? 30000 : 8000),
+        // Cold Render wake-ups and the multi-horizon weight map exceed a short
+        // read timeout; let the backend finish before the Vercel function limit.
+        signal: AbortSignal.timeout(hasBody ? POST_TIMEOUT_MS : GET_TIMEOUT_MS),
       };
       // Assign the body only when present: the project sets
       // exactOptionalPropertyTypes, so an explicit `body: undefined` is a type error.
       if (hasBody) init.body = await request.text();
-      const upstream = await fetch(`${backend.replace(/\/+$/, "")}/api/v1/${path}${url.search}`, init);
+      const upstream = await fetch(
+        `${backend.replace(/\/+$/, "")}/api/v1/${path}${url.search}`,
+        init,
+      );
       if (upstream.ok || upstream.status === 404 || upstream.status === 422) {
         return new Response(upstream.body, {
           status: upstream.status,

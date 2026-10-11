@@ -5,9 +5,11 @@ import {
   readLiveRefreshStatus,
   requestRefreshIfStale,
 } from "@/features/data/queries";
+import { toast } from "sonner";
 
 const POLL_INTERVAL_MS = 15_000;
-const MAX_POLLS = 8; // ~2 minutes of polling per attempt, then give up quietly
+const MAX_POLLS = 8; // ~2 minutes; status queries keep the visible page current afterwards
+const REFRESH_RETRY_DELAYS_MS = [5_000, 15_000];
 // Re-check freshness roughly every 15 minutes while the tab is active. This is
 // the same 15 as the backend's SYNOPTIQ_REFRESH_MIN_AGE_MINUTES threshold: the
 // backend still decides whether anything is actually stale, and still holds the
@@ -66,12 +68,37 @@ export function RefreshOnLoad() {
         const before = await readLiveRefreshStatus();
         const previousSuccess = before?.last_success ?? null;
 
-        const result = await requestRefreshIfStale();
-        if (cancelled || !result) return;
+        let result: Awaited<ReturnType<typeof requestRefreshIfStale>> = null;
+        for (let retry = 0; retry <= REFRESH_RETRY_DELAYS_MS.length; retry += 1) {
+          try {
+            result = await requestRefreshIfStale();
+            break;
+          } catch {
+            const delay = REFRESH_RETRY_DELAYS_MS[retry];
+            if (delay === undefined) {
+              if (!cancelled) {
+                toast.error(
+                  "Live refresh could not reach the backend. Please keep this page open or try again.",
+                );
+              }
+              return;
+            }
+            await sleep(delay);
+            if (cancelled) return;
+          }
+        }
+        if (cancelled) return;
+        if (!result) return;
 
         if (result.status === "fresh") return; // nothing to do
         if (result.refreshed) {
           invalidate(); // synchronous (wait=true) path finished
+          return;
+        }
+        if (result.status === "refresh_failed" || result.status === "disabled") {
+          toast.error(
+            "Live data could not be refreshed. The current validated data has been kept.",
+          );
           return;
         }
         if (result.status !== "refresh_started" && result.status !== "refresh_in_progress") {

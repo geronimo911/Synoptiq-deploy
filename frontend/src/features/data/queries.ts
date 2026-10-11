@@ -13,17 +13,13 @@ export const APP_DATA_MODE = import.meta.env.VITE_APP_MODE === "DEMO" ? "mock" :
 const DEMO_MODE = APP_DATA_MODE === "mock";
 const choose = <T>(live: () => Promise<T>, demo: () => Promise<T>) => (DEMO_MODE ? demo() : live());
 
-// Demand-driven refresh: only in LIVE mode, and always best-effort. The UI
-// renders from cached data first, so a failed refresh never blocks or breaks it.
+// Demand-driven refresh: only in LIVE mode. The UI renders from cached data
+// first, so a failed refresh never blocks or breaks it.
 export const REFRESH_ON_LOAD = !DEMO_MODE;
 
 export async function requestRefreshIfStale(): Promise<RefreshIfStaleResponse | null> {
   if (DEMO_MODE) return null;
-  try {
-    return await liveApi.refreshIfStale(false);
-  } catch {
-    return null;
-  }
+  return liveApi.refreshIfStale(false);
 }
 
 export async function readLiveRefreshStatus(): Promise<LiveRefreshStatus | null> {

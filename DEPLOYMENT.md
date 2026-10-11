@@ -138,7 +138,9 @@ Set the Vercel project's **Root Directory** to `frontend`, and set only `VITE_AP
 
 `installCommand` is set to `npm install` because the committed `package-lock.json` is currently out of sync (`npm ci` fails on missing `@emnapi/*` entries). Run `npm install` once locally and commit the regenerated lock file to restore `npm ci`.
 
-The frontend does not block on the refresh: it loads cached API data, renders, then calls `refresh-if-stale` asynchronously and invalidates the affected queries once the backend reports fresh data. If the refresh fails or is disabled, the UI keeps showing the last available data.
+The frontend does not block on the refresh: it loads cached API data, renders, then calls `refresh-if-stale` asynchronously and invalidates the affected queries once the backend reports fresh data. Transient gateway/backend failures are retried twice with a short backoff to cover a sleeping Render service waking up; a persistent failure is shown to the user instead of being silently ignored. If the refresh fails or is disabled, the UI keeps showing the last available data.
+
+The Vercel same-origin API gateway allows 25 seconds for GET requests and its functions are configured for a 60-second maximum. This is needed for the backend cold-start and full five-horizon weight-map calculation; a shorter proxy timeout returns `503 Live backend unavailable` before those responses finish.
 
 ## Local
 

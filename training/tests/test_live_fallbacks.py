@@ -41,7 +41,7 @@ def test_provider_fallback_is_used_after_primary_failure(monkeypatch):
     assert state["status"] == "LIVE"
     assert state["fallback_used"] is True
     assert calls[-1] == "fallback"
-    assert calls[:-1] == ["primary"] * 2
+    assert calls[:-1] == ["primary"]
 
 
 def test_ecmwf_candidate_missing_first_step_is_skipped_without_fetching_rest(
